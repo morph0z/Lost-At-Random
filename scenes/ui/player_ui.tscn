@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmh6hwcgqj3b6"]
+
+[ext_resource type="Script" path="res://scripts/ui/player_ui.gd" id="1_l260u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dq4ne"]
+bg_color = Color(0, 0.678431, 0, 1)
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l260u")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 61.0
+offset_right = 206.0
+offset_bottom = 88.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_dq4ne")
+value = 100.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 35.0
+offset_top = 65.0
+offset_right = 1117.0
+offset_bottom = 643.0
+scale = Vector2(0.0740016, 0.131422)
+
+[node name="Fps Counter" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.885
+anchor_right = 0.984
+anchor_bottom = 0.045
+offset_left = -0.520081
+offset_top = 6.0
+offset_right = 0.432007
+offset_bottom = -0.160002
+text = "Fps:"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 49.0
+offset_right = 79.0
+offset_bottom = 72.0
+text = "HP
+"

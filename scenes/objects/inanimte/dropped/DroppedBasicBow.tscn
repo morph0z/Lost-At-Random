@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy1rkwiwtk5ny"]
+
+[ext_resource type="PackedScene" uid="uid://cq1jf82muvco" path="res://scenes/objects/inanimte/BasicBow.tscn" id="1_ci37h"]
+
+[node name="DroppedBasicBow" type="Node2D"]
+
+[node name="BasicBow" parent="." instance=ExtResource("1_ci37h")]

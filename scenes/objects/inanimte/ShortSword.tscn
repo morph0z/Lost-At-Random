@@ -1,0 +1,257 @@
+[gd_scene load_steps=19 format=3 uid="uid://dnxtsou78jt78"]
+
+[ext_resource type="Script" path="res://scripts/weapons/sword/BasicSword.gd" id="1_hmxd8"]
+[ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_vpuat"]
+[ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_avlkd"]
+[ext_resource type="Texture2D" uid="uid://da5lx6eqkw7n1" path="res://assets/sprites/items/ShortSword.png" id="4_baiae"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_il1y2"]
+size = Vector2(7, 4.5)
+
+[sub_resource type="Gradient" id="Gradient_pgp4d"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_vg28o"]
+offsets = PackedFloat32Array(0, 0.333333, 1)
+colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vbel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_baiae")
+}],
+"loop": false,
+"name": &"Swing",
+"speed": 5.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mt5ga"]
+polygon = PackedVector2Array(-8, -1, -8, 1, -7, 1, -7, 3, -6, 3, -6, 2, -5, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2, -6, -2, -6, -3, -7, -3, -7, -1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xar4"]
+radius = 2.99856
+height = 9.99712
+
+[sub_resource type="Animation" id="Animation_vkebn"]
+resource_name = "Drop"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.249948, 0.496078),
+"transitions": PackedFloat32Array(0.5, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(29, -11), Vector2(59, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.248143, 0.492365),
+"transitions": PackedFloat32Array(1.41421, 1.41421, 1.41421),
+"update": 0,
+"values": [0.0, 4.36332, 7.33038]
+}
+
+[sub_resource type="Animation" id="Animation_6oe78"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wgwdb"]
+resource_name = "heldB"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-17, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.13904]
+}
+
+[sub_resource type="Animation" id="Animation_87s4h"]
+resource_name = "heldF"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1qo4w"]
+resource_name = "onGround"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [-1.5708, -0.0159494, 1.56247, 3.13726, 4.71239]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -3), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
+_data = {
+"Drop": SubResource("Animation_vkebn"),
+"RESET": SubResource("Animation_6oe78"),
+"heldB": SubResource("Animation_wgwdb"),
+"heldF": SubResource("Animation_87s4h"),
+"onGround": SubResource("Animation_1qo4w")
+}
+
+[node name="ShortSword" type="AnimatableBody2D" groups=["PickableItem", "Sword"]]
+position = Vector2(0, 1)
+disable_mode = 2
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_rvip8")
+constant_linear_velocity = Vector2(5, 0)
+sync_to_physics = false
+script = ExtResource("1_hmxd8")
+weaponDamage = 1
+originalSwingTime = 0.1
+
+[node name="ColShape" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -7.15256e-06)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fo6jp")
+one_way_collision_margin = 0.0
+debug_color = Color(0.884428, 0, 0.355222, 0.42)
+
+[node name="SharpPart" type="Area2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="SharpPartShape" type="CollisionShape2D" parent="SharpPart"]
+position = Vector2(-1.5, -2)
+shape = SubResource("RectangleShape2D_il1y2")
+debug_color = Color(0.266667, 0, 1, 0.419608)
+
+[node name="HeroSlash" parent="." instance=ExtResource("2_vpuat")]
+position = Vector2(-2, 0)
+rotation = 1.5708
+emission_rect_extents = Vector2(1, 4)
+color_ramp = SubResource("Gradient_pgp4d")
+
+[node name="SwordHit_prt" parent="." instance=ExtResource("3_avlkd")]
+position = Vector2(6, 0)
+lifetime = 0.2
+explosiveness = 0.85
+randomness = 1.0
+color_ramp = SubResource("Gradient_vg28o")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_3vbel")
+animation = &"Swing"
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_mt5ga")
+
+[node name="ItemPick" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPick"]
+position = Vector2(-3, 0)
+rotation = -1.57223
+shape = SubResource("CapsuleShape2D_2xar4")
+debug_color = Color(0.655886, 0.516826, 0, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l67t7")
+}
+
+[connection signal="area_entered" from="SharpPart" to="." method="_on_sharp_part_area_entered"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

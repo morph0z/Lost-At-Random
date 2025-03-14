@@ -1,0 +1,557 @@
+[gd_scene load_steps=19 format=3 uid="uid://brqqrkpvnybn1"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_uvua7"]
+[ext_resource type="PackedScene" uid="uid://ba1yr0h0pyx13" path="res://scenes/particles/player/SprintDust_prt.tscn" id="2_eltwr"]
+[ext_resource type="PackedScene" uid="uid://nwje8vwlqx71" path="res://scenes/particles/player/PlayerDeath_prt.tscn" id="4_1eoig"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="5_8hwpb"]
+[ext_resource type="PackedScene" uid="uid://cu72tq4p7psd7" path="res://scenes/particles/player/PlayerGotHit_prt.tscn" id="5_if6u3"]
+[ext_resource type="PackedScene" uid="uid://deq7gvba5j8l8" path="res://scenes/componets/HurtboxComponent.tscn" id="6_la5yj"]
+[ext_resource type="PackedScene" uid="uid://b5cqjim3ufhp5" path="res://scenes/componets/HealthComponent.tscn" id="6_ltku5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pbuog"]
+radius = 9.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_23scw"]
+polygon = PackedVector2Array(0, -12.3213, -8.76337, 0, 0, 12.3213, 6.13436, 4.92854, 10.516, 4.92854, 7.0107, 0, 10.516, -4.92854, 6.13436, -4.92854)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fx0m6"]
+polygon = PackedVector2Array(0, -12.3213, -4.38169, -4.92854, -10.516, -4.92854, -5.25802, 0, -10.516, 6.16067, -3.50535, 6.16067, 0, 12.3213, 6.13436, 4.92854, 10.516, 4.92854, 7.0107, 0, 10.516, -4.92854, 6.13436, -4.92854)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qog78"]
+radius = 13.0384
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2ig8"]
+
+[sub_resource type="Animation" id="Animation_pf2nr"]
+resource_name = "Dead"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5evna"]
+resource_name = "DeathOne"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Particles/PlayerDeathPrt:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Items:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.3),
+"transitions": PackedFloat32Array(1, -2.73208, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(21, -10)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Items:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.3),
+"transitions": PackedFloat32Array(1, -2.73208, 2),
+"update": 0,
+"values": [0.0, 0.0, 0.392315]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PhysicsBox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Polygons/HoldingOne:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, false]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PickUpZone:disable_mode")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PhysicsBox:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PickUpZone:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Componets/HurtboxComponent/CollisionShape2D:disabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_awvlj"]
+resource_name = "DeathTwo"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Particles/PlayerDeathPrt:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Items:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.3),
+"transitions": PackedFloat32Array(1, -2.73208, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(21, -10)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Items:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.3),
+"transitions": PackedFloat32Array(1, -2.73208, 2),
+"update": 0,
+"values": [0.0, 0.0, 0.392315]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PhysicsBox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Polygons/HoldingOne:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Polygons/HoldingTwo:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, false]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Componets/HurtboxComponent/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ri3af"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Particles/PlayerDeathPrt:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Items:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Items:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PhysicsBox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Polygons/HoldingOne:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Polygons/HoldingTwo:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PhysicsBox:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PickUpZone:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Componets/HurtboxComponent/CollisionShape2D:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2ekv4"]
+resource_name = "Walking"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_his6b"]
+_data = {
+"Dead": SubResource("Animation_pf2nr"),
+"DeathOne": SubResource("Animation_5evna"),
+"DeathTwo": SubResource("Animation_awvlj"),
+"RESET": SubResource("Animation_ri3af"),
+"Walking": SubResource("Animation_2ekv4")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+script = ExtResource("1_uvua7")
+
+[node name="PhysicsBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pbuog")
+
+[node name="Items" type="Node2D" parent="." groups=["HeldItems"]]
+unique_name_in_owner = true
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="SprintDust" parent="Particles" instance=ExtResource("2_eltwr")]
+rotation = 1.5708
+
+[node name="PlayerDeathPrt" parent="Particles" instance=ExtResource("4_1eoig")]
+
+[node name="PlayerGotHitPrt" parent="Particles" instance=ExtResource("5_if6u3")]
+
+[node name="Polygons" type="Node2D" parent="."]
+
+[node name="HoldingOne" type="Polygon2D" parent="Polygons"]
+position = Vector2(0, -3.57628e-07)
+scale = Vector2(0.9, 0.9)
+color = Color(0, 0.813918, 0.872179, 1)
+polygon = PackedVector2Array(7.77778, -4.44444, 13.3333, -4.44444, 8.88889, 3.97364e-07, 13.3333, 4.44445, 7.77778, 4.44445, 0, 11.1111, -11.1111, 3.97364e-07, 0, -11.1111)
+
+[node name="HoldingTwo" type="Polygon2D" parent="Polygons"]
+position = Vector2(0, -3.57628e-07)
+scale = Vector2(0.9, 0.9)
+color = Color(1, 0.111589, 0.541962, 1)
+polygon = PackedVector2Array(-13.3333, -4.44444, -5.55556, -4.44444, 0, -11.1111, 7.77778, -4.44444, 13.3333, -4.44444, 8.88889, 3.97364e-07, 13.3333, 4.44445, 7.77778, 4.44445, 0, 11.1111, -4.44444, 5.55556, -13.3333, 5.55556, -6.66667, 3.97364e-07)
+
+[node name="Shadows" type="Node2D" parent="."]
+
+[node name="ShadowH1" type="LightOccluder2D" parent="Shadows"]
+visible = false
+scale = Vector2(1.14111, 0.8116)
+occluder = SubResource("OccluderPolygon2D_23scw")
+
+[node name="ShadowH2" type="LightOccluder2D" parent="Shadows"]
+visible = false
+scale = Vector2(1.14111, 0.8116)
+occluder = SubResource("OccluderPolygon2D_fx0m6")
+
+[node name="PickUpZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpZone"]
+shape = SubResource("CircleShape2D_qog78")
+debug_color = Color(0.463259, 0.592475, 1.73271e-06, 0.42)
+
+[node name="Componets" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="Componets" instance=ExtResource("6_ltku5")]
+HealthPoints = 100
+
+[node name="HurtboxComponent" parent="Componets" node_paths=PackedStringArray("health_component") instance=ExtResource("6_la5yj")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Componets/HurtboxComponent"]
+shape = SubResource("CircleShape2D_e2ig8")
+debug_color = Color(0.955225, 0.213235, 0, 0.42)
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Camera" type="Camera2D" parent="."]
+scale = Vector2(2.18239, 0.832806)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("5_8hwpb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_his6b")
+}
+autoplay = "RESET"
+
+[connection signal="area_entered" from="PickUpZone" to="." method="_on_pick_up_zone_area_entered"]

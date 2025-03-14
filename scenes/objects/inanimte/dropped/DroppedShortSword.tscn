@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdowieesjb4b"]
+
+[ext_resource type="PackedScene" uid="uid://dnxtsou78jt78" path="res://scenes/objects/inanimte/ShortSword.tscn" id="1_d3aj8"]
+
+[node name="DroppedShortSword" type="Node2D"]
+
+[node name="BasicSword" parent="." instance=ExtResource("1_d3aj8")]

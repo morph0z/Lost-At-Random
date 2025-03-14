@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn8sqojviqpvo"]
+
+[ext_resource type="PackedScene" uid="uid://b1hwvovdqqtc5" path="res://scenes/objects/inanimte/BasicScythe.tscn" id="1_01sj0"]
+
+[node name="DroppedBasicScythe" type="Node2D"]
+
+[node name="BasicScythe" parent="." instance=ExtResource("1_01sj0")]

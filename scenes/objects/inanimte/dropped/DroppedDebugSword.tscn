@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://gp0ubk8frh5h"]
+
+[ext_resource type="PackedScene" uid="uid://cyo7fe3b41be7" path="res://scenes/objects/inanimte/DebugSword.tscn" id="1_550t6"]
+
+[node name="DroppedDebugSword" type="Node2D"]
+
+[node name="DebugSword" parent="." instance=ExtResource("1_550t6")]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ehasn7j6estd"]
+
+[ext_resource type="PackedScene" uid="uid://dokr0aggg5on5" path="res://scenes/objects/inanimte/BasicSword.tscn" id="1_khina"]
+
+[node name="DroppedBasicSword" type="Node2D"]
+
+[node name="BasicSword" parent="." instance=ExtResource("1_khina")]

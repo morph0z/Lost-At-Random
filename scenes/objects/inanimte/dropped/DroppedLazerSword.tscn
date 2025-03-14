@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkqob2l3ab1c6"]
+
+[ext_resource type="PackedScene" uid="uid://cfigjsj20oduv" path="res://scenes/objects/inanimte/LazerSword.tscn" id="1_8vku4"]
+
+[node name="DroppedLazerSword" type="Node2D"]
+
+[node name="LazerSword" parent="." instance=ExtResource("1_8vku4")]

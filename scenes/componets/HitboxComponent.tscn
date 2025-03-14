@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnc4mtqu8fb30"]
+
+[sub_resource type="GDScript" id="GDScript_6n2ww"]
+script/source = "extends Area2D
+class_name HitboxComponent
+
+@export var selfHurtbox: HurtboxComponent
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is HurtboxComponent:
+		var hurtbox_component = area
+		if area.get_parent().get_parent() is not PlayerClass:
+			var attack = area.get_parent().get_parent().attack
+			if area != selfHurtbox:
+				hurtbox_component.damage(attack)
+			print(\"enemy not cool\")
+		elif area.get_parent().get_parent() is PlayerClass:
+			var attack = get_parent().get_parent().attack
+			hurtbox_component.damage(attack)
+			print(\"enemy hitting player \"+str(attack.attack_damage))
+"
+
+[node name="HitboxComponent" type="Area2D"]
+script = SubResource("GDScript_6n2ww")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,248 @@
+[gd_scene load_steps=19 format=3 uid="uid://b1hwvovdqqtc5"]
+
+[ext_resource type="Script" path="res://scripts/weapons/scythe/BasicScythe.gd" id="1_m4rcj"]
+[ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_5ysj8"]
+[ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_6pbn7"]
+[ext_resource type="Texture2D" uid="uid://c0v7p0765rcw4" path="res://assets/sprites/items/scythe.png" id="4_ynefd"]
+[ext_resource type="Texture2D" uid="uid://jvoadk2xomyj" path="res://assets/sprites/normal maps/scytheNM.png" id="5_kgyxa"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5gsfu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc7td"]
+size = Vector2(13.7432, 5.89844)
+
+[sub_resource type="Gradient" id="Gradient_5f6nk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_gykch"]
+offsets = PackedFloat32Array(0, 0.333333, 1)
+colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fa5r3"]
+diffuse_texture = ExtResource("4_ynefd")
+normal_texture = ExtResource("5_kgyxa")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rxa0j"]
+polygon = PackedVector2Array(-8, -1, -8, 2, -7, 2, -7, 1, 2, 1, 2, 0, 6, 0, 6, -1, 8, -1, 8, 0, 10, 0, 10, 1, 14, 1, 14, 4, 15, 4, 15, 5, 17, 5, 17, 4, 18, 4, 18, 3, 19, 3, 19, 1, 20, 1, 20, -3, 21, -3, 21, -13, 20, -13, 20, -14, 19, -14, 19, -17, 18, -17, 18, -18, 15, -18, 15, -13, 16, -13, 16, -5, 15, -5, 15, -2, 11, -2, 11, -3, 0, -3, 0, -2, -6, -2, -6, -1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jtcx1"]
+radius = 4.0
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_vkebn"]
+resource_name = "Drop"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.249948, 0.496078),
+"transitions": PackedFloat32Array(0.5, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(29, -11), Vector2(59, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.248143, 0.492365),
+"transitions": PackedFloat32Array(1.41421, 1.41421, 1.41421),
+"update": 0,
+"values": [0.0, 4.36332, 7.33038]
+}
+
+[sub_resource type="Animation" id="Animation_6oe78"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wgwdb"]
+resource_name = "heldB"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-17, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.13904]
+}
+
+[sub_resource type="Animation" id="Animation_87s4h"]
+resource_name = "heldF"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1qo4w"]
+resource_name = "onGround"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [-1.5708, -0.0159494, 1.56247, 3.13726, 4.71239]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -3), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
+_data = {
+"Drop": SubResource("Animation_vkebn"),
+"RESET": SubResource("Animation_6oe78"),
+"heldB": SubResource("Animation_wgwdb"),
+"heldF": SubResource("Animation_87s4h"),
+"onGround": SubResource("Animation_1qo4w")
+}
+
+[node name="BasicScythe" type="AnimatableBody2D" groups=["PickableItem", "Scythe"]]
+position = Vector2(0, 1)
+disable_mode = 2
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_5gsfu")
+constant_linear_velocity = Vector2(5, 0)
+sync_to_physics = false
+script = ExtResource("1_m4rcj")
+weaponDamage = 10
+originalSwingTime = 0.5
+
+[node name="ColShape" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -1, -8, 2, -7, 2, -7, 1, 2, 1, 2, 0, 6, 0, 6, -1, 8, -1, 8, 0, 10, 0, 10, 1, 14, 1, 14, 4, 15, 4, 15, 5, 17, 5, 17, 4, 18, 4, 18, 3, 19, 3, 19, 1, 20, 1, 20, -3, 21, -3, 21, -13, 20, -13, 20, -14, 19, -14, 19, -17, 18, -17, 18, -18, 15, -18, 15, -13, 16, -13, 16, -5, 15, -5, 15, -2, 11, -2, 11, -3, 0, -3, 0, -2, -6, -2, -6, -1)
+
+[node name="SharpPart" type="Area2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="SharpPartShape" type="CollisionShape2D" parent="SharpPart"]
+position = Vector2(17, -12.5)
+rotation = -1.57082
+scale = Vector2(1.23697, 1.01723)
+shape = SubResource("RectangleShape2D_pc7td")
+debug_color = Color(0.266667, 0, 1, 0.419608)
+
+[node name="ScytheSlash" parent="." instance=ExtResource("2_5ysj8")]
+position = Vector2(17, -8)
+rotation = 1.5708
+scale = Vector2(-1.38694, 4.81962)
+emission_rect_extents = Vector2(7, 0.5)
+color_ramp = SubResource("Gradient_5f6nk")
+
+[node name="ScytheHit_prt" parent="." instance=ExtResource("3_6pbn7")]
+position = Vector2(16, -17)
+rotation = -5.3482
+lifetime = 0.2
+explosiveness = 0.85
+randomness = 1.0
+spread = 26.67
+color_ramp = SubResource("Gradient_gykch")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(8, -2)
+rotation = 1.5708
+texture = SubResource("CanvasTexture_fa5r3")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_rxa0j")
+
+[node name="ItemPick" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPick"]
+position = Vector2(4, -1)
+rotation = -1.57223
+shape = SubResource("CapsuleShape2D_jtcx1")
+debug_color = Color(0.655886, 0.516826, 0, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l67t7")
+}
+
+[connection signal="area_entered" from="SharpPart" to="." method="_on_sharp_part_area_entered"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
