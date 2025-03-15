@@ -2,10 +2,6 @@
 extends item
 class_name sword
 
-#instances
-const Player = preload("res://scripts/Player.gd")
-var PlayerIn = Player.new()
-
 
 @onready var attack_cooldown = $AttackCooldown
 @onready var hero_slash = $HeroSlash

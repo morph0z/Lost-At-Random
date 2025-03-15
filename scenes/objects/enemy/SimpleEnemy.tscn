@@ -210,7 +210,7 @@ occluder = SubResource("OccluderPolygon2D_2sjnj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_voxl0")
+&"": SubResource("AnimationLibrary_voxl0")
 }
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

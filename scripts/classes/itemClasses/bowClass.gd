@@ -1,34 +1,44 @@
+#The Bow Class
 class_name bow
 extends item
+
+##this class extends the item class and is a type of weapon that needs to be charged before a shot is shot.
 
 @onready var attack_cooldown = $AttackCooldown
 @onready var bow_shoot_prt = $BowShoot_prt
 @onready var shooting_point = $ShootingPoint
 @onready var sprite: AnimatedSprite2D = $Sprite
 
+##a signal that gives out the amount of ammo left on the bow
 signal ammoChange(ammoAmount)
 
 #instances
-const Player = preload("res://scripts/Player.gd") 
-var PlayerIn = Player.new()
-
+##an instance of the arrow type the bow will shoot
 const BASIC_Arrow = preload("res://scenes/objects/inanimte/ammo/BasicArrow.tscn")
 
 #attributes
+##the cooldown of the weapon?
 @export var shootCooldown:float = 1
+##the amout multiplyed to the normal cooldown
 @export var reloadTimeMultiplyer:float = 3
+##the amount of damage that the bow does when the arrow is shot
 @export var weaponDamage = 1
 @export var ammoAmountOriginal:int
+##how fast the bow power level is charged
 @export var chargeSpeedMultiplyer:float = 1
+##the least charge amount needed for the arrow to shoot
 @export var minimumChargeLevel:float = 10
+##the max amount of charge so the power does not keep charging
 @export var maximumChargeLevel:float = 20
 
 var ammoAmount = ammoAmountOriginal
+##the amount of charge the bow has
 var chargeLevel = 0
 
 
 
 #bools
+##the ability of the bow to shoot
 var canShoot = true
 
 # Called when the node enters the scene tree for the first time.
@@ -36,10 +46,12 @@ func _ready():
 	whenThisItemIsReady()
 	ammoAmount = ammoAmountOriginal
 
+##charges a shot
 func chargeShot():
 	sprite.play("charge")
 	attack_cooldown.start(shootCooldown)
 	
+##shoots an arrow
 func Shoot():
 	ammoChange.emit(ammoAmount)
 	ammoAmount = ammoAmount-1
@@ -54,6 +66,7 @@ func Shoot():
 	get_tree().get_root().add_child(ArrowNew)
 	print(ammoAmount)
 
+##shoots a blank
 func emptyShot():
 	pass
 

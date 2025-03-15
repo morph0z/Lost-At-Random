@@ -228,7 +228,7 @@ position = Vector2(8, -1.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_l67t7")
+&"": SubResource("AnimationLibrary_l67t7")
 }
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

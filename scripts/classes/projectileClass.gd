@@ -11,7 +11,7 @@ var distanceTraveled = 0
 @export var RANGE = 100
 @export var peircingLevel = 1
 
-const Player = preload("res://scripts/Player.gd")
+const Player = preload("res://scripts/player/Player.gd")
 var PlayerIn = Player.new()
 
 func DestroyProjectile(particles:bool):

@@ -1,9 +1,6 @@
 extends item
 class_name scythe
 
-#instances
-const Player = preload("res://scripts/Player.gd")
-var PlayerIn = Player.new()
 
 
 @onready var attack_cooldown = $AttackCooldown

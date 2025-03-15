@@ -1,6 +1,10 @@
 class_name item
 extends AnimatableBody2D
 
+#instances
+const Player = preload("res://scripts/player/Player.gd") 
+var PlayerIn = Player.new()
+
 #
 @onready var animation_player = $AnimationPlayer
 @onready var item_pick = $ItemPick

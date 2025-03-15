@@ -7,10 +7,6 @@ extends item
 
 signal ammoChange(ammoAmount)
 
-#instances
-const Player = preload("res://scripts/Player.gd") 
-var PlayerIn = Player.new()
-
 const BASIC_BULLET = preload("res://scenes/objects/inanimte/ammo/BasicBullet.tscn")
 
 #attributes
