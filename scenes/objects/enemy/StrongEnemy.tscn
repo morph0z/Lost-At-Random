@@ -203,9 +203,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_voxl0"]
 _data = {
-"Dead": SubResource("Animation_w88n2"),
-"Death": SubResource("Animation_dgu4m"),
-"RESET": SubResource("Animation_4esjb")
+&"Dead": SubResource("Animation_w88n2"),
+&"Death": SubResource("Animation_dgu4m"),
+&"RESET": SubResource("Animation_4esjb")
 }
 
 [node name="StrongEnemy" type="CharacterBody2D" groups=["Enemys", "StrongEnemys"]]

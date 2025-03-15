@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://cq1jf82muvco"]
 
-[ext_resource type="Script" path="res://scripts/weapons/ranged/BasicBow.gd" id="1_257ij"]
+[ext_resource type="Script" uid="uid://dh4ga17kcdake" path="res://scripts/weapons/ranged/BasicBow.gd" id="1_257ij"]
 [ext_resource type="PackedScene" uid="uid://bilfddfsraiwq" path="res://scenes/particles/GunShoot_prt.tscn" id="1_nc88v"]
 [ext_resource type="Texture2D" uid="uid://2j6sfj3a3iua" path="res://assets/sprites/items/BasicBow.png" id="2_u0i6m"]
 
@@ -256,11 +256,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
 _data = {
-"Drop": SubResource("Animation_vkebn"),
-"RESET": SubResource("Animation_6oe78"),
-"heldB": SubResource("Animation_wgwdb"),
-"heldF": SubResource("Animation_87s4h"),
-"onGround": SubResource("Animation_1qo4w")
+&"Drop": SubResource("Animation_vkebn"),
+&"RESET": SubResource("Animation_6oe78"),
+&"heldB": SubResource("Animation_wgwdb"),
+&"heldF": SubResource("Animation_87s4h"),
+&"onGround": SubResource("Animation_1qo4w")
 }
 
 [node name="BasicBow" type="AnimatableBody2D" groups=["Bow", "PickableItem", "ProjShooter"]]

@@ -13,16 +13,17 @@ config_version=5
 config/name="L.A.R"
 config/tags=PackedStringArray("dont_delete", "my_game", "very_cool")
 run/main_scene="res://scenes/worlds/test_world.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Shaker="*res://addons/shaker/src/Shaker.gd"
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/shaker/plugin.cfg")
+enabled=PackedStringArray("res://addons/animated_shape_2d/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [file_customization]
 
@@ -34,6 +35,10 @@ folder_colors={
 "res://scenes/worlds/": "green",
 "res://scripts/": "red"
 }
+
+[gui]
+
+theme/custom_font="res://addons/ridiculous_coding/font.tres"
 
 [input]
 

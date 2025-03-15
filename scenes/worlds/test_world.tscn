@@ -1,8 +1,7 @@
-[gd_scene load_steps=38 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=37 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
-[ext_resource type="PackedScene" uid="uid://bpqx6586q8y2s" path="res://scenes/objects/enemy/SimpleEnemy.tscn" id="3_0ixrr"]
 [ext_resource type="PackedScene" uid="uid://bmh6hwcgqj3b6" path="res://scenes/ui/player_ui.tscn" id="3_l34h6"]
 [ext_resource type="PackedScene" uid="uid://comkq82bfwitx" path="res://scenes/objects/enemy/DummyEnemy.tscn" id="4_umrhl"]
 [ext_resource type="PackedScene" uid="uid://gp0ubk8frh5h" path="res://scenes/objects/inanimte/dropped/DroppedDebugSword.tscn" id="5_kwljm"]
@@ -107,81 +106,81 @@ agent_radius = 0.0
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7plhp"]
 texture = ExtResource("1_eet0d")
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_vmr3c")
 1:0/0 = 0
-1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rosph")
 2:0/0 = 0
-2:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_bnrgj")
 3:0/0 = 0
-3:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 3:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ct3gs")
 4:0/0 = 0
-4:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+4:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 4:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 5:0/0 = 0
-5:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+5:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 5:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 6:0/0 = 0
-6:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+6:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 6:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 7:0/0 = 0
-7:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+7:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 7:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 0:1/0 = 0
-0:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 0:1/0/navigation_layer_1/polygon = SubResource("NavigationPolygon_vppd4")
 1:1/0 = 0
-1:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 1:1/0/navigation_layer_1/polygon = SubResource("NavigationPolygon_4mc21")
 2:1/0 = 0
-2:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 3:1/0 = 0
-3:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 4:1/0 = 0
-4:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+4:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 4:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 5:1/0 = 0
-5:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 5:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 6:1/0 = 0
-6:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+6:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 6:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 7:1/0 = 0
-7:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+7:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 7:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pax8b")
 0:2/0 = 0
-0:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+0:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 0:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3h4vb")
 1:2/0 = 0
-1:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+1:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 1:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3h4vb")
 4:2/0 = 0
-4:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+4:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 4:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3h4vb")
 6:2/0 = 0
-6:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+6:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 6:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_a42ky")
 7:2/0 = 0
-7:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_op7yw")
+7:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_op7yw")
 7:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_a42ky")
 0:3/0 = 0
-0:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_d7jrd")
+0:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d7jrd")
 0:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3h4vb")
 1:3/0 = 0
-1:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_j1mgo")
+1:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j1mgo")
 1:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3h4vb")
 2:3/0 = 0
-2:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_u7unv")
+2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_u7unv")
 2:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3h4vb")
 1:4/0 = 0
-1:4/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ql3ko")
+1:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ql3ko")
 1:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x11il")
 2:4/0 = 0
 2:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x11il")
@@ -194,16 +193,16 @@ texture = ExtResource("1_eet0d")
 5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0/navigation_layer_1/polygon = SubResource("NavigationPolygon_q271u")
 1:5/0 = 0
-1:5/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_20uum")
+1:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_20uum")
 1:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x11il")
 2:5/0 = 0
-2:5/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_bohu1")
+2:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_bohu1")
 2:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x11il")
 3:5/0 = 0
-3:5/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_jnqyy")
+3:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_jnqyy")
 3:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x11il")
 4:5/0 = 0
-4:5/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_7nll8")
+4:5/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7nll8")
 4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:5/0/navigation_layer_1/polygon = SubResource("NavigationPolygon_q271u")
 5:5/0 = 0
@@ -243,10 +242,6 @@ texture = ExtResource("9_fr0f8")
 height = 30.0
 
 [node name="Enemys" type="Node2D" parent="."]
-
-[node name="SimpleEnemy" parent="Enemys" instance=ExtResource("3_0ixrr")]
-position = Vector2(-136, -9)
-AttackStrength = 20
 
 [node name="DummyEnemy" parent="Enemys" instance=ExtResource("4_umrhl")]
 position = Vector2(72, 144)

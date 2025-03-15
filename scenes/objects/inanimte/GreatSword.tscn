@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cts86xxnhkjgh"]
 
-[ext_resource type="Script" path="res://scripts/weapons/sword/GreatSword.gd" id="1_yr7uc"]
+[ext_resource type="Script" uid="uid://nb2h83j3ytgd" path="res://scripts/weapons/sword/GreatSword.gd" id="1_yr7uc"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_5kokd"]
 [ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_nsrop"]
 [ext_resource type="Texture2D" uid="uid://cvn5rr4r7xlur" path="res://assets/sprites/items/GreatSword.png" id="4_i06wa"]
@@ -173,11 +173,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
 _data = {
-"Drop": SubResource("Animation_vkebn"),
-"RESET": SubResource("Animation_6oe78"),
-"heldB": SubResource("Animation_wgwdb"),
-"heldF": SubResource("Animation_87s4h"),
-"onGround": SubResource("Animation_1qo4w")
+&"Drop": SubResource("Animation_vkebn"),
+&"RESET": SubResource("Animation_6oe78"),
+&"heldB": SubResource("Animation_wgwdb"),
+&"heldF": SubResource("Animation_87s4h"),
+&"onGround": SubResource("Animation_1qo4w")
 }
 
 [node name="GreatSword" type="AnimatableBody2D" groups=["PickableItem", "Sword"]]

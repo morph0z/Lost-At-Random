@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmw2e0d87tcvn"]
 
-[ext_resource type="Script" path="res://scripts/weapons/ammo/BasicArrow.gd" id="1_t8fg7"]
+[ext_resource type="Script" uid="uid://dsr4820xo1ehq" path="res://scripts/weapons/ammo/BasicArrow.gd" id="1_t8fg7"]
 [ext_resource type="Texture2D" uid="uid://bq6iapgtfxhvc" path="res://assets/sprites/items/BasicArrow.png" id="2_dmoi1"]
 [ext_resource type="PackedScene" uid="uid://cu72tq4p7psd7" path="res://scenes/particles/player/PlayerGotHit_prt.tscn" id="2_m7c3d"]
 

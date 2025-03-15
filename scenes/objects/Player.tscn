@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://brqqrkpvnybn1"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_uvua7"]
+[ext_resource type="Script" uid="uid://ekhqkcb6o8y7" path="res://scripts/Player.gd" id="1_uvua7"]
 [ext_resource type="PackedScene" uid="uid://ba1yr0h0pyx13" path="res://scenes/particles/player/SprintDust_prt.tscn" id="2_eltwr"]
 [ext_resource type="PackedScene" uid="uid://nwje8vwlqx71" path="res://scenes/particles/player/PlayerDeath_prt.tscn" id="4_1eoig"]
-[ext_resource type="Script" path="res://scripts/Camera.gd" id="5_8hwpb"]
+[ext_resource type="Script" uid="uid://ba1gaade51h0l" path="res://scripts/Camera.gd" id="5_8hwpb"]
 [ext_resource type="PackedScene" uid="uid://cu72tq4p7psd7" path="res://scenes/particles/player/PlayerGotHit_prt.tscn" id="5_if6u3"]
 [ext_resource type="PackedScene" uid="uid://deq7gvba5j8l8" path="res://scenes/componets/HurtboxComponent.tscn" id="6_la5yj"]
 [ext_resource type="PackedScene" uid="uid://b5cqjim3ufhp5" path="res://scenes/componets/HealthComponent.tscn" id="6_ltku5"]
@@ -469,11 +469,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_his6b"]
 _data = {
-"Dead": SubResource("Animation_pf2nr"),
-"DeathOne": SubResource("Animation_5evna"),
-"DeathTwo": SubResource("Animation_awvlj"),
-"RESET": SubResource("Animation_ri3af"),
-"Walking": SubResource("Animation_2ekv4")
+&"Dead": SubResource("Animation_pf2nr"),
+&"DeathOne": SubResource("Animation_5evna"),
+&"DeathTwo": SubResource("Animation_awvlj"),
+&"RESET": SubResource("Animation_ri3af"),
+&"Walking": SubResource("Animation_2ekv4")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfium7e7b5yep"]
 
-[ext_resource type="Script" path="res://scripts/weapons/ammo/BasicBullet.gd" id="1_cpmwd"]
+[ext_resource type="Script" uid="uid://hlf4om5wcswx" path="res://scripts/weapons/ammo/BasicBullet.gd" id="1_cpmwd"]
 [ext_resource type="PackedScene" uid="uid://cu72tq4p7psd7" path="res://scenes/particles/player/PlayerGotHit_prt.tscn" id="2_ukmqo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h6uv"]

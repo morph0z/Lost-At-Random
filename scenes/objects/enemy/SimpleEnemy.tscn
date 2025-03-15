@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bpqx6586q8y2s"]
 
-[ext_resource type="Script" path="res://scripts/enemys/SimpleEnemy.gd" id="1_ek7tt"]
+[ext_resource type="Script" uid="uid://ti1ouh7gaytn" path="res://scripts/enemys/SimpleEnemy.gd" id="1_ek7tt"]
 [ext_resource type="PackedScene" uid="uid://b5r1v2wvjl4r2" path="res://scenes/particles/EnemyDeath_prt.tscn" id="2_3bcq2"]
 [ext_resource type="PackedScene" uid="uid://b5cqjim3ufhp5" path="res://scenes/componets/HealthComponent.tscn" id="3_11ysd"]
 [ext_resource type="PackedScene" uid="uid://deq7gvba5j8l8" path="res://scenes/componets/HurtboxComponent.tscn" id="4_nx8p6"]
@@ -181,9 +181,9 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_voxl0"]
 _data = {
-"Dead": SubResource("Animation_w88n2"),
-"Death": SubResource("Animation_dgu4m"),
-"RESET": SubResource("Animation_4esjb")
+&"Dead": SubResource("Animation_w88n2"),
+&"Death": SubResource("Animation_dgu4m"),
+&"RESET": SubResource("Animation_4esjb")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t47dm"]

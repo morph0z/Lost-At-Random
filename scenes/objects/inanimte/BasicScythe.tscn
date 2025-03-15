@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b1hwvovdqqtc5"]
 
-[ext_resource type="Script" path="res://scripts/weapons/scythe/BasicScythe.gd" id="1_m4rcj"]
+[ext_resource type="Script" uid="uid://b05p415hctym2" path="res://scripts/weapons/scythe/BasicScythe.gd" id="1_m4rcj"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_5ysj8"]
 [ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_6pbn7"]
 [ext_resource type="Texture2D" uid="uid://c0v7p0765rcw4" path="res://assets/sprites/items/scythe.png" id="4_ynefd"]
@@ -171,11 +171,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
 _data = {
-"Drop": SubResource("Animation_vkebn"),
-"RESET": SubResource("Animation_6oe78"),
-"heldB": SubResource("Animation_wgwdb"),
-"heldF": SubResource("Animation_87s4h"),
-"onGround": SubResource("Animation_1qo4w")
+&"Drop": SubResource("Animation_vkebn"),
+&"RESET": SubResource("Animation_6oe78"),
+&"heldB": SubResource("Animation_wgwdb"),
+&"heldF": SubResource("Animation_87s4h"),
+&"onGround": SubResource("Animation_1qo4w")
 }
 
 [node name="BasicScythe" type="AnimatableBody2D" groups=["PickableItem", "Scythe"]]

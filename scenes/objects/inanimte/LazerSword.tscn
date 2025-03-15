@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://cfigjsj20oduv"]
 
-[ext_resource type="Script" path="res://scripts/weapons/sword/LazerSword.gd" id="1_kpkgl"]
+[ext_resource type="Script" uid="uid://ciwdehhhjcmhc" path="res://scripts/weapons/sword/LazerSword.gd" id="1_kpkgl"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_srl5h"]
 [ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_ehfc1"]
 [ext_resource type="Texture2D" uid="uid://mi6gu8543j7n" path="res://assets/sprites/items/LazerSword.png" id="4_dcphg"]
@@ -227,11 +227,11 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
 _data = {
-"Drop": SubResource("Animation_vkebn"),
-"RESET": SubResource("Animation_6oe78"),
-"heldB": SubResource("Animation_wgwdb"),
-"heldF": SubResource("Animation_87s4h"),
-"onGround": SubResource("Animation_1qo4w")
+&"Drop": SubResource("Animation_vkebn"),
+&"RESET": SubResource("Animation_6oe78"),
+&"heldB": SubResource("Animation_wgwdb"),
+&"heldF": SubResource("Animation_87s4h"),
+&"onGround": SubResource("Animation_1qo4w")
 }
 
 [node name="LazerSword" type="AnimatableBody2D" groups=["PickableItem", "Sword"]]
