@@ -74,9 +74,11 @@ func _input(event):
 	if Input.is_action_pressed("SprintShift"):
 			SPEED = 200
 			sprint_dust.get_child(0).set_emitting(true)
+			animation_player.speed_scale = 2
 	elif Input.is_action_just_released("SprintShift"):
 			SPEED = 100
 			sprint_dust.get_child(0).set_emitting(false)
+			animation_player.speed_scale = 1
 	
 	
 	#ITEM DROPPING SYSTEM
@@ -101,18 +103,25 @@ func _input(event):
 
 func _physics_process(_delta):
 	#this is for movement 
-	var directionY = Input.get_axis("UpW", "DownS")
-	var directionX = Input.get_axis("LeftA", "RightD")
-	if directionX:
-		velocity.x = directionX * SPEED
-		state_machine.change_active_state(walking_state)
-	elif directionY:
-		velocity.y = directionY * SPEED
-		state_machine.change_active_state(walking_state)
-	elif not directionX or directionY:
-		state_machine.change_active_state(idle_state)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	#var directionY = Input.get_axis("UpW", "DownS")
+	#var directionX = Input.get_axis("LeftA", "RightD")
+	#if directionX:
+		#velocity.x = directionX * SPEED
+		#state_machine.change_active_state(walking_state)
+	#elif directionY:
+		#velocity.y = directionY * SPEED
+		#state_machine.change_active_state(walking_state)
+	#if not directionY:
+		#state_machine.change_active_state(idle_state)
+		#velocity.y = move_toward(velocity.y, 0, SPEED)
+	#if not directionX:
+		#state_machine.change_active_state(idle_state)
+		#velocity.x = move_toward(velocity.x, 0, SPEED)
+	var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
+	if direction != Vector2.ZERO:
+		velocity = direction*SPEED
+	elif direction ==Vector2.ZERO:
+		velocity = Vector2.ZERO
 
 	move_and_slide()	
 

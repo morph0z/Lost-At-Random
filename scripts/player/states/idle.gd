@@ -3,6 +3,8 @@ extends LimboState
 @export var animation_player:AnimationPlayer
 @export var animation:StringName
 
-func _process(delta: float) -> void:
-	if self.is_active():
+func _update(delta: float) -> void:
 		animation_player.play(animation)
+		
+func _enter() -> void:
+	pass

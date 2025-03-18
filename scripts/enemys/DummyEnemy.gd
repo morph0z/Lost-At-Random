@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var playerSeen = $"../../Player"
 @onready var animation_player = $AnimationPlayer
-@onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 
 @onready var health_component: HealthComponent = $Components/HealthComponent
 var attacking = false

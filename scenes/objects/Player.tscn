@@ -561,12 +561,6 @@ script = ExtResource("9_2i02n")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"Walking"
 
-[node name="Sprinting" type="LimboState" parent="LimboHSM"]
-
-[node name="Damaged" type="LimboState" parent="LimboHSM"]
-
-[node name="Death" type="LimboState" parent="LimboHSM"]
-
 [node name="Attack" type="LimboState" parent="LimboHSM"]
 
 [node name="Swing" type="LimboState" parent="LimboHSM/Attack"]
