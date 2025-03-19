@@ -37,7 +37,7 @@ func generate_room_structue(numberOfRooms):
 		var RoomNew = RoomTypes[randomRoomType].instantiate()
 		rooms.add_child(RoomNew)
 		#randomNum = randi_range(0,2)
-		randomRoomDirectionNum = randi_range(0,2)
+		randomRoomDirectionNum = randi_range(0,3)
 		randomRoomRotation = randi_range(0,3)
 		lastDirection = randomDirection
 		randomDirection = RoomDirections[randomRoomDirectionNum]
@@ -73,7 +73,7 @@ func generate_room_structue(numberOfRooms):
 					RoomNew.position.y = RoomNew.position.y + directionAmountR*(180.35)
 				#print(str(directionAmountL)+" lefts")
 
-		print(str(lastDirection)+" is before.   " + str(randomDirection)+" is after.")
+		#print(str(lastDirection)+" is before.   " + str(randomDirection)+" is after.")
 		RoomNew.set_rotation(deg_to_rad(RoomRotations[randomRoomRotation]))
 		if RoomNew.has_node("enterArea"):
 			if RoomNew.has_node("enterArea/areaEnterU"):
