@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://brqqrkpvnybn1"]
+[gd_scene load_steps=24 format=3 uid="uid://brqqrkpvnybn1"]
 
 [ext_resource type="Script" uid="uid://ekhqkcb6o8y7" path="res://scripts/player/Player.gd" id="1_uvua7"]
 [ext_resource type="PackedScene" uid="uid://ba1yr0h0pyx13" path="res://scenes/particles/player/SprintDust_prt.tscn" id="2_eltwr"]
@@ -9,9 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://b5cqjim3ufhp5" path="res://scenes/componets/HealthComponent.tscn" id="6_ltku5"]
 [ext_resource type="Script" uid="uid://cxgu4tqfwlwh3" path="res://scripts/player/states/idle.gd" id="8_5jm4c"]
 [ext_resource type="Script" uid="uid://d2m2262s2t7g5" path="res://scripts/player/states/walking.gd" id="9_2i02n"]
+[ext_resource type="Script" uid="uid://ledmnhumjxtg" path="res://scripts/player/states/attack.gd" id="10_bnlsx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbuog"]
 radius = 9.0
+
+[sub_resource type="Gradient" id="Gradient_vnarb"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_23scw"]
 polygon = PackedVector2Array(0, -12.3213, -8.76337, 0, 0, 12.3213, 6.13436, 4.92854, 10.516, 4.92854, 7.0107, 0, 10.516, -4.92854, 6.13436, -4.92854)
@@ -490,6 +494,14 @@ rotation = 1.5708
 
 [node name="PlayerGotHitPrt" parent="Particles" instance=ExtResource("5_if6u3")]
 
+[node name="PlayerDashPrt" type="CPUParticles2D" parent="Particles"]
+emitting = false
+amount = 130
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+scale_amount_max = 17.95
+color_ramp = SubResource("Gradient_vnarb")
+
 [node name="Polygons" type="Node2D" parent="."]
 
 [node name="HoldingOne" type="Polygon2D" parent="Polygons"]
@@ -537,6 +549,10 @@ debug_color = Color(0.955225, 0.213235, 0, 0.42)
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="Camera" type="Camera2D" parent="."]
 scale = Vector2(2.18239, 0.832806)
 zoom = Vector2(2, 2)
@@ -562,6 +578,7 @@ animation_player = NodePath("../../AnimationPlayer")
 animation = &"Walking"
 
 [node name="Attack" type="LimboState" parent="LimboHSM"]
+script = ExtResource("10_bnlsx")
 
 [node name="Swing" type="LimboState" parent="LimboHSM/Attack"]
 

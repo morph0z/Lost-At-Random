@@ -10,6 +10,9 @@ class_name PlayerClass
 @onready var holding_two = $Polygons/HoldingTwo
 @onready var shadow_h_2 = $Shadows/ShadowH2
 @onready var shadow_h_1 = $Shadows/ShadowH1
+@onready var dash_timer: Timer = $DashTimer
+@onready var player_dash_prt: CPUParticles2D = $Particles/PlayerDashPrt
+
 
 #State Machine
 @export var state_machine : LimboHSM
@@ -79,6 +82,10 @@ func _input(event):
 			SPEED = 100
 			sprint_dust.get_child(0).set_emitting(false)
 			animation_player.speed_scale = 1
+			
+	if Input.is_action_just_pressed("DashCtrl"):
+		dash(3)
+		
 	
 	
 	#ITEM DROPPING SYSTEM
@@ -101,22 +108,18 @@ func _input(event):
 
 #-------------------------------------------------------------------------------
 
+func dash(dashPower):
+	if dash_timer.time_left == 0:
+		SPEED = SPEED+(dashPower*100)
+		player_dash_prt.emitting = true
+		await get_tree().create_timer(0.1).timeout
+		player_dash_prt.emitting = false
+		SPEED = 100
+		dash_timer.start()
+	
+
 func _physics_process(_delta):
 	#this is for movement 
-	#var directionY = Input.get_axis("UpW", "DownS")
-	#var directionX = Input.get_axis("LeftA", "RightD")
-	#if directionX:
-		#velocity.x = directionX * SPEED
-		#state_machine.change_active_state(walking_state)
-	#elif directionY:
-		#velocity.y = directionY * SPEED
-		#state_machine.change_active_state(walking_state)
-	#if not directionY:
-		#state_machine.change_active_state(idle_state)
-		#velocity.y = move_toward(velocity.y, 0, SPEED)
-	#if not directionX:
-		#state_machine.change_active_state(idle_state)
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
 	var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
 	if direction != Vector2.ZERO:
 		velocity = direction*SPEED

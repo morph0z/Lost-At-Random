@@ -4,6 +4,7 @@ extends Control
 const GENERATED_WORLD = preload("res://scenes/worlds/generated_world.tscn")
 const TEST_WORLD = preload("res://scenes/worlds/test_world.tscn")
 
+
 func _ready() -> void:
 	animation_player.play("GameStart")
 	await animation_player.animation_finished

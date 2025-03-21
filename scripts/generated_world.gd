@@ -52,11 +52,12 @@ func generate_room_structue(numberOfRooms):
 				directionAmountU = directionAmountU+1
 				#print(str(directionAmountU)+" ups")
 			elif randomDirection == "enterArea/areaEnterD":
-				i = directionAmountD
-				directionAmountD = directionAmountD+1
-				RoomNew.position = RoomNew.position + RoomNew.get_node(randomDirection).position*(randf_range(8,20)*(i+1))
-				if lastDirection == "enterArea/areaEnterR" or RoomNew.position.x < 0:
-					RoomNew.position.x = RoomNew.position.x + directionAmountR*(180.35)
+				if RoomNew.has_node("enterArea/areaEnderD"):
+					i = directionAmountD
+					directionAmountD = directionAmountD+1
+					RoomNew.position = RoomNew.position + RoomNew.get_node(randomDirection).position*(randf_range(8,20)*(i+1))
+					if lastDirection == "enterArea/areaEnterR" or RoomNew.position.x < 0:
+						RoomNew.position.x = RoomNew.position.x + directionAmountR*(180.35)
 				#print(str(directionAmountD)+" downs")
 			elif randomDirection == "enterArea/areaEnterR":
 				i = directionAmountR
@@ -99,9 +100,5 @@ func generate_room_structue(numberOfRooms):
 			#if RoomNew.get_node(""):
 			#	pass
 		
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _on_debug_generate_refresh_timeout() -> void:
 	generate_room_structue(randi_range(1,10))

@@ -30,6 +30,54 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(13, 330), Vector2(13, 135)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayTest:anchor_bottom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-4, 1),
+"update": 0,
+"values": [0.549, 0.165]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayTest:anchor_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-4, 1),
+"update": 0,
+"values": [0.195, 0.205]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayTest:anchor_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-4, 1),
+"update": 0,
+"values": [0.509, 0.125]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayTest:anchor_left")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.018, 0.018]
+}
 
 [sub_resource type="Animation" id="Animation_8kjlb"]
 length = 0.001
@@ -44,6 +92,54 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(19, 256)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayTest:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.165]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayTest:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.205]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayTest:anchor_top")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.125]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayTest:anchor_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.018]
 }
 
 [sub_resource type="Animation" id="Animation_3vnl4"]
@@ -122,8 +218,16 @@ position = Vector2(11, 117)
 color = Color(0.427451, 0.588235, 0.356863, 1)
 polygon = PackedVector2Array(255, 420, 296, 383, 318, 401, 294, 414, 277, 415)
 
-[node name="LostAtRandom" type="Sprite2D" parent="."]
-position = Vector2(720, 324)
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 291.0
+offset_right = 939.0
+offset_bottom = 702.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("2_3vnl4")
 
@@ -134,10 +238,10 @@ anchor_left = 0.018
 anchor_top = 0.125
 anchor_right = 0.205
 anchor_bottom = 0.165
-offset_left = 0.263998
-offset_top = 1.52588e-05
-offset_right = -3.16002
-offset_bottom = 0.0800095
+offset_left = 0.264
+offset_top = -0.00199127
+offset_right = 8.36006
+offset_bottom = 0.0778427
 theme = SubResource("Theme_4g317")
 theme_type_variation = &"FlatButton"
 text = "||  Play test  ||"
@@ -166,7 +270,7 @@ anchor_right = 0.668
 anchor_bottom = 0.573
 offset_left = 0.567999
 offset_top = 0.0399933
-offset_right = 0.463928
+offset_right = 0.463989
 offset_bottom = -0.304016
 text = "Lost At Random"
 label_settings = SubResource("LabelSettings_ey4sl")
