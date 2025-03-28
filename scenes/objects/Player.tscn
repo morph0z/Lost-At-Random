@@ -555,7 +555,7 @@ one_shot = true
 
 [node name="Camera" type="Camera2D" parent="."]
 scale = Vector2(2.18239, 0.832806)
-zoom = Vector2(2, 2)
+zoom = Vector2(0.2, 0.2)
 position_smoothing_enabled = true
 script = ExtResource("5_8hwpb")
 

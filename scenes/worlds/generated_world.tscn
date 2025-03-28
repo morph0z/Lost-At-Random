@@ -6,7 +6,3 @@
 script = ExtResource("1_bvteu")
 
 [node name="Rooms" type="Node2D" parent="."]
-
-[node name="DebugGenerateRefresh" type="Timer" parent="."]
-
-[connection signal="timeout" from="DebugGenerateRefresh" to="." method="_on_debug_generate_refresh_timeout"]
