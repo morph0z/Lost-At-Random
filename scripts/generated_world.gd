@@ -20,16 +20,65 @@ func _ready() -> void:
 	print(textDungeon())
 	generateGameDungeon()
 	
-	
 func generateGameDungeon() -> void:
 	for x in textDungeon().count("#",0,(numOfRooms.x*(3))) :
-		var roomX = ROOM_NORMAL_AREA.instantiate()
-		rooms.add_child(roomX)
-		roomX.position = Vector2i((roomX.position.x+6.5)*(x*100), (roomX.position.y))
 		for y in textDungeon().count("#",0,(numOfRooms.y*(3))):
-			var roomY = ROOM_NORMAL_AREA.instantiate()
-			rooms.add_child(roomY)
-			roomY.position = Vector2i((roomY.position.x+6.5)*(x*100), (roomY.position.y+6.5)*(y*100))
+			var room = ROOM_NORMAL_AREA.instantiate()
+			var roomDirections = [(room.get_node("enterArea/areaEnterD")),(room.get_node("enterArea/areaEnterU")),(room.get_node("enterArea/areaEnterL")),(room.get_node("enterArea/areaEnterR"))]
+			var randomRoomDirections = randi_range(0,4)
+			match randomRoomDirections:
+				0:
+					room.get_node("enterArea/areaEnterD").visible = true
+					room.get_node("enterArea/areaEnterU").visible = true
+					room.get_node("enterArea/areaEnterL").visible = true
+					room.get_node("enterArea/areaEnterR").visible = true
+				1:
+					var randomDirection1 = roomDirections.pick_random()
+					randomDirection1.visible = true
+					if randomDirection1.get_child(0).is_colliding() == false:
+						randomDirection1.visible = false
+				2:
+					var randomDirection1 = roomDirections.pick_random()
+					var randomDirection2 = roomDirections.pick_random()
+					randomDirection1.visible = true
+					randomDirection2.visible = true
+					if randomDirection1.get_child(0).is_colliding() == false:
+						randomDirection1.visible = false
+					if randomDirection2.get_child(0).is_colliding() == false:
+						randomDirection2.visible = false
+				3:
+					var randomDirection1 = roomDirections.pick_random()
+					var randomDirection2 = roomDirections.pick_random()
+					var randomDirection3 = roomDirections.pick_random()
+					randomDirection1.visible = true
+					randomDirection2.visible = true
+					randomDirection3.visible = true
+					if randomDirection1.get_child(0).is_colliding() == false:
+						randomDirection1.visible = false
+					if randomDirection2.get_child(0).is_colliding() == false:
+						randomDirection2.visible = false
+					if randomDirection3.get_child(0).is_colliding() == false:
+						randomDirection3.visible = false
+				4:
+					var randomDirection1 = roomDirections.pick_random()
+					var randomDirection2 = roomDirections.pick_random()
+					var randomDirection3 = roomDirections.pick_random()
+					var randomDirection4 = roomDirections.pick_random()
+					randomDirection1.visible = true
+					randomDirection2.visible = true
+					randomDirection3.visible = true
+					randomDirection4.visible = true
+					if randomDirection1.get_child(0).is_colliding() == false:
+						randomDirection1.visible = false
+					if randomDirection2.get_child(0).is_colliding() == false:
+						randomDirection2.visible = false
+					if randomDirection3.get_child(0).is_colliding() == false:
+						randomDirection3.visible = false
+					if randomDirection4.get_child(0).is_colliding() == false:
+						randomDirection4.visible = false
+					
+			rooms.add_child(room)
+			room.position = Vector2i((room.position.x+6.5)*(x*100), (room.position.y+6.5)*(y*100))
 
 #CREDIT: Thomas Yanuziello (https://www.youtube.com/watch?v=yl4YrFRXNpk&t=375s)
 func textDungeon() -> String:

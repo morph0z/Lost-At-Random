@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bpqjvwe12xb8u"]
+[gd_scene load_steps=8 format=4 uid="uid://bpqjvwe12xb8u"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_ym2r2"]
 [ext_resource type="Script" uid="uid://854brk04exim" path="res://scripts/wallCol.gd" id="2_xewbl"]
@@ -93,6 +93,8 @@ physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_wc8cv")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xewbl"]
+
 [node name="RoomNormalArea" type="Node2D"]
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -113,12 +115,42 @@ tile_map_data = PackedByteArray("AAD7/+r/AAAEAAQAAAD7/+v/AAAEAAUAAAD8/+r/AAAFAAQ
 tile_set = SubResource("TileSet_tnrit")
 script = ExtResource("2_xewbl")
 
+[node name="RayCaU" type="RayCast2D" parent="enterArea/areaEnterU"]
+z_index = 1
+position = Vector2(0, -353)
+scale = Vector2(3, 3)
+target_position = Vector2(-0.333333, -20)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="enterArea/areaEnterU"]
+position = Vector2(0, -328)
+scale = Vector2(7.97925, 2.38429)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterArea/areaEnterU/Area2D"]
+shape = SubResource("RectangleShape2D_xewbl")
+
 [node name="areaEnterD" type="TileMapLayer" parent="enterArea"]
 visible = false
 scale = Vector2(0.233645, 0.233645)
 tile_map_data = PackedByteArray("AAADABEAAAAEAAQAAAD8/xEAAAAFAAQAAAD8/xIAAAAFAAUAAAD8/xMAAAAFAAQAAAD9/xEAAAAEAAQAAAD9/xIAAAAEAAUAAAD+/xEAAAAFAAQAAAD+/xIAAAAFAAUAAAD9/xMAAAAEAAQAAAD+/xMAAAAFAAQAAAD//xEAAAAEAAQAAAD//xIAAAAEAAUAAAAAABEAAAAFAAQAAAAAABIAAAAFAAUAAAD//xMAAAAEAAQAAAAAABMAAAAFAAQAAAABABEAAAAEAAQAAAABABIAAAAEAAUAAAACABEAAAAFAAQAAAACABIAAAAFAAUAAAABABMAAAAEAAQAAAACABMAAAAFAAQAAAADABIAAAAEAAUAAAADABMAAAAEAAQAAAD7/xEAAAAEAAQAAAD7/xIAAAAEAAUAAAD7/xMAAAAEAAQAAAAEABEAAAAFAAQAAAAEABIAAAAFAAUAAAAEABMAAAAFAAQAAAA=")
 tile_set = SubResource("TileSet_tnrit")
 script = ExtResource("2_xewbl")
+
+[node name="RayCaD" type="RayCast2D" parent="enterArea/areaEnterD"]
+z_index = 1
+position = Vector2(0, 321)
+scale = Vector2(3, 3)
+target_position = Vector2(-0.333333, 26)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="enterArea/areaEnterD"]
+position = Vector2(0, 296)
+scale = Vector2(7.97925, 2.38429)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterArea/areaEnterD/Area2D"]
+shape = SubResource("RectangleShape2D_xewbl")
 
 [node name="areaEnterL" type="TileMapLayer" parent="enterArea"]
 visible = false
@@ -127,9 +159,41 @@ tile_map_data = PackedByteArray("AADr//7/AAAEAAQAAADr////AAAEAAUAAADs//7/AAAFAAQ
 tile_set = SubResource("TileSet_tnrit")
 script = ExtResource("2_xewbl")
 
+[node name="RayCaL" type="RayCast2D" parent="enterArea/areaEnterL"]
+z_index = 1
+position = Vector2(-337, 0)
+scale = Vector2(3, 3)
+target_position = Vector2(-21.6666, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="enterArea/areaEnterL"]
+position = Vector2(-312, -22)
+rotation = 1.5708
+scale = Vector2(10.3792, 2.38429)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterArea/areaEnterL/Area2D"]
+shape = SubResource("RectangleShape2D_xewbl")
+
 [node name="areaEnterR" type="TileMapLayer" parent="enterArea"]
 visible = false
 scale = Vector2(0.233645, 0.233645)
 tile_map_data = PackedByteArray("AAAUAPz/AAAEAAQAAAAUAP3/AAAEAAUAAAAVAPz/AAAFAAQAAAAVAP3/AAAFAAUAAAAUAP7/AAAEAAQAAAAUAP//AAAEAAUAAAAVAP7/AAAFAAQAAAAVAP//AAAFAAUAAAAUAAAAAAAEAAQAAAAUAAEAAAAEAAUAAAAVAAAAAAAFAAQAAAAVAAEAAAAFAAUAAAAUAAIAAAAEAAQAAAAVAAIAAAAFAAQAAAAWAPz/AAAEAAQAAAAWAP3/AAAEAAUAAAAWAP7/AAAEAAQAAAAWAP//AAAEAAUAAAAWAAAAAAAEAAQAAAAWAAEAAAAEAAUAAAAWAAIAAAAEAAQAAAAUAPr/AAAEAAQAAAAUAPv/AAAEAAUAAAAVAPr/AAAFAAQAAAAVAPv/AAAFAAUAAAAWAPr/AAAEAAQAAAAWAPv/AAAEAAUAAAAUAAMAAAAEAAUAAAAVAAMAAAAFAAUAAAAWAAMAAAAEAAUAAAA=")
 tile_set = SubResource("TileSet_tnrit")
 script = ExtResource("2_xewbl")
+
+[node name="RayCaR" type="RayCast2D" parent="enterArea/areaEnterR"]
+z_index = 1
+position = Vector2(369, 0)
+scale = Vector2(3, 3)
+target_position = Vector2(26, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="enterArea/areaEnterR"]
+position = Vector2(344, -17)
+rotation = 1.5708
+scale = Vector2(7.81925, 2.38429)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enterArea/areaEnterR/Area2D"]
+shape = SubResource("RectangleShape2D_xewbl")
