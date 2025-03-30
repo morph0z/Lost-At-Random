@@ -11,7 +11,7 @@ var attacking = false
 @export var KBstrengh: float = 3
 @export var AttackCooldown: float
 @export var AttackStrength: int
-var Health
+var EntityHealth
 var target
 
 

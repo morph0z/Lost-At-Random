@@ -4,5 +4,6 @@
 
 [node name="GeneratedWorld" type="Node2D"]
 script = ExtResource("1_bvteu")
+numOfRooms = Vector2i(5, 5)
 
 [node name="Rooms" type="Node2D" parent="."]

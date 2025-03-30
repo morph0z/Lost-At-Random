@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(-4, 1),
 "update": 0,
-"values": [Vector2(13, 330), Vector2(21, 81)]
+"values": [Vector2(13, 330), Vector2(13, 81)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -25,58 +25,10 @@ tracks/1/path = NodePath("Play:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-4.43828, 1),
-"update": 0,
-"values": [Vector2(13, 330), Vector2(13, 135)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayTest:anchor_bottom")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0.566667, 2),
 "transitions": PackedFloat32Array(-4, 1),
 "update": 0,
-"values": [0.549, 0.165]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayTest:anchor_right")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-4, 1),
-"update": 0,
-"values": [0.195, 0.205]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayTest:anchor_top")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-4, 1),
-"update": 0,
-"values": [0.509, 0.125]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayTest:anchor_left")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.018, 0.018]
+"values": [Vector2(13, 330), Vector2(13, 112)]
 }
 
 [sub_resource type="Animation" id="Animation_8kjlb"]
@@ -96,50 +48,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayTest:anchor_bottom")
+tracks/1/path = NodePath("Play:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.165]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayTest:anchor_right")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.205]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayTest:anchor_top")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.125]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayTest:anchor_left")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.018]
+"values": [Vector2(13, 330)]
 }
 
 [sub_resource type="Animation" id="Animation_3vnl4"]
@@ -189,7 +105,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_3vnl4")
 }
 
-[node name="imageBgPolys" type="Node2D" parent="."]
+[node name="imageBgPolys" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Polygon2D" type="Polygon2D" parent="imageBgPolys"]
 color = Color(0.113725, 0.156863, 0.227451, 1)
@@ -220,28 +145,28 @@ polygon = PackedVector2Array(255, 420, 296, 383, 318, 401, 294, 414, 277, 415)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 291.0
-offset_right = 939.0
-offset_bottom = 702.0
+anchor_bottom = 0.5
+offset_left = 288.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.48, 0.48)
+pivot_offset = Vector2(900, 675)
 texture = ExtResource("2_3vnl4")
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayTest" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.018
-anchor_top = 0.125
-anchor_right = 0.205
-anchor_bottom = 0.165
-offset_left = 0.264
-offset_top = -0.00199127
-offset_right = 8.36006
-offset_bottom = 0.0778427
+anchor_top = 0.529
+anchor_bottom = 0.529
+offset_left = 13.0
+offset_top = -261.791
+offset_right = 225.0
+offset_bottom = -235.792
+pivot_offset = Vector2(106, 26)
 theme = SubResource("Theme_4g317")
 theme_type_variation = &"FlatButton"
 text = "||  Play test  ||"
@@ -249,14 +174,12 @@ text = "||  Play test  ||"
 [node name="Play" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.021
-anchor_top = 0.509
-anchor_right = 0.205
-anchor_bottom = 0.549
-offset_left = -11.192
-offset_top = -194.832
-offset_right = -11.16
-offset_bottom = -194.752
+anchor_top = 0.529
+anchor_bottom = 0.529
+offset_left = 13.0
+offset_top = -12.792
+offset_right = 225.0
+offset_bottom = 13.208
 theme = SubResource("Theme_4g317")
 theme_type_variation = &"FlatButton"
 text = "||  Play  ||"
@@ -264,14 +187,12 @@ text = "||  Play  ||"
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.016
-anchor_top = 0.395
-anchor_right = 0.668
-anchor_bottom = 0.573
-offset_left = 0.567999
-offset_top = 0.0399933
-offset_right = 0.463989
-offset_bottom = -0.304016
+anchor_top = 0.484
+anchor_bottom = 0.484
+offset_left = 19.0
+offset_top = -57.632
+offset_right = 770.0
+offset_bottom = 57.368
 text = "Lost At Random"
 label_settings = SubResource("LabelSettings_ey4sl")
 vertical_alignment = 1

@@ -38,7 +38,7 @@ var joyStickSense = 0.5
 #atrributes
 var SPEED = 100.0
 #var EnemyStrenghtMultiplyer = 1
-var Health
+var EntityHealth
 
 #-------------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ func _input(event):
 
 func dash(dashPower):
 	if dash_timer.time_left == 0:
-		SPEED = SPEED+(dashPower*100)
+		SPEED = (SPEED+(dashPower*100))
 		player_dash_prt.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		player_dash_prt.emitting = false
@@ -167,7 +167,7 @@ func _on_pick_up_zone_area_entered(area):
 			
 func _process(_delta):
 	#checks if player has 1 or less items to change the item holding polygon
-	Health = health_component.HealthPoints
+	EntityHealth = health_component.HealthPoints
 	if isHolding <= 1:
 		holding_one.show()
 		holding_two.hide()
