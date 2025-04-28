@@ -60,6 +60,6 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 				var camera = get_parent().get_parent().get_node("Camera")
 				area.damage(attack)
 				sword_hit_prt.set_emitting(true)
-				camera.randomStrength = weaponDamage
+				camera.randomStrength = 2
 				camera.apply_shake()
-				#PlayerIn.frameFreeze(0.005, 3.346, area.get_parent().get_parent())
+				PlayerIn.frameFreeze(0.005, 3.346, area.get_parent().get_parent())

@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2641u613c38h"]
+[gd_scene load_steps=16 format=3 uid="uid://b2641u613c38h"]
 
 [ext_resource type="Script" uid="uid://b1g6e54j2mepl" path="res://scripts/weapons/ranged/BasicGun.gd" id="1_04e2t"]
 [ext_resource type="PackedScene" uid="uid://bilfddfsraiwq" path="res://scenes/particles/GunShoot_prt.tscn" id="2_14afo"]
 [ext_resource type="Texture2D" uid="uid://bfruupmg8lv86" path="res://assets/sprites/items/gun.png" id="3_8drw6"]
+[ext_resource type="PackedScene" uid="uid://dfium7e7b5yep" path="res://scenes/objects/inanimte/ammo/BasicBullet.tscn" id="4_8dlji"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
 
@@ -185,6 +186,7 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_04e2t")
+BULLET = ExtResource("4_8dlji")
 reloadTimeMultiplyer = 1.0
 ammoAmountOriginal = 31
 

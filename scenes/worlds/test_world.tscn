@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=27 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bkqob2l3ab1c6" path="res://scenes/objects/inanimte/dropped/DroppedLazerSword.tscn" id="10_x0mqq"]
 [ext_resource type="PackedScene" uid="uid://cy1rkwiwtk5ny" path="res://scenes/objects/inanimte/dropped/DroppedBasicBow.tscn" id="11_41gat"]
 [ext_resource type="PackedScene" uid="uid://bjbn1p7iuqtyv" path="res://scenes/objects/inanimte/dropped/DroppedGreatSword.tscn" id="11_rk7qi"]
+[ext_resource type="PackedScene" uid="uid://bfv2us2l8qw0q" path="res://scenes/objects/inanimte/dropped/DroppedGlassCannon.tscn" id="12_dneas"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_op7yw"]
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
@@ -171,6 +172,9 @@ position = Vector2(-12, 136)
 
 [node name="DroppedGreatSword" parent="DroppedItems" instance=ExtResource("11_rk7qi")]
 position = Vector2(98, -103)
+
+[node name="DroppedGlassCannon" parent="DroppedItems" instance=ExtResource("12_dneas")]
+position = Vector2(-303, 64)
 
 [node name="Player" parent="." instance=ExtResource("2_8108k")]
 position = Vector2(57, 34)

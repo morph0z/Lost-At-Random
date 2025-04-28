@@ -7,7 +7,7 @@ extends item
 
 signal ammoChange(ammoAmount)
 
-const BASIC_BULLET = preload("res://scenes/objects/inanimte/ammo/BasicBullet.tscn")
+@export var BULLET:PackedScene
 
 #attributes
 @export var shootCooldown:float = 1
@@ -28,7 +28,7 @@ func _ready():
 func shoot():
 	ammoChange.emit(ammoAmount)
 	gun_shoot_prt.set_emitting(true)
-	var BulletNew = BASIC_BULLET.instantiate()
+	var BulletNew = BULLET.instantiate()
 	BulletNew.set_scale(Vector2(0.1, 0.1))
 	BulletNew.bulletDamage = weaponDamage
 	BulletNew.global_position = shooting_point.global_position

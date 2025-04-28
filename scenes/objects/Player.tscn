@@ -27,6 +27,7 @@ polygon = PackedVector2Array(0, -12.3213, -4.38169, -4.92854, -10.516, -4.92854,
 radius = 13.0384
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2ig8"]
+radius = 7.0
 
 [sub_resource type="Animation" id="Animation_pf2nr"]
 resource_name = "Dead"
@@ -555,7 +556,7 @@ one_shot = true
 
 [node name="Camera" type="Camera2D" parent="."]
 scale = Vector2(2.18239, 0.832806)
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 script = ExtResource("5_8hwpb")
 
