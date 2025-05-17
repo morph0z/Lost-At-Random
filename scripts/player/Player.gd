@@ -61,6 +61,7 @@ func _initialize_state_machine():
 #-------------------------------------------------------------------------------
 
 func _input(event):
+				
 	#checks if player is dead duh
 	if health_component.isDead == false:
 		#turns player when right joystick is moved		
