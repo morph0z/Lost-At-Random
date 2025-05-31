@@ -21,7 +21,7 @@ func _on_area_entered(area: Area2D) -> void:
 			attack.attack_damage = bulletDamage
 			attack.attack_position = global_position
 			area.damage(attack)
-			PlayerIn.frameFreeze(0.005, 3.346, area.get_parent().get_parent())
+			#Global.frameFreeze(0.1, 1.5, area.get_parent().get_parent())
 			
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("World"):

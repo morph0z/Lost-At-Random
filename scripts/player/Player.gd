@@ -52,6 +52,7 @@ func _ready():
 	_initialize_state_machine()
 	animation_player.play("RESET")
 	health_component.HealthPoints = 100
+	
 
 func _initialize_state_machine():
 	state_machine.initial_state = idle_state
@@ -128,18 +129,6 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 
 	move_and_slide()	
-
-#-------------------------------------------------------------------------------
-
-func frameFreeze(timeScale, duration, flash):
-	Engine.time_scale = timeScale*0.1
-	joyStickSense = timeScale*duration*0.08
-	flash.set_modulate(Color(10000, 10000, 10000, 1))
-	await flash.get_tree().create_timer(timeScale * duration).timeout
-	flash.set_modulate(Color(1,1,1,1))
-	Engine.time_scale = 1.0
-	joyStickSense = 0.5
-	
 #-------------------------------------------------------------------------------	
 
 #for checking if an area2d node enetered the pickupzone

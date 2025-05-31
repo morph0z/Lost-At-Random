@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://bpqjvwe12xb8u"]
+[gd_scene load_steps=14 format=4 uid="uid://bpqjvwe12xb8u"]
 
-[ext_resource type="Script" uid="uid://byvpq5j8ryge8" path="res://scenes/worlds/Areas/room_normal.gd" id="1_p4vog"]
+[ext_resource type="Script" uid="uid://byvpq5j8ryge8" path="res://scripts/room_normal.gd" id="1_p4vog"]
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_ym2r2"]
 [ext_resource type="Texture2D" uid="uid://uk6k8vdp46tu" path="res://assets/sprites/particles/smoke.png" id="2_xewbl"]
 [ext_resource type="Script" uid="uid://854brk04exim" path="res://scripts/wallCol.gd" id="3_gs7my"]
+[ext_resource type="PackedScene" uid="uid://ckqbyekhs6t1" path="res://scenes/placeHolders/enemyPlaceHolder.tscn" id="5_ltw4b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hmwnk"]
 texture = ExtResource("1_ym2r2")
@@ -257,7 +258,6 @@ tile_map_data = PackedByteArray("AADr//7/AAAEAAQAAADr////AAAEAAUAAADs//7/AAAFAAQ
 tile_set = SubResource("TileSet_tnrit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enterArea/areaEnterL"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xewbl")
 
 [node name="areaEnterR" type="Area2D" parent="enterArea"]
@@ -275,8 +275,23 @@ tile_map_data = PackedByteArray("AAAUAPz/AAAEAAQAAAAUAP3/AAAEAAUAAAAVAPz/AAAFAAQ
 tile_set = SubResource("TileSet_tnrit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enterArea/areaEnterR"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xewbl")
+
+[node name="PlaceHolders" type="Node2D" parent="."]
+
+[node name="Enemys" type="Node2D" parent="PlaceHolders"]
+
+[node name="EnemyPlaceHolder" parent="PlaceHolders/Enemys" instance=ExtResource("5_ltw4b")]
+position = Vector2(-181, -207)
+
+[node name="EnemyPlaceHolder2" parent="PlaceHolders/Enemys" instance=ExtResource("5_ltw4b")]
+position = Vector2(197, -130)
+
+[node name="EnemyPlaceHolder3" parent="PlaceHolders/Enemys" instance=ExtResource("5_ltw4b")]
+position = Vector2(-205, -85)
+
+[node name="EnemyPlaceHolder4" parent="PlaceHolders/Enemys" instance=ExtResource("5_ltw4b")]
+position = Vector2(216, 75)
 
 [connection signal="area_entered" from="Background/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Background/Area2D2" to="." method="_on_area_2d_2_area_entered"]

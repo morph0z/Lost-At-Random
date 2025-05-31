@@ -62,4 +62,4 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 				sword_hit_prt.set_emitting(true)
 				camera.randomStrength = 2
 				camera.apply_shake()
-				PlayerIn.frameFreeze(0.005, 3.346, area.get_parent().get_parent())
+				Global.frameFreeze(0.1, 1, area.get_parent().get_parent())

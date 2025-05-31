@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=26 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
-[ext_resource type="PackedScene" uid="uid://bmh6hwcgqj3b6" path="res://scenes/ui/player_ui.tscn" id="3_l34h6"]
 [ext_resource type="PackedScene" uid="uid://comkq82bfwitx" path="res://scenes/objects/enemy/DummyEnemy.tscn" id="4_umrhl"]
 [ext_resource type="PackedScene" uid="uid://gp0ubk8frh5h" path="res://scenes/objects/inanimte/dropped/DroppedDebugSword.tscn" id="5_kwljm"]
 [ext_resource type="PackedScene" uid="uid://cpia0yvq8cwfw" path="res://scenes/objects/inanimte/dropped/DroppedBasicGun.tscn" id="6_8n2ue"]
@@ -179,12 +178,5 @@ position = Vector2(-303, 64)
 [node name="Player" parent="." instance=ExtResource("2_8108k")]
 position = Vector2(57, 34)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
-
-[node name="PlayerUI" parent="Player/CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("3_l34h6")]
-player = NodePath("../..")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_arj4h")
-
-[connection signal="itemPicked" from="Player" to="Player/CanvasLayer/PlayerUI" method="_on_player_item_picked"]

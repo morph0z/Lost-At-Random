@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://brqqrkpvnybn1"]
+[gd_scene load_steps=27 format=3 uid="uid://brqqrkpvnybn1"]
 
 [ext_resource type="Script" uid="uid://ekhqkcb6o8y7" path="res://scripts/player/Player.gd" id="1_uvua7"]
+[ext_resource type="Shader" uid="uid://bgmem2bvyd36o" path="res://shaders/damageFlash.gdshader" id="1_vnarb"]
 [ext_resource type="PackedScene" uid="uid://ba1yr0h0pyx13" path="res://scenes/particles/player/SprintDust_prt.tscn" id="2_eltwr"]
 [ext_resource type="PackedScene" uid="uid://nwje8vwlqx71" path="res://scenes/particles/player/PlayerDeath_prt.tscn" id="4_1eoig"]
 [ext_resource type="Script" uid="uid://ba1gaade51h0l" path="res://scripts/Camera.gd" id="5_8hwpb"]
@@ -10,6 +11,11 @@
 [ext_resource type="Script" uid="uid://cxgu4tqfwlwh3" path="res://scripts/player/states/idle.gd" id="8_5jm4c"]
 [ext_resource type="Script" uid="uid://d2m2262s2t7g5" path="res://scripts/player/states/walking.gd" id="9_2i02n"]
 [ext_resource type="Script" uid="uid://ledmnhumjxtg" path="res://scripts/player/states/attack.gd" id="10_bnlsx"]
+[ext_resource type="PackedScene" uid="uid://bmh6hwcgqj3b6" path="res://scenes/ui/player_ui.tscn" id="12_ubpv3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubpv3"]
+shader = ExtResource("1_vnarb")
+shader_parameter/active = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbuog"]
 radius = 9.0
@@ -476,6 +482,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["Player"]]
+material = SubResource("ShaderMaterial_ubpv3")
 motion_mode = 1
 script = ExtResource("1_uvua7")
 state_machine = NodePath("LimboHSM")
@@ -587,5 +594,10 @@ script = ExtResource("10_bnlsx")
 [node name="Swing" type="LimboState" parent="LimboHSM/Attack"]
 
 [node name="Shoot" type="LimboState" parent="LimboHSM/Attack"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("12_ubpv3")]
+player = NodePath("../..")
 
 [connection signal="area_entered" from="PickUpZone" to="." method="_on_pick_up_zone_area_entered"]

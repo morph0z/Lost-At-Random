@@ -187,8 +187,9 @@ constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_04e2t")
 BULLET = ExtResource("4_8dlji")
-reloadTimeMultiplyer = 1.0
-ammoAmountOriginal = 31
+shootCooldown = 0.065
+reloadTimeMultiplyer = 0.105
+ammoAmountOriginal = 1000
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(0.500007, -1.50002)

@@ -6,3 +6,5 @@
 script = ExtResource("1_bvteu")
 
 [node name="Rooms" type="Node2D" parent="."]
+
+[node name="Enemys" type="Node2D" parent="."]
