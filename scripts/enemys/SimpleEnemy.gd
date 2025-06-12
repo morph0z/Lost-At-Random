@@ -29,7 +29,8 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func makePath() -> void:
-	navigation_agent_2d.target_position = playerSeen.global_position
+	if playerSeen.is_inside_tree():
+		navigation_agent_2d.target_position = playerSeen.global_position
 
 func _on_hurtbox_component_area_entered(area: Area2D) -> void:
 	if area is HurtboxComponent:

@@ -11,8 +11,9 @@ height = 160.0
 [sub_resource type="Gradient" id="Gradient_d3jb3"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="CannonBall" type="Area2D"]
+[node name="CannonBall" type="Area2D" node_paths=PackedStringArray("shape")]
 script = ExtResource("1_l4f4v")
+shape = NodePath("Polygon2D2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.90735e-06, 5.68434e-12)
@@ -20,12 +21,6 @@ rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 shape = SubResource("CapsuleShape2D_5h6uv")
 debug_color = Color(0.988235, 0, 0, 0.419608)
-
-[node name="ProjectileGone" parent="." instance=ExtResource("2_l4f4v")]
-position = Vector2(-1.90735e-06, 0)
-scale = Vector2(10, 10)
-amount = 100
-scale_amount_max = 35.52
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(59, 0)
@@ -49,7 +44,13 @@ scale_amount_max = 6.0
 color_ramp = SubResource("Gradient_d3jb3")
 
 [node name="Polygon2D2" type="Sprite2D" parent="."]
-scale = Vector2(8, 8)
+scale = Vector2(4, 4)
 texture = ExtResource("3_l4f4v")
+
+[node name="ProjectileGone" parent="." instance=ExtResource("2_l4f4v")]
+position = Vector2(-2, 2)
+scale = Vector2(10, 10)
+amount = 100
+scale_amount_max = 35.52
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

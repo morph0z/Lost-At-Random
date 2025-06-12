@@ -10,8 +10,9 @@ height = 500.0
 [sub_resource type="Gradient" id="Gradient_d3jb3"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="BasicBullet" type="Area2D"]
+[node name="BasicBullet" type="Area2D" node_paths=PackedStringArray("shape")]
 script = ExtResource("1_cpmwd")
+shape = NodePath("Polygon2D2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-20, 5.68434e-12)
@@ -31,7 +32,7 @@ amount = 100
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 exclude_parent = false
-target_position = Vector2(193, 0)
+target_position = Vector2(86, 0)
 
 [node name="ProjectileTrail" type="CPUParticles2D" parent="."]
 position = Vector2(-38, 0)

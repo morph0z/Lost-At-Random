@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cyo7fe3b41be7"]
+[gd_scene load_steps=17 format=3 uid="uid://cyo7fe3b41be7"]
 
 [ext_resource type="Script" uid="uid://dxp6l3khe2m3k" path="res://scripts/weapons/sword/DebugSword.gd" id="1_b8geh"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_ijwa2"]
@@ -8,28 +8,17 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
-size = Vector2(4, 16)
+size = Vector2(4, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il1y2"]
-size = Vector2(8, 4.5)
+size = Vector2(17.3484, 4.5)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xbf5n"]
-atlas = ExtResource("4_2kwy8")
-region = Rect2(2, 0, 12, 18)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3vbel"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xbf5n")
-}],
-"loop": false,
-"name": &"Swing",
-"speed": 5.0
-}]
+[sub_resource type="Gradient" id="Gradient_07025"]
+offsets = PackedFloat32Array(0, 0.447236, 1)
+colors = PackedColorArray(0, 1, 1, 1, 0, 0.552941, 1, 0.498039, 0, 0, 1, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mt5ga"]
-polygon = PackedVector2Array(-8, -1, -5, -1, -5, -3, -4, -3, -4, -2, 4, -2, 4, -1, 7, -1, 7, 1, 4, 1, 4, 2, -4, 2, -4, 3, -5, 3, -5, 1, -8, 1)
+polygon = PackedVector2Array(-8, -1, -8, 1, -7, 1, -7, 2, -5, 2, -5, 1, -3, 1, -3, 2, -2, 2, -2, 4, -1, 4, -1, 5, -3, 5, -3, 6, -2, 6, -2, 7, -1, 7, -1, 6, 1, 6, 1, 3, 0, 3, 0, 2, 4, 2, 4, 1, 6, 1, 6, 0, 14, 0, 14, 1, 18, 1, 18, 2, 19, 2, 19, 3, 22, 3, 22, -1, 20, -1, 20, -2, 17, -2, 17, -3, 4, -3, 4, -2, 0, -2, 0, -3, 1, -3, 1, -6, -1, -6, -1, -7, -2, -7, -2, -6, -3, -6, -3, -5, -1, -5, -1, -4, -2, -4, -2, -2, -3, -2, -3, -1, -5, -1, -5, -2, -7, -2, -7, -1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xar4"]
 radius = 2.99856
@@ -197,7 +186,7 @@ weaponDamage = 100
 originalSwingTime = 2.0
 
 [node name="ColShape" type="CollisionShape2D" parent="." groups=["PickableItem", "Sword"]]
-position = Vector2(0, 3.71734e-06)
+position = Vector2(7, 2.90871e-05)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_fo6jp")
 one_way_collision_margin = 0.0
@@ -207,42 +196,48 @@ debug_color = Color(0.884428, 0, 0.355222, 0.42)
 position = Vector2(0, 2)
 
 [node name="SharpPartShape" type="CollisionShape2D" parent="SharpPart"]
-position = Vector2(0, -2)
+position = Vector2(11, -4)
+scale = Vector2(1.19864, 0.732625)
 shape = SubResource("RectangleShape2D_il1y2")
 debug_color = Color(0.266667, 0, 1, 0.419608)
 
 [node name="HeroSlash" parent="." instance=ExtResource("2_ijwa2")]
+position = Vector2(11, 1)
 rotation = 1.5708
+scale = Vector2(1, 1.2)
+color_ramp = SubResource("Gradient_07025")
 
 [node name="SwordHit_prt" parent="." instance=ExtResource("3_dbypr")]
-position = Vector2(4, 0)
+position = Vector2(20, -1.19209e-07)
+rotation = -1.08352
 lifetime = 0.2
 explosiveness = 0.85
 randomness = 1.0
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 0)
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
 rotation = 1.5708
-sprite_frames = SubResource("SpriteFrames_3vbel")
-animation = &"Swing"
+texture = ExtResource("4_2kwy8")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 occluder = SubResource("OccluderPolygon2D_mt5ga")
 
 [node name="ItemPick" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPick"]
+position = Vector2(-1, 0)
 rotation = -1.57223
 shape = SubResource("CapsuleShape2D_2xar4")
 debug_color = Color(0.655886, 0.516826, 0, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_l67t7")
+&"": SubResource("AnimationLibrary_l67t7")
 }
 
 [connection signal="area_entered" from="SharpPart" to="." method="_on_sharp_part_area_entered"]

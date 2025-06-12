@@ -31,16 +31,14 @@ func spawnEnemys():
 		enemys.call_deferred("add_child", basicEnemyInstance)
 		basicEnemyInstance.set_position(currentEnemyPlaceHolder.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
 		enemylist.append(basicEnemyInstance)
-	print(enemylist)
-	
+
 func clearEnemys():
 	var listInc:int = 0
 	for i in enemylist:
 		listInc += 1
 		i.queue_free()
 		enemylist.remove_at(listInc-1)
-#		i.remove_at(enemylist.find(i)))
-		
+
 func generateRoom():
 	var normalRoom = ROOM_NORMAL_AREA.instantiate()
 	var roomOpenings = ["enterArea/areaEnterU","enterArea/areaEnterD","enterArea/areaEnterL","enterArea/areaEnterR"]

@@ -14,7 +14,7 @@ var goneThrough = 0
 
 ##Removes Arrow from world
 func DestroyArrow():
-	sprite.hide()
+	#sprite.hide()
 	goneThrough = 0
 		
 func _on_area_entered(area: Area2D) -> void:
@@ -25,15 +25,20 @@ func _on_area_entered(area: Area2D) -> void:
 		#checks if the peircinglevel is equal to the gonethrough level to remove the arrow when needed
 		if peircingLevel == goneThrough:
 			var attack = Attack.new()
-			DestroyProjectile(true)
+			DestroyProjectile(true,sprite)
 			DestroyArrow()
 			attack.attack_damage = arrowDamage
 			attack.attack_position = global_position
 			area.damage(attack)
 			Global.frameFreeze(0.1, 1.5, area.get_parent().get_parent())
-		
+			
+func _process(_delta: float) -> void:
+	if ray_cast.is_colliding():
+		if ray_cast.get_collider().is_in_group("World"):
+			DestroyProjectile(true,sprite)
+			
 func _on_body_entered(body: Node2D) -> void:
 	#when the arrow colides with any collidable tile it will delete it
 	if body.is_in_group("World"):
-		DestroyProjectile(true)
+		DestroyProjectile(true,sprite)
 		DestroyArrow()

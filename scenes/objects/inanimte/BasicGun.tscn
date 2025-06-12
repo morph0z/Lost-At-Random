@@ -205,7 +205,7 @@ spread = 73.33
 initial_velocity_max = 503.7
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(8, -1)
 rotation = -0.00326566
 sprite_frames = SubResource("SpriteFrames_3vbel")
 animation = &"Swing"
