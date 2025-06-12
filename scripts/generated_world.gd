@@ -2,17 +2,12 @@ extends Node2D
 
 @onready var enemys: Node2D = $Enemys
 @onready var rooms: Node2D = $Rooms
-@export var enemySpawning1: PackedScene = preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
-@export var enemySpawning2: PackedScene	= preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
-@export var enemySpawning3: PackedScene	= preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
-@export var enemySpawning4: PackedScene	= preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
-@export var enemySpawning5: PackedScene	= preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
-var enemyList = [enemySpawning1.instantiate(),enemySpawning2.instantiate(),enemySpawning3.instantiate(),enemySpawning4.instantiate(),enemySpawning5.instantiate()]
 const PLAYERins = preload("res://scenes/objects/Player.tscn")
 var player = PLAYERins.instantiate()
 var ROOM_NORMAL_AREA = preload("res://scenes/worlds/Areas/room_normal_area.tscn")
 var roomPlaceHolderInsance = ROOM_NORMAL_AREA.instantiate()
 var enemyPlaceHolders = roomPlaceHolderInsance.get_node("PlaceHolders/Enemys")
+var enemylist:Array = []
 
 var randomAmountRoomOpenings:int
 var randomRoomOpening
@@ -27,18 +22,27 @@ func _ready() -> void:
 	
 	
 func spawnEnemys():
-	var randomEnemy = enemyList.pick_random()
-	var currentEnemyPlaceHolder
-	for i in enemyPlaceHolders.get_children():
-		currentEnemyPlaceHolder = i
-		if randomEnemy == null:
-			randomEnemy = enemyList.pick_random()
-		enemys.add_child(randomEnemy)
-		randomEnemy.set_position(currentEnemyPlaceHolder.get_position())
+	var BasicEnemy: PackedScene = preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
+	#NOTE replace the 5 with the increasing amount of enemys due to higher levels
+	var randomEnemyAmount = randi_range(0, 5)
+	for i in range(randomEnemyAmount):
+		var basicEnemyInstance = BasicEnemy.instantiate()
+		var currentEnemyPlaceHolder = enemyPlaceHolders.get_child(randi_range(0,3))
+		enemys.call_deferred("add_child", basicEnemyInstance)
+		basicEnemyInstance.set_position(currentEnemyPlaceHolder.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
+		enemylist.append(basicEnemyInstance)
+	print(enemylist)
+	
+func clearEnemys():
+	var listInc:int = 0
+	for i in enemylist:
+		listInc += 1
+		i.queue_free()
+		enemylist.remove_at(listInc-1)
+#		i.remove_at(enemylist.find(i)))
 		
 func generateRoom():
 	var normalRoom = ROOM_NORMAL_AREA.instantiate()
-	spawnEnemys()
 	var roomOpenings = ["enterArea/areaEnterU","enterArea/areaEnterD","enterArea/areaEnterL","enterArea/areaEnterR"]
 	rooms.call_deferred("add_child", normalRoom)
 	match randomAmountRoomOpenings:

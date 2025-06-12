@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=27 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
+[ext_resource type="PackedScene" uid="uid://bpqx6586q8y2s" path="res://scenes/objects/enemy/SimpleEnemy.tscn" id="4_dneas"]
 [ext_resource type="PackedScene" uid="uid://comkq82bfwitx" path="res://scenes/objects/enemy/DummyEnemy.tscn" id="4_umrhl"]
 [ext_resource type="PackedScene" uid="uid://gp0ubk8frh5h" path="res://scenes/objects/inanimte/dropped/DroppedDebugSword.tscn" id="5_kwljm"]
 [ext_resource type="PackedScene" uid="uid://cpia0yvq8cwfw" path="res://scenes/objects/inanimte/dropped/DroppedBasicGun.tscn" id="6_8n2ue"]
@@ -145,6 +146,9 @@ height = 30.0
 
 [node name="DummyEnemy" parent="Enemys" instance=ExtResource("4_umrhl")]
 position = Vector2(72, 144)
+
+[node name="SimpleEnemy" parent="Enemys" instance=ExtResource("4_dneas")]
+position = Vector2(274, -74)
 
 [node name="DroppedItems" type="Node2D" parent="."]
 
