@@ -18,7 +18,7 @@ shader = ExtResource("1_vnarb")
 shader_parameter/active = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbuog"]
-radius = 9.0
+radius = 8.0
 
 [sub_resource type="Gradient" id="Gradient_vnarb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -33,7 +33,7 @@ polygon = PackedVector2Array(0, -12.3213, -4.38169, -4.92854, -10.516, -4.92854,
 radius = 13.0384
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2ig8"]
-radius = 7.0
+radius = 9.0
 
 [sub_resource type="Animation" id="Animation_pf2nr"]
 resource_name = "Dead"

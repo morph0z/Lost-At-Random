@@ -11,7 +11,7 @@ var attacking = false
 @export var SPEED = 60.0
 @export var KBstrengh: float = 3
 @export var AttackCooldown: float
-@export var AttackStrength: int
+@export var AttackStrength: int = 10
 #var Health
 var target
 
@@ -29,7 +29,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func makePath() -> void:
-	if playerSeen.is_inside_tree():
+	if playerSeen.is_queued_for_deletion() == false:
 		navigation_agent_2d.target_position = playerSeen.global_position
 
 func _on_hurtbox_component_area_entered(area: Area2D) -> void:
