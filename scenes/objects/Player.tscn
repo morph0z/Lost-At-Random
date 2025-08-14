@@ -482,6 +482,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["Player"]]
+z_index = 1
 material = SubResource("ShaderMaterial_ubpv3")
 motion_mode = 1
 script = ExtResource("1_uvua7")

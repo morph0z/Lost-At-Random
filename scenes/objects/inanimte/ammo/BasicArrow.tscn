@@ -11,8 +11,10 @@ height = 600.0
 [sub_resource type="Gradient" id="Gradient_0y1xw"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="BasicArrow" type="Area2D"]
+[node name="BasicArrow" type="Area2D" node_paths=PackedStringArray("visual")]
 script = ExtResource("1_t8fg7")
+visual = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://58b8q2vx725j"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-20, 5.68434e-12)
@@ -47,10 +49,6 @@ position = Vector2(0, 1.5)
 rotation = 1.5708
 scale = Vector2(3, 3)
 texture = ExtResource("2_dmoi1")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-exclude_parent = false
-target_position = Vector2(28, 0)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

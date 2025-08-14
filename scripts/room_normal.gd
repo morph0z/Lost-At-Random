@@ -1,9 +1,16 @@
 extends Node2D
+@onready var background: TileMapLayer = $Background
+@onready var midground: TileMapLayer = $Midground
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+#func _ready() -> void:
+	#for i in background.get_used_cells(): 
+		#if background.get_cell_tile_data(i) == background.get_cell_tile_data(Vector2i(-21,-22)) :
+			#print("yo "+str(i)+" is grass")
+			#background.get_cell_tile_data(i).set_modulate(Color(0,0,0,0))
+			#background.erase_cell(i)
+			
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group("Player"):

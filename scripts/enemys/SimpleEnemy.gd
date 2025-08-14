@@ -42,7 +42,9 @@ func _on_hurtbox_component_area_entered(area: Area2D) -> void:
 		attack.hit_cooldown = AttackCooldown
 		area.get_parent().get_parent().velocity = velocity*attack.knockback_force*4 
 		area.damage(attack)
-		
+		area.get_parent().get_parent().set_velocity(Vector2(KBstrengh*(1000),KBstrengh*(1000))*velocity.normalized().round())
+		area.get_parent().get_parent().move_and_slide()
+		print()
 
 
 func _on_timer_timeout() -> void:

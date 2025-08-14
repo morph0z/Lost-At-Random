@@ -125,7 +125,6 @@ sources/1 = SubResource("TileSetAtlasSource_7plhp")
 glow_enabled = true
 
 [node name="test world" type="Node2D"]
-metadata/_edit_lock_ = true
 
 [node name="Background" type="TileMapLayer" parent="." groups=["World"]]
 use_parent_material = true

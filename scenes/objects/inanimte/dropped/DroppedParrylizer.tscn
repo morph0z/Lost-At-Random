@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhcvryfijjp5e"]
+
+[ext_resource type="PackedScene" uid="uid://c6lxwga1lujbj" path="res://scenes/objects/inanimte/Parrylizer.tscn" id="1_ciu63"]
+
+[node name="DroppedParrylizer" type="Node2D"]
+
+[node name="Parrylizer" parent="." instance=ExtResource("1_ciu63")]

@@ -127,7 +127,7 @@ func _physics_process(_delta):
 		velocity = direction*SPEED
 	elif direction ==Vector2.ZERO:
 		velocity = Vector2.ZERO
-
+		
 	move_and_slide()	
 #-------------------------------------------------------------------------------	
 
