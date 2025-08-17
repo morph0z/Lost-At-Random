@@ -1,11 +1,23 @@
 extends sword
-var shoot = gun.new()
+@onready var marker_2d: Marker2D = $ShootingPoint
+const PARRYLIZER_BULLET = preload("res://scenes/objects/inanimte/ammo/ParrylizerBullet.tscn")
 
+var funProperties = {
+	"statType": "Electric",
+	"spaceTimeLocation": "Futuristic"
+}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
+func createParryBullet():
+	var ParryBulletIns = PARRYLIZER_BULLET.instantiate()
+	ParryBulletIns.set_scale(Vector2(0.6, 0.6))
+	#sets the damage, position and rotation of the projectile
+	ParryBulletIns.bulletDamage = 1
+	ParryBulletIns.global_position = marker_2d.global_position
+	ParryBulletIns.global_rotation = marker_2d.global_rotation
+	ParryBulletIns.Speed = 500
+	ParryBulletIns.peircingLevel = 0
+	get_tree().get_root().call_deferred("add_child",ParryBulletIns)
+	get_tree().get_root().print_tree_pretty()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_sharp_part_area_entered(area: Area2D) -> void:
@@ -13,8 +25,8 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 		if Swung == true:
 			#checks if while the sword is swung if its in an enemy
 			if area is bullet:
-				area.DestroyBullet()
-				shoot.shoot()
+				area.DestroyProjectile(true, area.visual)
+				createParryBullet()
 			if area is HurtboxComponent:
 				var attack = Attack.new()
 				attack.attack_damage = weaponDamage
@@ -28,4 +40,3 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 				camera.randomStrength = 2
 				camera.apply_shake()
 				Global.frameFreeze(0.1, 1, area.get_parent().get_parent())
-		

@@ -241,7 +241,7 @@ debug_color = Color(0.655886, 0.516826, 0, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_l67t7")
+&"": SubResource("AnimationLibrary_l67t7")
 }
 
 [connection signal="area_entered" from="SharpPart" to="." method="_on_sharp_part_area_entered"]

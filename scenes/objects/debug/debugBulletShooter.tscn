@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b00sfpaiwq7i4"]
+
+[ext_resource type="Script" uid="uid://py6megmbck3l" path="res://scripts/debug/debug_bullet_shooter.gd" id="1_2wshw"]
+
+[node name="DebugBulletShooter" type="Polygon2D"]
+polygon = PackedVector2Array(-17, -4, -7, -19, 12, -13, 16, 11, 0, 15, -10, 13, -14, 3)
+script = ExtResource("1_2wshw")
+
+[connection signal="draw" from="." to="." method="_on_draw"]
