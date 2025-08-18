@@ -17,9 +17,8 @@ func createParryBullet():
 	ParryBulletIns.Speed = 500
 	ParryBulletIns.peircingLevel = 0
 	get_tree().get_root().call_deferred("add_child",ParryBulletIns)
-	get_tree().get_root().print_tree_pretty()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#Overwrites the _on_sharp_part_area_entered from the sword class
 func _on_sharp_part_area_entered(area: Area2D) -> void:
 	if isHeld == true:
 		if Swung == true:

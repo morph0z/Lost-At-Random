@@ -16,6 +16,10 @@ func _on_area_entered(area: Area2D) -> void:
 		attack.attack_position = global_position
 		area.damage(attack)
 		Global.frameFreeze(0.1, 1.5, area.get_parent().get_parent())
+		#adds particles
+		projectile_gone.set_emitting(true)
+		if goneThrough == peircingLevel:
+			DestroyProjectile(true, visual)
 			
 ##Called when arrow enters another body			
 func _on_body_entered(_body: Node2D) -> void:

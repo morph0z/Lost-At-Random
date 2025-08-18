@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=30 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bfv2us2l8qw0q" path="res://scenes/objects/inanimte/dropped/DroppedGlassCannon.tscn" id="12_dneas"]
 [ext_resource type="PackedScene" uid="uid://dhcvryfijjp5e" path="res://scenes/objects/inanimte/dropped/DroppedParrylizer.tscn" id="14_anyd7"]
 [ext_resource type="PackedScene" uid="uid://b00sfpaiwq7i4" path="res://scenes/objects/debug/debugBulletShooter.tscn" id="15_0xgc2"]
+[ext_resource type="PackedScene" uid="uid://cq1jf82muvco" path="res://scenes/objects/inanimte/BasicBow.tscn" id="15_fs4ai"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_op7yw"]
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
@@ -182,7 +183,9 @@ position = Vector2(98, -103)
 position = Vector2(-303, 64)
 
 [node name="DroppedParrylizer" parent="DroppedItems" instance=ExtResource("14_anyd7")]
-position = Vector2(-222, 123)
+position = Vector2(-167, 182)
+
+[node name="BasicBow" parent="DroppedItems" instance=ExtResource("15_fs4ai")]
 
 [node name="Player" parent="." instance=ExtResource("2_8108k")]
 position = Vector2(57, 34)

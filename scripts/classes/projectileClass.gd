@@ -46,7 +46,9 @@ func _process(_delta: float) -> void:
 	if self.has_overlapping_bodies():
 		for i in self.get_overlapping_bodies():
 			if i.is_in_group("World"):
-				if goneThrough >= peircingLevel:
+				if goneThrough == peircingLevel:
 					DestroyProjectile(true, visual)
-				elif goneThrough <= peircingLevel:
-					goneThrough = goneThrough+1
+				elif goneThrough < peircingLevel:
+					if body_exited:
+						goneThrough = goneThrough+1
+						print("goneThroung " + str(goneThrough))

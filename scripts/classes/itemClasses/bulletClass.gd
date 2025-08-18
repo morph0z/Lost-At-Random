@@ -11,13 +11,16 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is HurtboxComponent:
 		#it deals damage
 		var attack = Attack.new()
-		#destroys the bullet
-		DestroyProjectile(true, visual)
 		attack.attack_damage = bulletDamage
 		attack.attack_position = global_position
 		area.damage(attack)
 		#adds framestop
 		Global.frameFreeze(0.1, 1.5, area.get_parent().get_parent())
+		#adds particles
+		projectile_gone.set_emitting(true)
+		#destroys the bullet if the amount of things gone through is equal to the peircing level
+		if goneThrough == peircingLevel:
+			DestroyProjectile(true, visual)
 
 ##Called when bullet hits another area
 func _on_body_entered(_body: Node2D) -> void:

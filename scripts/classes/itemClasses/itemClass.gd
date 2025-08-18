@@ -45,7 +45,3 @@ func checkIfHeld():
 	elif isHeld == false:
 		item_pick.call_deferred("set_monitorable", true)
 		item_pick.call_deferred("set_monitoring", true)
-
-	# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
