@@ -7,8 +7,11 @@ class_name sword
 @onready var hero_slash = $HeroSlash
 @onready var sword_hit_prt = $SwordHit_prt
 
+##The damage the sword deals when swung
 @export var weaponDamage:int
+##The amount of time the sword swings for (in seconds)
 @export var originalSwingTime:float
+##DOES NOT DO ANYTHING
 @export var weaponKnockback:float = 0
 
 var swingTime = originalSwingTime

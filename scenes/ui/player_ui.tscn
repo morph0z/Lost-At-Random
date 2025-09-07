@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmh6hwcgqj3b6"]
+[gd_scene load_steps=6 format=3 uid="uid://bmh6hwcgqj3b6"]
 
 [ext_resource type="Script" uid="uid://c2l3vqbiti4lf" path="res://scripts/ui/player_ui.gd" id="1_l260u"]
 
@@ -13,6 +13,21 @@ bg_color = Color(0, 0.678431, 0, 1)
 border_width_left = 9
 border_width_top = 8
 border_color = Color(0, 0.458824, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 5
+corner_radius_bottom_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sf84"]
+bg_color = Color(0.82648, 0.575823, 5.77569e-07, 1)
+corner_radius_top_left = 23
+corner_radius_top_right = 8
+corner_radius_bottom_right = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg20v"]
+bg_color = Color(1, 0.966667, 0, 1)
+border_width_left = 9
+border_width_top = 8
+border_color = Color(0.55, 0.531667, 0, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 5
 corner_radius_bottom_right = 6
@@ -35,6 +50,19 @@ offset_bottom = 88.0
 theme_override_styles/background = SubResource("StyleBoxFlat_s4ogp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dq4ne")
 value = 100.0
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 95.0
+offset_right = 206.0
+offset_bottom = 122.0
+scale = Vector2(1, -0.350682)
+theme_override_styles/background = SubResource("StyleBoxFlat_2sf84")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jg20v")
+max_value = 50.0
+value = 50.0
 show_percentage = false
 
 [node name="TextureRect" type="TextureRect" parent="."]

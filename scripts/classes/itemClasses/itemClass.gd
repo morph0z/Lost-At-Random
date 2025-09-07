@@ -5,14 +5,15 @@ extends AnimatableBody2D
 const Player = preload("res://scripts/player/Player.gd") 
 var PlayerIn = Player.new()
 
-#
+##The animation player for the item
 @onready var animation_player = $AnimationPlayer
+##The item hitbox that activates when picking up an item
 @onready var item_pick = $ItemPick
 
-#bool
+##This is only true when the item is held by the player
 var isHeld = false
 
-# Called when the node enters the scene tree for the first time.
+##This is called when the item is ready
 func whenThisItemIsReady():
 	if get_parent().is_in_group("HeldItems") == true:
 		animation_player.play("heldF")
@@ -26,7 +27,7 @@ func whenThisItemIsReady():
 		item_pick.monitorable = true
 	checkIfHeld()
 
-	#function to check if the item is held
+##Function to check if the item is held
 func checkIfHeld():
 	if get_parent().is_in_group("HeldItems") == true:
 		if get_parent().get_child_count(false) == 1:

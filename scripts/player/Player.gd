@@ -37,6 +37,9 @@ var joyStickSense = 0.5
 
 #atrributes
 var SPEED = 100.0
+const OriginalStamina = 50
+var Stamina = OriginalStamina
+var StaminaUse = true
 #var EnemyStrenghtMultiplyer = 1
 var EntityHealth
 
@@ -53,6 +56,7 @@ func _ready():
 	animation_player.play("RESET")
 	health_component.HealthPoints = 100
 	
+#-------------------------------------------------------------------------------
 
 func _initialize_state_machine():
 	state_machine.initial_state = idle_state
@@ -76,20 +80,18 @@ func _input(event):
 			if event is InputEventMouseMotion:
 				look_at(get_global_mouse_position())
 	
-	if Input.is_action_pressed("SprintShift"):
-			SPEED = 200
-			sprint_dust.get_child(0).set_emitting(true)
-			animation_player.speed_scale = 2
-	elif Input.is_action_just_released("SprintShift"):
-			SPEED = 100
-			sprint_dust.get_child(0).set_emitting(false)
-			animation_player.speed_scale = 1
-			
+	if (StaminaUse):
+		if Input.is_action_pressed("SprintShift"):
+			sprint(true)
+		elif Input.is_action_just_released("SprintShift"):
+			sprint(false)
+		while Input.is_action_pressed("SprintShift"):
+			Stamina = Stamina - 1
+			await get_tree().create_timer(0.1).timeout		
 	if Input.is_action_just_pressed("DashCtrl"):
-		dash(3)
+		if(StaminaUse):
+			dash(3)
 		
-	
-	
 	#ITEM DROPPING SYSTEM
 	if Input.is_action_pressed("Drop"):
 		#checks if the player has one item or not
@@ -110,15 +112,32 @@ func _input(event):
 
 #-------------------------------------------------------------------------------
 
-func dash(dashPower):
-	if dash_timer.time_left == 0:
-		SPEED = (SPEED+(dashPower*100))
-		player_dash_prt.emitting = true
-		await get_tree().create_timer(0.1).timeout
-		player_dash_prt.emitting = false
+func sprint(sprintToggle):
+	if sprintToggle:
+		if Stamina > 0:
+			SPEED = 200
+			sprint_dust.get_child(0).set_emitting(sprintToggle)
+		elif Stamina <= 0:
+			SPEED = 100
+			sprint_dust.get_child(0).set_emitting(false)
+	else:
 		SPEED = 100
-		dash_timer.start()
-	
+
+#-------------------------------------------------------------------------------
+
+func dash(dashPower):
+	if Stamina != 0:
+		if dash_timer.time_left == 0:
+			if Stamina > OriginalStamina%(dashPower*5):
+				Stamina = Stamina-(dashPower*5)
+				SPEED = (SPEED+(dashPower*100))
+				player_dash_prt.emitting = true
+				await get_tree().create_timer(0.1).timeout
+				player_dash_prt.emitting = false
+				SPEED = 100
+				dash_timer.start()
+
+#-------------------------------------------------------------------------------
 
 func _physics_process(_delta):
 	#this is for movement 
@@ -154,7 +173,9 @@ func _on_pick_up_zone_area_entered(area):
 					holding_two.show()
 					shadow_h_1.hide()
 					shadow_h_2.show()
-			
+
+#-------------------------------------------------------------------------------
+
 func _process(_delta):
 	#checks if player has 1 or less items to change the item holding polygon
 	EntityHealth = health_component.HealthPoints
@@ -163,3 +184,15 @@ func _process(_delta):
 		holding_two.hide()
 		shadow_h_1.show()
 		shadow_h_2.hide()
+	if Stamina < 0:
+		Stamina = 0
+
+#-------------------------------------------------------------------------------
+
+func _on_stamina_regen_cooldown_timeout() -> void:
+	StaminaUse = false
+	while Stamina <= OriginalStamina:
+		Stamina = Stamina+1
+		await get_tree().create_timer(0.05).timeout
+		if Stamina >= OriginalStamina:
+			StaminaUse = true

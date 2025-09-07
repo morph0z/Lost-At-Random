@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpc7odlpkaayu"]
+
+[ext_resource type="PackedScene" uid="uid://jvhpue48a44f" path="res://scenes/objects/inanimte/SwordBlaster.tscn" id="1_hw83u"]
+
+[node name="DroppedSwordBlaster" type="Node2D"]
+
+[node name="SwordBlaster" parent="." instance=ExtResource("1_hw83u")]
+weaponDamage = 3
+originalSwingTime = 0.6
