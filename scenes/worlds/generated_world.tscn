@@ -5,6 +5,10 @@
 [node name="GeneratedWorld" type="Node2D"]
 script = ExtResource("1_bvteu")
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-1079, -1159, 1233, -1169, 1311, 1032, -1221, 977)
+
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Enemys" type="Node2D" parent="."]

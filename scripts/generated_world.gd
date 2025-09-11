@@ -6,6 +6,7 @@ const PLAYERins = preload("res://scenes/objects/Player.tscn")
 var player = PLAYERins.instantiate()
 var ROOM_NORMAL_AREA = preload("res://scenes/worlds/Areas/room_normal_area.tscn")
 var roomPlaceHolderInsance = ROOM_NORMAL_AREA.instantiate()
+var ROOM_L_AREA = preload("res://scenes/worlds/Areas/room_L_area.tscn")
 var enemyPlaceHolders = roomPlaceHolderInsance.get_node("PlaceHolders/Enemys")
 var enemylist:Array = []
 
@@ -16,7 +17,6 @@ var randomRoomOpening
 @export var numOfRooms:int = randi_range(10,20)
 
 func _ready() -> void:
-	randomAmountRoomOpenings = randi_range(1,4)
 	add_child(player)
 	generateRoom()
 	
@@ -44,33 +44,36 @@ func clearEnemys():
 
 func generateRoom():
 	var normalRoom = ROOM_NORMAL_AREA.instantiate()
+	var lShapedRoom = ROOM_L_AREA.instantiate()
+	var roomList = [normalRoom, lShapedRoom]
+	var randomRoom = roomList.pick_random()
 	var roomOpenings = ["enterArea/areaEnterU","enterArea/areaEnterD","enterArea/areaEnterL","enterArea/areaEnterR"]
-	rooms.call_deferred("add_child", normalRoom)
-	match randomAmountRoomOpenings:
-		1:
+	var OpenRoomOpenings = func():
+		randomAmountRoomOpenings = randi_range(1,4)
+		for i in range(randomAmountRoomOpenings):
 			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-		2:
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-		3:
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-		4:
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			normalRoom.get_node(randomRoomOpening).visible = false
-	return normalRoom
+			randomRoom.get_node(randomRoomOpening).visible = false
+	rooms.call_deferred("add_child", randomRoom)
+	OpenRoomOpenings.call()
+	return randomRoom
+	
+	#match randomAmountRoomOpenings:
+		#1:
+			#for i in range(randomAmountRoomOpenings):
+				#randomRoomOpening = roomOpenings[randi_range(0,3)]
+				#randomRoom.get_node(randomRoomOpening).visible = false
+		#2:
+			#for i in range(randomAmountRoomOpenings):
+				#randomRoomOpening = roomOpenings[randi_range(0,3)]
+				#randomRoom.get_node(randomRoomOpening).visible = false
+		#3:
+			#for i in range(randomAmountRoomOpenings):
+				#randomRoomOpening = roomOpenings[randi_range(0,3)]
+				#randomRoom.get_node(randomRoomOpening).visible = false
+		#4:
+			#for i in range(randomAmountRoomOpenings):
+				#randomRoomOpening = roomOpenings[randi_range(0,3)]
+				#randomRoom.get_node(randomRoomOpening).visible = false
+
 	
 	

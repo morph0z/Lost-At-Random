@@ -1,7 +1,7 @@
 extends Node
 class_name HealthComponent
 
-
+const MAIN_MENU_UI = preload("res://scenes/ui/mainMenu_ui.tscn")
 @onready var damaged_timer: Timer = $damagedTimer
 
 @export var HealthPoints: int
@@ -18,7 +18,7 @@ func damage(attack: Attack):
 
 func dead():
 	HealthPoints = 0
-	if get_parent().get_parent().name == "Player":
+	if get_parent().get_parent() is PlayerClass:
 		var player = $"../.."
 		if isDead == false:
 			player.player_death_prt.set_emitting(true)
@@ -27,7 +27,7 @@ func dead():
 			elif player.isHolding <= 1:
 				player.holding_one.hide()
 			await get_tree().create_timer(1).timeout
-			player.queue_free()
+			SceneManager.change_scene(MAIN_MENU_UI.instantiate())
 			isDead = true
 	elif get_parent().get_parent().name != "Player":
 		get_parent().get_parent().animation_player.play("Death")

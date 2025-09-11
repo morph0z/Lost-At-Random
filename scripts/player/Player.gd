@@ -112,15 +112,28 @@ func _input(event):
 
 #-------------------------------------------------------------------------------
 
+func _on_stamina_regen_cooldown_timeout() -> void:
+	StaminaUse = false
+	while Stamina <= OriginalStamina:
+		Stamina = Stamina+1
+		await get_tree().create_timer(0.05).timeout
+
+#-------------------------------------------------------------------------------
+
 func sprint(sprintToggle):
-	if sprintToggle:
+	if sprintToggle == true:
 		if Stamina > 0:
-			SPEED = 200
-			sprint_dust.get_child(0).set_emitting(sprintToggle)
+			if StaminaUse == true:
+				SPEED = 200
+				sprint_dust.get_child(0).set_emitting(sprintToggle)
+			elif StaminaUse == false:
+				SPEED = 100
+				sprint_dust.get_child(0).set_emitting(false)
 		elif Stamina <= 0:
-			SPEED = 100
 			sprint_dust.get_child(0).set_emitting(false)
-	else:
+			SPEED = 100
+	elif sprintToggle == false:
+		sprint_dust.get_child(0).set_emitting(false)
 		SPEED = 100
 
 #-------------------------------------------------------------------------------
@@ -179,6 +192,9 @@ func _on_pick_up_zone_area_entered(area):
 func _process(_delta):
 	#checks if player has 1 or less items to change the item holding polygon
 	EntityHealth = health_component.HealthPoints
+	print(str(StaminaUse)+" | "+str(Stamina))
+	if Stamina >= OriginalStamina:
+		StaminaUse = true
 	if isHolding <= 1:
 		holding_one.show()
 		holding_two.hide()
@@ -188,11 +204,3 @@ func _process(_delta):
 		Stamina = 0
 
 #-------------------------------------------------------------------------------
-
-func _on_stamina_regen_cooldown_timeout() -> void:
-	StaminaUse = false
-	while Stamina <= OriginalStamina:
-		Stamina = Stamina+1
-		await get_tree().create_timer(0.05).timeout
-		if Stamina >= OriginalStamina:
-			StaminaUse = true
