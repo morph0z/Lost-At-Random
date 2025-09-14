@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://brqqrkpvnybn1"]
+[gd_scene load_steps=28 format=3 uid="uid://brqqrkpvnybn1"]
 
 [ext_resource type="Script" uid="uid://ekhqkcb6o8y7" path="res://scripts/player/Player.gd" id="1_uvua7"]
 [ext_resource type="Shader" uid="uid://bgmem2bvyd36o" path="res://shaders/damageFlash.gdshader" id="1_vnarb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://deq7gvba5j8l8" path="res://scenes/componets/HurtboxComponent.tscn" id="6_la5yj"]
 [ext_resource type="PackedScene" uid="uid://b5cqjim3ufhp5" path="res://scenes/componets/HealthComponent.tscn" id="6_ltku5"]
 [ext_resource type="Script" uid="uid://cxgu4tqfwlwh3" path="res://scripts/player/states/idle.gd" id="8_5jm4c"]
+[ext_resource type="PackedScene" uid="uid://dqe40ukmew3og" path="res://scenes/componets/StaminaComponet.tscn" id="8_ulqmn"]
 [ext_resource type="Script" uid="uid://d2m2262s2t7g5" path="res://scripts/player/states/walking.gd" id="9_2i02n"]
 [ext_resource type="Script" uid="uid://ledmnhumjxtg" path="res://scripts/player/states/attack.gd" id="10_bnlsx"]
 [ext_resource type="PackedScene" uid="uid://bmh6hwcgqj3b6" path="res://scenes/ui/player_ui.tscn" id="12_ubpv3"]
@@ -558,15 +559,13 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_e2ig8")
 debug_color = Color(0.955225, 0.213235, 0, 0.42)
 
+[node name="StaminaComponet" parent="Componets" instance=ExtResource("8_ulqmn")]
+
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="StaminaRegenCooldown" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
 
 [node name="Camera" type="Camera2D" parent="."]
 scale = Vector2(2.18239, 0.832806)
@@ -592,6 +591,8 @@ script = ExtResource("9_2i02n")
 animation_player = NodePath("../../AnimationPlayer")
 animation = &"Walking"
 
+[node name="Sprinting" type="LimboState" parent="LimboHSM/Walking"]
+
 [node name="Attack" type="LimboState" parent="LimboHSM"]
 script = ExtResource("10_bnlsx")
 
@@ -605,4 +606,3 @@ script = ExtResource("10_bnlsx")
 player = NodePath("../..")
 
 [connection signal="area_entered" from="PickUpZone" to="." method="_on_pick_up_zone_area_entered"]
-[connection signal="timeout" from="StaminaRegenCooldown" to="." method="_on_stamina_regen_cooldown_timeout"]

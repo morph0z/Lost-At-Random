@@ -1,5 +1,7 @@
 extends CharacterBody2D
 class_name PlayerClass
+
+#Child Nodes
 @onready var sprint_dust = $Particles/SprintDust
 @onready var player_got_hit_prt = $Particles/PlayerGotHitPrt
 @onready var player_death_prt: CPUParticles2D = $Particles/PlayerDeathPrt
@@ -18,8 +20,12 @@ class_name PlayerClass
 @export var state_machine : LimboHSM
 
 #States
-@onready var idle_state = $LimboHSM/Idle
-@onready var walking_state = $LimboHSM/Walking
+@onready var idle_state: LimboState = $LimboHSM/Idle
+@onready var walking_state: LimboState = $LimboHSM/Walking
+@onready var sprinting_state: LimboState = $LimboHSM/Walking/Sprinting
+@onready var attacking_state: LimboState = $LimboHSM/Attack
+@onready var swinging_state: LimboState = $LimboHSM/Attack/Swing
+@onready var shooting_state: LimboState = $LimboHSM/Attack/Shoot
 
 #--------------------------------------------------------------------------------
 
@@ -27,6 +33,7 @@ signal itemPicked
 
 #componets
 @onready var health_component = $Componets/HealthComponent
+@onready var stamina_componet: StaminaComponent = $Componets/StaminaComponet
 
 #-------------------------------------------------------------------------------
 
@@ -36,10 +43,9 @@ var joyStickSense = 0.5
 #-------------------------------------------------------------------------------
 
 #atrributes
-var SPEED = 100.0
-const OriginalStamina = 50
-var Stamina = OriginalStamina
-var StaminaUse = true
+var walkSpeed = 100.0
+var sprintSpeed = 200.0
+var SPEED = walkSpeed
 #var EnemyStrenghtMultiplyer = 1
 var EntityHealth
 
@@ -80,16 +86,11 @@ func _input(event):
 			if event is InputEventMouseMotion:
 				look_at(get_global_mouse_position())
 	
-	if (StaminaUse):
 		if Input.is_action_pressed("SprintShift"):
 			sprint(true)
 		elif Input.is_action_just_released("SprintShift"):
 			sprint(false)
-		while Input.is_action_pressed("SprintShift"):
-			Stamina = Stamina - 1
-			await get_tree().create_timer(0.1).timeout		
-	if Input.is_action_just_pressed("DashCtrl"):
-		if(StaminaUse):
+		if Input.is_action_just_pressed("DashCtrl"):
 			dash(3)
 		
 	#ITEM DROPPING SYSTEM
@@ -112,43 +113,28 @@ func _input(event):
 
 #-------------------------------------------------------------------------------
 
-func _on_stamina_regen_cooldown_timeout() -> void:
-	StaminaUse = false
-	while Stamina <= OriginalStamina:
-		Stamina = Stamina+1
-		await get_tree().create_timer(0.05).timeout
-
-#-------------------------------------------------------------------------------
-
 func sprint(sprintToggle):
-	if sprintToggle == true:
-		if Stamina > 0:
-			if StaminaUse == true:
-				SPEED = 200
-				sprint_dust.get_child(0).set_emitting(sprintToggle)
-			elif StaminaUse == false:
-				SPEED = 100
-				sprint_dust.get_child(0).set_emitting(false)
-		elif Stamina <= 0:
-			sprint_dust.get_child(0).set_emitting(false)
-			SPEED = 100
-	elif sprintToggle == false:
-		sprint_dust.get_child(0).set_emitting(false)
-		SPEED = 100
-
+	var canSprint = (sprintToggle) and (stamina_componet.Stamina > 0) and (stamina_componet.canUseStamina)
+	if canSprint:
+		SPEED = sprintSpeed
+		stamina_componet.startStaminaDrain(1, 0.05)
+		sprint_dust.get_child(0).set_emitting(sprintToggle)
+	elif !canSprint:
+		setWalking()
+		stamina_componet.stopStaminaDrain()
+		
 #-------------------------------------------------------------------------------
 
 func dash(dashPower):
-	if Stamina != 0:
-		if dash_timer.time_left == 0:
-			if Stamina > OriginalStamina%(dashPower*5):
-				Stamina = Stamina-(dashPower*5)
-				SPEED = (SPEED+(dashPower*100))
-				player_dash_prt.emitting = true
-				await get_tree().create_timer(0.1).timeout
-				player_dash_prt.emitting = false
-				SPEED = 100
-				dash_timer.start()
+	var canDash = (dash_timer.time_left == 0) and (stamina_componet.Stamina > 0) and (stamina_componet.canUseStamina)
+	if canDash:
+		stamina_componet.useStamina(dashPower*5)
+		SPEED = (SPEED+(dashPower*100))
+		player_dash_prt.emitting = true
+		await get_tree().create_timer(0.1).timeout
+		player_dash_prt.emitting = false
+		SPEED = 100
+		dash_timer.start()
 
 #-------------------------------------------------------------------------------
 
@@ -157,7 +143,7 @@ func _physics_process(_delta):
 	var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
 	if direction != Vector2.ZERO:
 		velocity = direction*SPEED
-	elif direction ==Vector2.ZERO:
+	elif direction == Vector2.ZERO:
 		velocity = Vector2.ZERO
 		
 	move_and_slide()	
@@ -192,15 +178,19 @@ func _on_pick_up_zone_area_entered(area):
 func _process(_delta):
 	#checks if player has 1 or less items to change the item holding polygon
 	EntityHealth = health_component.HealthPoints
-	print(str(StaminaUse)+" | "+str(Stamina))
-	if Stamina >= OriginalStamina:
-		StaminaUse = true
+	print(state_machine.get_active_state())
+	if stamina_componet.Stamina >= stamina_componet.OriginalStamina:
+		stamina_componet.canUseStamina = true
 	if isHolding <= 1:
 		holding_one.show()
 		holding_two.hide()
 		shadow_h_1.show()
 		shadow_h_2.hide()
-	if Stamina < 0:
-		Stamina = 0
+	if stamina_componet.Stamina < 0:
+		stamina_componet.Stamina = 0
 
 #-------------------------------------------------------------------------------
+
+func setWalking():
+	sprint_dust.get_child(0).set_emitting(false)
+	SPEED = walkSpeed

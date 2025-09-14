@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqe40ukmew3og"]
+
+[ext_resource type="Script" uid="uid://rw7qrtwjd1u1" path="res://scripts/components/StaminaComponent.gd" id="1_ajsxm"]
+
+[node name="StaminaComponet" type="Node"]
+script = ExtResource("1_ajsxm")
+
+[node name="StaminaRegenCooldown" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="StaminaRegenCooldown" to="." method="_on_stamina_regen_cooldown_timeout"]

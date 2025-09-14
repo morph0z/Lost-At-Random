@@ -1,5 +1,4 @@
-extends Node
-class_name HealthComponent
+class_name HealthComponent extends Node 
 
 const MAIN_MENU_UI = preload("res://scenes/ui/mainMenu_ui.tscn")
 @onready var damaged_timer: Timer = $damagedTimer
