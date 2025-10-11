@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpyjisrc3j6ig"]
+
+[ext_resource type="Script" uid="uid://wsjxmvgsv615" path="res://scripts/artifact/speed_artifact.gd" id="1_fejj4"]
+[ext_resource type="Texture2D" uid="uid://5334y1pip0wx" path="res://assets/sprites/Artifacts/BoostPellet.png" id="2_fejj4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ryxx"]
+radius = 2.0
+
+[node name="SpeedArtifact" type="Node2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_fejj4")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://cd1gp3mj4e13k"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.4233, 0.518197, 0.83, 1)
+texture = ExtResource("2_fejj4")
+
+[node name="PickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickArea"]
+shape = SubResource("CircleShape2D_5ryxx")
+
+[connection signal="area_entered" from="PickArea" to="." method="_on_pick_area_area_entered"]

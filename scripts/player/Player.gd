@@ -8,13 +8,10 @@ class_name PlayerClass
 @onready var animation_player = $AnimationPlayer
 @onready var items = $Items
 @onready var camera = $Camera
-@onready var holding_one = $Polygons/HoldingOne
-@onready var holding_two = $Polygons/HoldingTwo
-@onready var shadow_h_2 = $Shadows/ShadowH2
-@onready var shadow_h_1 = $Shadows/ShadowH1
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var dash_timer: Timer = $DashTimer
 @onready var player_dash_prt: CPUParticles2D = $Particles/PlayerDashPrt
-
+@onready var player_ui: Control = $CanvasLayer/PlayerUI
 
 #State Machine
 @export var state_machine : LimboHSM
@@ -22,17 +19,15 @@ class_name PlayerClass
 #States
 @onready var idle_state: LimboState = $LimboHSM/Idle
 @onready var walking_state: LimboState = $LimboHSM/Walking
-@onready var sprinting_state: LimboState = $LimboHSM/Walking/Sprinting
-@onready var attacking_state: LimboState = $LimboHSM/Attack
-@onready var swinging_state: LimboState = $LimboHSM/Attack/Swing
-@onready var shooting_state: LimboState = $LimboHSM/Attack/Shoot
+@onready var sprinting_state: LimboState = $LimboHSM/Sprinting
+@onready var dead_state: LimboState = $LimboHSM/Dead
 
 #--------------------------------------------------------------------------------
 
 signal itemPicked 
 
 #componets
-@onready var health_component = $Componets/HealthComponent
+@export var health_component:HealthComponent
 @onready var stamina_componet: StaminaComponent = $Componets/StaminaComponet
 
 #-------------------------------------------------------------------------------
@@ -46,6 +41,11 @@ var joyStickSense = 0.5
 var walkSpeed = 100.0
 var sprintSpeed = 200.0
 var SPEED = walkSpeed
+var attackStrengthMultiplier:float = 1
+var swordStrengthMultiplier:float = 1
+var scytheStrengthMultiplier:float = 1
+var bowStrengthMultiplier:float = 1
+var gunStrengthMultiplier:float = 1
 #var EnemyStrenghtMultiplyer = 1
 var EntityHealth
 
@@ -74,7 +74,7 @@ func _initialize_state_machine():
 func _input(event):
 				
 	#checks if player is dead duh
-	if health_component.isDead == false:
+	if !health_component.isDead:
 		#turns player when right joystick is moved		
 		var aim_dir = Vector2(Input.get_axis("TurnLeft", "TurnRight"), Input.get_axis("TurnUp", "TurnDown")) 
 		if aim_dir != Vector2.ZERO:
@@ -106,8 +106,7 @@ func _input(event):
 			if items.get_child(0) != null:
 				items.get_child(0).queue_free()
 			isHolding = isHolding-1
-			holding_one.show()
-			holding_two.hide()
+			sprite.play("HoldingOne")
 		elif items.get_child(0) == null:
 			pass
 
@@ -119,6 +118,7 @@ func sprint(sprintToggle):
 		SPEED = sprintSpeed
 		stamina_componet.startStaminaDrain(1, 0.05)
 		sprint_dust.get_child(0).set_emitting(sprintToggle)
+		state_machine.change_active_state(sprinting_state)
 	elif !canSprint:
 		setWalking()
 		stamina_componet.stopStaminaDrain()
@@ -133,20 +133,27 @@ func dash(dashPower):
 		player_dash_prt.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		player_dash_prt.emitting = false
-		SPEED = 100
+		SPEED = walkSpeed
 		dash_timer.start()
 
 #-------------------------------------------------------------------------------
 
 func _physics_process(_delta):
-	#this is for movement 
-	var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
-	if direction != Vector2.ZERO:
-		velocity = direction*SPEED
-	elif direction == Vector2.ZERO:
-		velocity = Vector2.ZERO
-		
-	move_and_slide()	
+	if !health_component.isDead:	
+		#this is for movement 
+		var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
+		if direction != Vector2.ZERO:
+			velocity = direction*SPEED
+			if SPEED == walkSpeed:
+				state_machine.change_active_state(walking_state)
+			elif SPEED == sprintSpeed:
+				state_machine.change_active_state(sprinting_state)			
+		elif direction == Vector2.ZERO:
+			state_machine.change_active_state(idle_state)
+			velocity = Vector2.ZERO
+			
+		move_and_slide()	
+	
 #-------------------------------------------------------------------------------	
 
 #for checking if an area2d node enetered the pickupzone
@@ -166,31 +173,24 @@ func _on_pick_up_zone_area_entered(area):
 				#Pickitem.reparent(items, false)
 				#adds 0.5 beacause it adds 2 when touched once
 				isHolding = isHolding+0.5
-				print(isHolding)
+				#print(isHolding)
 				if isHolding == 2:
-					holding_one.hide()
-					holding_two.show()
-					shadow_h_1.hide()
-					shadow_h_2.show()
+					sprite.play("HoldingTwo")
 
 #-------------------------------------------------------------------------------
 
 func _process(_delta):
-	#checks if player has 1 or less items to change the item holding polygon
 	EntityHealth = health_component.HealthPoints
-	print(state_machine.get_active_state())
-	if stamina_componet.Stamina >= stamina_componet.OriginalStamina:
-		stamina_componet.canUseStamina = true
+	#print(state_machine.get_active_state())
+
 	if isHolding <= 1:
-		holding_one.show()
-		holding_two.hide()
-		shadow_h_1.show()
-		shadow_h_2.hide()
+		sprite.play("HoldingOne")
 	if stamina_componet.Stamina < 0:
 		stamina_componet.Stamina = 0
 
 #-------------------------------------------------------------------------------
 
 func setWalking():
+	state_machine.change_active_state(walking_state)
 	sprint_dust.get_child(0).set_emitting(false)
 	SPEED = walkSpeed

@@ -12,6 +12,7 @@ extends item
 ##The sprite for the bow
 @onready var sprite: AnimatedSprite2D = $Sprite
 
+
 ##A signal that gives out the amount of ammo left on the bow
 signal ammoChange(ammoAmount)
 
@@ -75,8 +76,11 @@ func Shoot():
 	#resizes scale (since it is normally to big)
 	ArrowNew.set_scale(Vector2(0.3, 0.3))
 	#sets the damage the arrow will deal
-	ArrowNew.arrowDamage = weaponDamage*(chargeLevel*0.5)
-
+	if playerRef is PlayerClass:
+		var attackMultiplierFromPlayer = playerRef.bowStrengthMultiplier*playerRef.attackStrengthMultiplier
+		ArrowNew.arrowDamage = (weaponDamage*(chargeLevel*0.5))*attackMultiplierFromPlayer
+	else:
+		ArrowNew.arrowDamage = (weaponDamage*(chargeLevel*0.5))
 	#DEBUGING PRINT: print(str(ArrowNew.arrowDamage)+" YO")
 	
 	#sets the rotation and position of the arrow to the shooting point of the bow
@@ -141,6 +145,9 @@ func _process(_delta: float) -> void:
 		if ammoAmount <= 0:
 			#the bow is out of ammo
 			outOfAmmo()
+	
+	if get_parent().get_parent() is PlayerClass:
+		playerRef = get_parent().get_parent()
 
 ##Called once the attack cooldown is done
 func _on_attack_cooldown_timeout():

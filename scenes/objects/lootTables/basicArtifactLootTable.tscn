@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c51h4416b1un5"]
+
+[ext_resource type="PackedScene" uid="uid://qarse0bpbvsn" path="res://scenes/objects/Artifacts/AttackIncs/baseAttackArtifact.tscn" id="1_wk275"]
+[ext_resource type="PackedScene" uid="uid://dpyjisrc3j6ig" path="res://scenes/objects/Artifacts/speedArtifact.tscn" id="2_oyjhy"]
+[ext_resource type="PackedScene" uid="uid://dy2v4nb7n1ibu" path="res://scenes/objects/Artifacts/staminaArtifact.tscn" id="3_gu341"]
+
+[node name="BasicArtifactLootTable" type="Node2D"]
+
+[node name="baseAttackArtifact" parent="." instance=ExtResource("1_wk275")]
+
+[node name="SpeedArtifact" parent="." instance=ExtResource("2_oyjhy")]
+
+[node name="StaminaArtifact" parent="." instance=ExtResource("3_gu341")]

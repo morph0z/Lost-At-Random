@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnbvp70e4f3gd"]
+
+[ext_resource type="Script" uid="uid://d10wfrl78h2g4" path="res://scripts/artifact/attackIncs/scythe_attack_artifact.gd" id="1_0q32y"]
+[ext_resource type="Texture2D" uid="uid://5334y1pip0wx" path="res://assets/sprites/Artifacts/BoostPellet.png" id="2_moijv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ryxx"]
+radius = 2.0
+
+[node name="scytheAttackArtifact" type="Node2D"]
+script = ExtResource("1_0q32y")
+metadata/_custom_type_script = "uid://cd1gp3mj4e13k"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.5, 0, 1)
+texture = ExtResource("2_moijv")
+
+[node name="PickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickArea"]
+shape = SubResource("CircleShape2D_5ryxx")
+
+[connection signal="area_entered" from="PickArea" to="." method="_on_pick_area_area_entered"]

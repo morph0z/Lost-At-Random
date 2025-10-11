@@ -1,6 +1,8 @@
 class_name item
 extends AnimatableBody2D
 
+var playerRef
+
 #instances
 const Player = preload("res://scripts/player/Player.gd") 
 var PlayerIn = Player.new()
@@ -12,6 +14,10 @@ var PlayerIn = Player.new()
 
 ##This is only true when the item is held by the player
 var isHeld = false
+
+func _process(_delta: float) -> void:
+	if get_parent().get_parent() is PlayerClass:
+		playerRef = get_parent().get_parent()
 
 ##This is called when the item is ready
 func whenThisItemIsReady():

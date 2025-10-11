@@ -2,7 +2,6 @@ extends Node2D
 @onready var background: TileMapLayer = $Background
 @onready var midground: TileMapLayer = $Midground
 
-
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#for i in background.get_used_cells(): 
@@ -16,6 +15,7 @@ func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 	if area.get_parent().is_in_group("Player"):
 		self.get_parent().get_child(0).queue_free()
 		self.get_parent().get_parent().clearEnemys()
+		self.get_parent().get_parent().clearItems()
 		var newRoom = self.get_parent().get_parent().generateRoom()
 		self.get_parent().get_parent().spawnEnemys()
 		if Direction == "Up":

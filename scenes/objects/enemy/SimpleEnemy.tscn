@@ -1,14 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpqx6586q8y2s"]
+[gd_scene load_steps=14 format=3 uid="uid://bpqx6586q8y2s"]
 
 [ext_resource type="Script" uid="uid://ti1ouh7gaytn" path="res://scripts/enemys/SimpleEnemy.gd" id="1_ek7tt"]
 [ext_resource type="PackedScene" uid="uid://b5r1v2wvjl4r2" path="res://scenes/particles/EnemyDeath_prt.tscn" id="2_3bcq2"]
 [ext_resource type="PackedScene" uid="uid://b5cqjim3ufhp5" path="res://scenes/componets/HealthComponent.tscn" id="3_11ysd"]
 [ext_resource type="PackedScene" uid="uid://deq7gvba5j8l8" path="res://scenes/componets/HurtboxComponent.tscn" id="4_nx8p6"]
+[ext_resource type="PackedScene" uid="uid://cnc4mtqu8fb30" path="res://scenes/componets/HitboxComponent.tscn" id="5_sw41e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbuog"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2sjnj"]
 polygon = PackedVector2Array(0, -10, -9, -5, -9, 4, 0, 10, 9, 4, 9, -5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7nxc8"]
+radius = 206.737
 
 [sub_resource type="Animation" id="Animation_w88n2"]
 resource_name = "Dead"
@@ -187,12 +191,14 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t47dm"]
+radius = 15.0333
 
 [node name="SimpleEnemy" type="CharacterBody2D" groups=["Enemys", "WeakEnemys"]]
 collision_layer = 7
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_ek7tt")
+metadata/_custom_type_script = "uid://dgsuexky4rm14"
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pbuog")
@@ -208,26 +214,24 @@ initial_velocity_max = 300.0
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_2sjnj")
 
+[node name="SeeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeeArea"]
+shape = SubResource("CircleShape2D_7nxc8")
+
+[node name="targetRay" type="RayCast2D" parent="SeeArea"]
+target_position = Vector2(0, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_voxl0")
 }
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_postprocessing = 1
-avoidance_enabled = true
-radius = 1300.0
-neighbor_distance = 15000.0
-debug_enabled = true
-
-[node name="pathRefreshTimer" type="Timer" parent="."]
-wait_time = 0.055
-autostart = true
-
 [node name="Components" type="Node2D" parent="."]
 
-[node name="HealthComponent" parent="Components" instance=ExtResource("3_11ysd")]
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("Entity") instance=ExtResource("3_11ysd")]
 HealthPoints = 2
+Entity = NodePath("../..")
 
 [node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("health_component") instance=ExtResource("4_nx8p6")]
 health_component = NodePath("../HealthComponent")
@@ -236,5 +240,28 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_t47dm")
 debug_color = Color(0.989415, 0, 0.290723, 0.42)
 
-[connection signal="timeout" from="pathRefreshTimer" to="." method="_on_timer_timeout"]
-[connection signal="area_entered" from="Components/HurtboxComponent" to="." method="_on_hurtbox_component_area_entered"]
+[node name="HitboxComponent" parent="Components" node_paths=PackedStringArray("selfHurtbox", "attacker") instance=ExtResource("5_sw41e")]
+selfHurtbox = NodePath("../HurtboxComponent")
+attacker = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HitboxComponent"]
+shape = SubResource("CircleShape2D_t47dm")
+debug_color = Color(0.989415, 0, 0.290723, 0.42)
+
+[node name="RaycastCheck" type="Timer" parent="."]
+wait_time = 0.01
+autostart = true
+ignore_time_scale = true
+
+[node name="ForgetingTimer" type="Timer" parent="."]
+one_shot = true
+ignore_time_scale = true
+
+[node name="WanderTimer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="area_entered" from="SeeArea" to="." method="_on_see_area_area_entered"]
+[connection signal="area_exited" from="SeeArea" to="." method="_on_see_area_area_exited"]
+[connection signal="timeout" from="RaycastCheck" to="." method="_on_raycast_check_timeout"]
+[connection signal="timeout" from="ForgetingTimer" to="." method="_on_forgeting_timer_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

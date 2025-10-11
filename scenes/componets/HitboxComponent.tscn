@@ -5,19 +5,28 @@ script/source = "extends Area2D
 class_name HitboxComponent
 
 @export var selfHurtbox: HurtboxComponent
+@export var attacker:Node2D
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HurtboxComponent:
 		var hurtbox_component = area
 		if area.get_parent().get_parent() is not PlayerClass:
-			var attack = area.get_parent().get_parent().attack
 			if area != selfHurtbox:
-				hurtbox_component.damage(attack)
-			print(\"enemy not cool\")
+				attack(area)
 		elif area.get_parent().get_parent() is PlayerClass:
-			var attack = get_parent().get_parent().attack
-			hurtbox_component.damage(attack)
-			print(\"enemy hitting player \"+str(attack.attack_damage))
+			attack(area)
+
+
+func attack(area: Area2D):
+	var attack = Attack.new()
+	attack.attack_damage = attacker.AttackStrength
+	attack.knockback_force = attacker.KBstrengh
+	attack.attack_position = global_position
+	attack.hit_cooldown = attacker.AttackCooldown
+	area.get_parent().get_parent().velocity = attacker.velocity*attack.knockback_force*4 
+	area.damage(attack)
+	area.get_parent().get_parent().set_velocity(Vector2(attacker.KBstrengh*(1000),attacker.KBstrengh*(1000))*attacker.velocity.normalized().round())
+	area.get_parent().get_parent().move_and_slide()
 "
 
 [node name="HitboxComponent" type="Area2D"]

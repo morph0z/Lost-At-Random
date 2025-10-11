@@ -11,6 +11,7 @@ class_name scythe
 @export var originalSwingTime:float
 @export var weaponKnockback:float = 0
 
+
 var swingTime = originalSwingTime
 var changeSwingTime = originalSwingTime
 
@@ -52,10 +53,15 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 			#checks if while the sword is swung if its in an enemy
 			if area is HurtboxComponent:
 				var attack = Attack.new()
-				attack.attack_damage = weaponDamage
 				attack.knockback_force = weaponKnockback
 				attack.hit_cooldown = originalSwingTime
 				attack.attack_position = global_position
+				
+				if playerRef is PlayerClass:
+					var attackMultiplierFromPlayer = playerRef.scytheStrengthMultiplier*playerRef.attackStrengthMultiplier
+					attack.attack_damage = (weaponDamage)*attackMultiplierFromPlayer
+				else:
+					attack.attack_damage = (weaponDamage)
 				
 				var camera = get_parent().get_parent().get_node("Camera")
 				area.damage(attack)

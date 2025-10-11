@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ci5m425w8shmr"]
+[gd_scene load_steps=10 format=3 uid="uid://ci5m425w8shmr"]
 
 [ext_resource type="Script" uid="uid://b6m36wo67lte7" path="res://scripts/ui/main_menu_ui.gd" id="1_8kjlb"]
 [ext_resource type="Texture2D" uid="uid://dgtxwa3yr5qxa" path="res://assets/sprites/other/LostAtRandom.png" id="2_3vnl4"]
+[ext_resource type="AudioStream" uid="uid://c5ogsux5w0gso" path="res://assets/music/practice24.mp3" id="3_4g317"]
 
 [sub_resource type="Animation" id="Animation_ey4sl"]
 resource_name = "GameStart"
@@ -60,6 +61,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_3vnl4"]
 resource_name = "TitleIdle"
+length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -68,7 +70,7 @@ tracks/0/path = NodePath("Label:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 0.966667, 2),
 "transitions": PackedFloat32Array(-2, -2, 1),
 "update": 0,
 "values": [Vector2(19, 256), Vector2(19, 267), Vector2(19, 256)]
@@ -163,9 +165,9 @@ anchors_preset = -1
 anchor_top = 0.529
 anchor_bottom = 0.529
 offset_left = 13.0
-offset_top = -261.791
+offset_top = -261.792
 offset_right = 225.0
-offset_bottom = -235.792
+offset_bottom = -235.793
 pivot_offset = Vector2(106, 26)
 theme = SubResource("Theme_4g317")
 theme_type_variation = &"FlatButton"
@@ -196,6 +198,10 @@ offset_bottom = 57.368
 text = "Lost At Random"
 label_settings = SubResource("LabelSettings_ey4sl")
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4g317")
+autoplay = true
 
 [connection signal="pressed" from="PlayTest" to="." method="_on_play_test_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

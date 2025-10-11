@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=34 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
@@ -17,6 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://dhcvryfijjp5e" path="res://scenes/objects/inanimte/dropped/DroppedParrylizer.tscn" id="14_anyd7"]
 [ext_resource type="PackedScene" uid="uid://b00sfpaiwq7i4" path="res://scenes/objects/debug/debugBulletShooter.tscn" id="15_0xgc2"]
 [ext_resource type="PackedScene" uid="uid://bpc7odlpkaayu" path="res://scenes/objects/inanimte/dropped/DroppedSwordBlaster.tscn" id="15_fs4ai"]
+[ext_resource type="PackedScene" uid="uid://dpyjisrc3j6ig" path="res://scenes/objects/Artifacts/speedArtifact.tscn" id="18_oesy6"]
+[ext_resource type="PackedScene" uid="uid://dy2v4nb7n1ibu" path="res://scenes/objects/Artifacts/staminaArtifact.tscn" id="19_si77m"]
+[ext_resource type="PackedScene" uid="uid://qarse0bpbvsn" path="res://scenes/objects/Artifacts/AttackIncs/baseAttackArtifact.tscn" id="20_bjv75"]
+[ext_resource type="PackedScene" uid="uid://dvft5mjdadfue" path="res://scenes/objects/Artifacts/AttackIncs/gunAttackArtifact.tscn" id="21_suy51"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_op7yw"]
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
@@ -198,3 +202,15 @@ environment = SubResource("Environment_arj4h")
 position = Vector2(-350, -348)
 scale = Vector2(0.642256, 1.03)
 polygon = PackedVector2Array(-42.0393, -22.3301, 1.55701, -26.2136, 29.5832, -15.534, 18.6841, 13.5922, -14.0131, 28.1553, -54.4954, 11.6505, -68.5085, -9.70874)
+
+[node name="SpeedArtifact" parent="." instance=ExtResource("18_oesy6")]
+position = Vector2(-366, -57)
+
+[node name="StaminaArtifact" parent="." instance=ExtResource("19_si77m")]
+position = Vector2(-74, -224)
+
+[node name="baseAttackArtifact" parent="." instance=ExtResource("20_bjv75")]
+position = Vector2(-319, -53)
+
+[node name="gunAttackArtifact" parent="." instance=ExtResource("21_suy51")]
+position = Vector2(-310, -111)

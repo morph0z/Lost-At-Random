@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://qarse0bpbvsn"]
+
+[ext_resource type="Script" uid="uid://c4uafhvsgwu8t" path="res://scripts/artifact/attackIncs/base_attack_artifact.gd" id="1_r0olg"]
+[ext_resource type="Texture2D" uid="uid://5334y1pip0wx" path="res://assets/sprites/Artifacts/BoostPellet.png" id="2_jxw2w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ryxx"]
+radius = 2.0
+
+[node name="baseAttackArtifact" type="Node2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_r0olg")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://cd1gp3mj4e13k"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("2_jxw2w")
+
+[node name="PickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickArea"]
+shape = SubResource("CircleShape2D_5ryxx")
+
+[connection signal="area_entered" from="PickArea" to="." method="_on_pick_area_area_entered"]

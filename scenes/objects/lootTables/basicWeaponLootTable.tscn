@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkuvei78eppkf"]
+
+[ext_resource type="PackedScene" uid="uid://cy1rkwiwtk5ny" path="res://scenes/objects/inanimte/dropped/DroppedBasicBow.tscn" id="1_2jaoc"]
+[ext_resource type="PackedScene" uid="uid://cpia0yvq8cwfw" path="res://scenes/objects/inanimte/dropped/DroppedBasicGun.tscn" id="2_2p7ew"]
+[ext_resource type="PackedScene" uid="uid://cn8sqojviqpvo" path="res://scenes/objects/inanimte/dropped/DroppedBasicScythe.tscn" id="3_eti08"]
+[ext_resource type="PackedScene" uid="uid://ehasn7j6estd" path="res://scenes/objects/inanimte/dropped/DroppedBasicSword.tscn" id="4_6rglj"]
+
+[node name="BasicWeaponLootTable" type="Node2D"]
+
+[node name="DroppedBasicBow" parent="." instance=ExtResource("1_2jaoc")]
+
+[node name="DroppedBasicGun" parent="." instance=ExtResource("2_2p7ew")]
+
+[node name="DroppedBasicScythe" parent="." instance=ExtResource("3_eti08")]
+
+[node name="DroppedBasicSword" parent="." instance=ExtResource("4_6rglj")]

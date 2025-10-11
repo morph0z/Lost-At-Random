@@ -28,6 +28,7 @@ signal ammoChange(ammoAmount)
 ##The amount of ammo that the bow currently has
 var ammoAmount = ammoAmountOriginal
 
+
 #bools
 ##If the gun is able to shot a projectile or not
 var canShoot = true
@@ -49,9 +50,13 @@ func shoot():
 	#rescales the projectile thats shot
 	BulletNew.set_scale(Vector2(0.5, 0.5))
 	#sets the damage, position and rotation of the projectile
-	BulletNew.bulletDamage = weaponDamage
 	BulletNew.global_position = shooting_point.global_position
 	BulletNew.global_rotation = shooting_point.global_rotation
+	if playerRef is PlayerClass:
+		var attackMultiplierFromPlayer = playerRef.gunStrengthMultiplier*playerRef.attackStrengthMultiplier
+		BulletNew.bulletDamage = (weaponDamage)*attackMultiplierFromPlayer
+	else:
+		BulletNew.bulletDamage = (weaponDamage)
 	#adds the projectile to the scene
 	get_tree().get_root().add_child(BulletNew)
 	#starts the cooldown after the shot

@@ -1,6 +1,8 @@
 extends Node
 const MAIN_MENU_UI = preload("res://scenes/ui/mainMenu_ui.tscn")
 
+var globalDelay:float = 0.5
+
 func _input(_event):
 	#Exit to main menu
 	if SceneManager._current_scene.name != MAIN_MENU_UI.instantiate().name:

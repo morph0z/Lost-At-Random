@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://5fdr7y5cg8ar"]
+
+[ext_resource type="Script" uid="uid://cd1gp3mj4e13k" path="res://scripts/classes/artifactsClass.gd" id="1_gbupb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gbupb"]
+
+[node name="BaseArtifact" type="Node2D"]
+script = ExtResource("1_gbupb")
+metadata/_custom_type_script = "uid://cd1gp3mj4e13k"
+
+[node name="pickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickArea"]
+shape = SubResource("CircleShape2D_gbupb")
+
+[connection signal="area_entered" from="pickArea" to="." method="_on_pick_area_area_entered"]
