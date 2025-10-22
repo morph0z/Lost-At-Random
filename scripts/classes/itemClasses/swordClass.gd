@@ -1,4 +1,3 @@
-
 extends item
 class_name sword
 
@@ -6,6 +5,8 @@ class_name sword
 @onready var attack_cooldown = $AttackCooldown
 @onready var hero_slash = $HeroSlash
 @onready var sword_hit_prt = $SwordHit_prt
+
+@export var elementEffect:ElementEffect
 
 ##The damage the sword deals when swung
 @export var weaponDamage:int
@@ -45,7 +46,7 @@ func _on_attack_cooldown_timeout():
 		hero_slash.set_emitting(false)
 		#when the timer goes out it stops particles and sets swung to false	
 		if swingTime <= originalSwingTime*-1:
-			swingTime =	swingTime*-1
+			swingTime = swingTime*-1
 			if swingTime == originalSwingTime:
 				swingTime = originalSwingTime
 				
@@ -54,13 +55,15 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 		if Swung == true:
 			#checks if while the sword is swung if its in an enemy
 			if area is HurtboxComponent:
+				if elementEffect:
+					elementEffect.applyEffect(area, self)
 				var attack = Attack.new()
 				attack.knockback_force = weaponKnockback
 				attack.hit_cooldown = originalSwingTime
 				attack.attack_position = global_position
 				
 				if playerRef is PlayerClass:
-					var attackMultiplierFromPlayer = playerRef.scytheStrengthMultiplier*playerRef.attackStrengthMultiplier
+					var attackMultiplierFromPlayer = playerRef.swordStrengthMultiplier*playerRef.attackStrengthMultiplier
 					attack.attack_damage = (weaponDamage)*attackMultiplierFromPlayer
 				else:
 					attack.attack_damage = (weaponDamage)

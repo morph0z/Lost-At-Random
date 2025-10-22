@@ -15,6 +15,9 @@ signal ammoChange(ammoAmount)
 ##An instance of the bullet type the gun will shoot
 @export var BULLET:PackedScene
 
+@export var shoot_effects:Array[ShootEffect]
+@export var elementEffect:ElementEffect
+
 #attributes
 ##The cooldown on each shot
 @export var shootCooldown:float = 1
@@ -23,7 +26,9 @@ signal ammoChange(ammoAmount)
 ##The damage that the projectile will deal once shot
 @export var weaponDamage = 1
 ##The amount of ammo that the weapon holds
-@export var ammoAmountOriginal:int
+@export var ammoAmountOriginal:int = 1
+##The amount of bullets that are being shot
+@export var bulletsBeingShot:int = 1
 
 ##The amount of ammo that the bow currently has
 var ammoAmount = ammoAmountOriginal
@@ -38,32 +43,46 @@ func _ready():
 	whenThisItemIsReady()
 	#sets ammoAmount to the original ammo amount
 	ammoAmount = ammoAmountOriginal
+	if shoot_effects:
+		for i in shoot_effects:
+			i.applyEffect(self)
 
 ##The function that shoots a projectile out the gun
-func shoot():
+func shoot(amountShot:int, spreadFactor:int):
 	#emits the change in ammo for use in the UI
 	ammoChange.emit(ammoAmount)
 	#creates particles for the shooting of the projectile
 	gun_shoot_prt.set_emitting(true)
-	#creates a new bullet instance
-	var BulletNew = BULLET.instantiate()
-	#rescales the projectile thats shot
-	BulletNew.set_scale(Vector2(0.5, 0.5))
-	#sets the damage, position and rotation of the projectile
-	BulletNew.global_position = shooting_point.global_position
-	BulletNew.global_rotation = shooting_point.global_rotation
-	if playerRef is PlayerClass:
-		var attackMultiplierFromPlayer = playerRef.gunStrengthMultiplier*playerRef.attackStrengthMultiplier
-		BulletNew.bulletDamage = (weaponDamage)*attackMultiplierFromPlayer
-	else:
-		BulletNew.bulletDamage = (weaponDamage)
-	#adds the projectile to the scene
-	get_tree().get_root().add_child(BulletNew)
-	#starts the cooldown after the shot
-	attack_cooldown.start(shootCooldown)
-	#reduces the ammo amount
+	for i in range(amountShot):
+		#creates a new bullet instance
+		var BulletNew:bullet = BULLET.instantiate()
+		BulletNew.fromGun = self
+		#sets the element effect of the bullet
+		BulletNew.elementEffect = elementEffect
+		#rescales the projectile thats shot
+		BulletNew.set_scale(Vector2(0.5, 0.5))
+		#sets the damage, position and rotation of the projectile
+		BulletNew.global_position = shooting_point.global_position
+		if amountShot == 1:
+			BulletNew.global_rotation = shooting_point.global_rotation
+		else:
+			var bulletSpread = clamp(spreadFactor*(i+1),-180,90)
+			if bulletSpread == 90:
+				bulletSpread -= clamp(-spreadFactor*(i+1), -360, -180)
+			BulletNew.global_rotation = shooting_point.global_rotation+deg_to_rad(bulletSpread)
+		
+		if playerRef is PlayerClass:
+			var attackMultiplierFromPlayer = playerRef.gunStrengthMultiplier*playerRef.attackStrengthMultiplier
+			BulletNew.bulletDamage = (weaponDamage)*attackMultiplierFromPlayer
+		else:
+			BulletNew.bulletDamage = (weaponDamage)
+		#adds the projectile to the scene
+		get_tree().get_root().add_child(BulletNew)
+		#starts the cooldown after the shot
+		attack_cooldown.start(shootCooldown)
+		#reduces the ammo amount
 	ammoAmount = ammoAmount-1
-
+	
 ##This function does absolutly nothing
 func emptyShot():
 	pass
@@ -77,7 +96,7 @@ func _input(event):
 			#if the gun can shoot then
 			if canShoot == true:
 				#it shoots and sets the ability to shoot false
-				shoot()
+				shoot(bulletsBeingShot,10)
 				canShoot = false
 			#otherwise it does nothing
 			if canShoot == false:
@@ -92,7 +111,7 @@ func _on_attack_cooldown_timeout():
 			#if the ammo amount is greater than zero
 			if ammoAmount > 0:
 				#the projectile is shot
-				shoot()
+				shoot(bulletsBeingShot,10)
 			#if the ammo amount is less then zero
 			elif ammoAmount <= 0:
 				#the ammo is set to be exactly zero

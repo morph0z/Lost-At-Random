@@ -5,11 +5,10 @@ script/source = "extends Area2D
 class_name HitboxComponent
 
 @export var selfHurtbox: HurtboxComponent
-@export var attacker:Node2D
+@export var Entity:Node2D
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HurtboxComponent:
-		var hurtbox_component = area
 		if area.get_parent().get_parent() is not PlayerClass:
 			if area != selfHurtbox:
 				attack(area)
@@ -18,14 +17,15 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func attack(area: Area2D):
-	var attack = Attack.new()
-	attack.attack_damage = attacker.AttackStrength
-	attack.knockback_force = attacker.KBstrengh
-	attack.attack_position = global_position
-	attack.hit_cooldown = attacker.AttackCooldown
-	area.get_parent().get_parent().velocity = attacker.velocity*attack.knockback_force*4 
-	area.damage(attack)
-	area.get_parent().get_parent().set_velocity(Vector2(attacker.KBstrengh*(1000),attacker.KBstrengh*(1000))*attacker.velocity.normalized().round())
+	var NewAttack = Attack.new()
+	NewAttack.attack_damage = Entity.AttackStrength
+	NewAttack.knockback_force = Entity.KBstrengh
+	NewAttack.attack_position = global_position
+	NewAttack.hit_cooldown = Entity.AttackCooldown
+	area.get_parent().get_parent().velocity = Entity.velocity*NewAttack.knockback_force*4 
+	area.damage(NewAttack)
+	area.get_parent().get_parent().velocity += (Vector2(Entity.KBstrengh*(10),Entity.KBstrengh*(10))*Entity.velocity.normalized().round())
+	print( (Vector2(Entity.KBstrengh*(10),Entity.KBstrengh*(10))*Entity.velocity.normalized().round()))
 	area.get_parent().get_parent().move_and_slide()
 "
 

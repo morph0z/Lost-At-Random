@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bpqx6586q8y2s"]
+[gd_scene load_steps=15 format=3 uid="uid://bpqx6586q8y2s"]
 
 [ext_resource type="Script" uid="uid://ti1ouh7gaytn" path="res://scripts/enemys/SimpleEnemy.gd" id="1_ek7tt"]
 [ext_resource type="PackedScene" uid="uid://b5r1v2wvjl4r2" path="res://scenes/particles/EnemyDeath_prt.tscn" id="2_3bcq2"]
@@ -190,8 +190,11 @@ _data = {
 &"RESET": SubResource("Animation_4esjb")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sw41e"]
+radius = 13.0384
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_t47dm"]
-radius = 15.0333
+radius = 11.0454
 
 [node name="SimpleEnemy" type="CharacterBody2D" groups=["Enemys", "WeakEnemys"]]
 collision_layer = 7
@@ -237,12 +240,12 @@ Entity = NodePath("../..")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
-shape = SubResource("CircleShape2D_t47dm")
+shape = SubResource("CircleShape2D_sw41e")
 debug_color = Color(0.989415, 0, 0.290723, 0.42)
 
-[node name="HitboxComponent" parent="Components" node_paths=PackedStringArray("selfHurtbox", "attacker") instance=ExtResource("5_sw41e")]
+[node name="HitboxComponent" parent="Components" node_paths=PackedStringArray("selfHurtbox", "Entity") instance=ExtResource("5_sw41e")]
 selfHurtbox = NodePath("../HurtboxComponent")
-attacker = NodePath("../..")
+Entity = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HitboxComponent"]
 shape = SubResource("CircleShape2D_t47dm")

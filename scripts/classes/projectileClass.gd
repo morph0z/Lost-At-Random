@@ -3,7 +3,7 @@ class_name projectile
 
 ##This is a projectile it inherits the Area2D class 
 
-@onready var projectile_gone = $ProjectileGone
+const Projectile_Gone = preload("res://scenes/particles/player/PlayerGotHit_prt.tscn")
 @onready var projectile_trail: CPUParticles2D = $ProjectileTrail
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 ##The speed of the projectile
@@ -18,20 +18,14 @@ class_name projectile
 var goneThrough = 0
 ##How far the projectile has gone
 var distanceTraveled = 0
+
 const Player = preload("res://scripts/player/Player.gd")
 var PlayerIn = Player.new()
 
+
 ##When called this function will destroy the projectile
-func DestroyProjectile(particles:bool, sprite):
-	projectile_gone.set_emitting(particles)
-	projectile_trail.set_emitting(false)
-	collision_shape_2d.set_deferred("set_disabled", true)
-	collision_shape_2d.queue_free()
-	if sprite != null:
-		sprite.hide()
-	set_deferred("set_monitorable", false)
-	set_deferred("set_monitoring", false)
-	await projectile_gone.finished
+func DestroyProjectile():
+	createParticles()
 	queue_free()
 
 ##Called every frame
@@ -47,8 +41,15 @@ func _process(_delta: float) -> void:
 		for i in self.get_overlapping_bodies():
 			if i.is_in_group("World"):
 				if goneThrough == peircingLevel:
-					DestroyProjectile(true, visual)
+					DestroyProjectile()
 				elif goneThrough < peircingLevel:
 					if body_exited:
 						goneThrough = goneThrough+1
 						print("goneThroung " + str(goneThrough))
+
+##Creates particles at the bullets position
+func createParticles() -> void:
+	var projGonePrt = Projectile_Gone.instantiate()
+	projGonePrt.position = position
+	projGonePrt.emitting = true
+	get_tree().get_root().add_child(projGonePrt)

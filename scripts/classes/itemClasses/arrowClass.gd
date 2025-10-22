@@ -5,11 +5,15 @@ class_name arrow
 
 ##This is the value of damage that the arrow does. it usally gets it value from the weapon shooting it.
 var arrowDamage:float
+var elementEffect:ElementEffect
+var fromBow:bow
 
 ##Called when the arrow collides with another area 
 func _on_area_entered(area: Area2D) -> void:
 	#when the arrow hits a hurtbox (any hurtbox) it will damage it and delete it if it exceds its piercing level
-	if area is HurtboxComponent:		
+	if area is HurtboxComponent:
+		if elementEffect:
+			elementEffect.applyEffect(area, fromBow)
 		#damage dealt
 		var attack = Attack.new()
 		attack.attack_damage = arrowDamage
@@ -17,9 +21,8 @@ func _on_area_entered(area: Area2D) -> void:
 		area.damage(attack)
 		Global.frameFreeze(0.1, 1.5, area.get_parent().get_parent())
 		#adds particles
-		projectile_gone.set_emitting(true)
 		if goneThrough == peircingLevel:
-			DestroyProjectile(true, visual)
+			DestroyProjectile()
 			
 ##Called when arrow enters another body			
 func _on_body_entered(_body: Node2D) -> void:

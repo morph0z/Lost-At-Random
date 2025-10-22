@@ -50,7 +50,6 @@ func _input(event):
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("Secondary", true):
 		chargeLevel = chargeLevel+0.1*chargeSpeedMultiplyer
-		print(chargeLevel)
 		if chargeLevel >= maximumChargeLevel:
 			chargeLevel = maximumChargeLevel
 			

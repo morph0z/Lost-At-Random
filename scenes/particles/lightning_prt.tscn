@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://coie6dtjxg145"]
+
+[ext_resource type="Texture2D" uid="uid://cnj6grt2jeflf" path="res://assets/sprites/particles/lightning.png" id="1_lejv1"]
+[ext_resource type="Script" uid="uid://b0gpsaw3fuqym" path="res://scripts/attachParticleClass.gd" id="1_wdm4v"]
+[ext_resource type="Texture2D" uid="uid://ca4byytqckcy5" path="res://assets/sprites/particles/light.png" id="3_euvgu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6njtj"]
+atlas = ExtResource("1_lejv1")
+region = Rect2(0, 0, 5, 5)
+
+[sub_resource type="Curve" id="Curve_7qth2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.986487, 0), 0.0505618, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lejv1"]
+offsets = PackedFloat32Array(0, 0.586735, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.4, 0.4, 0.4, 1, 0.52, 0.52, 0.52, 0.0901961)
+
+[sub_resource type="Gradient" id="Gradient_euvgu"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="LightningPrt" type="CPUParticles2D"]
+amount = 300
+texture = SubResource("AtlasTexture_6njtj")
+lifetime = 0.3
+explosiveness = 0.55
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 106.56
+initial_velocity_max = 363.94
+angular_velocity_max = 424.92
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_7qth2")
+color_ramp = SubResource("Gradient_lejv1")
+color_initial_ramp = SubResource("Gradient_euvgu")
+script = ExtResource("1_wdm4v")
+metadata/_custom_type_script = "uid://b0gpsaw3fuqym"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("3_euvgu")

@@ -354,6 +354,7 @@ sync_to_physics = false
 script = ExtResource("1_shppg")
 minimumChargeLevel = 1.0
 maximumChargeLevel = 3.0
+originalSwingTime = 1.0
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(4, 1.81198e-05)

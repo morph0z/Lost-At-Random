@@ -1,11 +1,17 @@
-[gd_scene load_steps=26 format=3 uid="uid://cfigjsj20oduv"]
+[gd_scene load_steps=28 format=3 uid="uid://cfigjsj20oduv"]
 
 [ext_resource type="Script" uid="uid://ciwdehhhjcmhc" path="res://scripts/weapons/sword/LazerSword.gd" id="1_kpkgl"]
+[ext_resource type="Script" uid="uid://bqilmms0blfg7" path="res://scripts/customResources/Effects/ElementEffects/Effects/effectScripts/Fire.gd" id="2_j3pwn"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_srl5h"]
 [ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_ehfc1"]
 [ext_resource type="Texture2D" uid="uid://mi6gu8543j7n" path="res://assets/sprites/items/LazerSword.png" id="4_dcphg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
+
+[sub_resource type="Resource" id="Resource_0f0ue"]
+script = ExtResource("2_j3pwn")
+EffectStrength = 2.0
+metadata/_custom_type_script = "uid://bqilmms0blfg7"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
 size = Vector2(4, 16)
@@ -243,6 +249,7 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_kpkgl")
+elementEffect = SubResource("Resource_0f0ue")
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.71734e-06)
@@ -293,7 +300,7 @@ debug_color = Color(0.655886, 0.516826, 0, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_l67t7")
+&"": SubResource("AnimationLibrary_l67t7")
 }
 
 [connection signal="area_entered" from="SharpPart" to="." method="_on_sharp_part_area_entered"]

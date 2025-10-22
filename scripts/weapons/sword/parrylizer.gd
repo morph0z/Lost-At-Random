@@ -24,7 +24,7 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 		if Swung == true:
 			#checks if while the sword is swung if its in an enemy
 			if area is bullet:
-				area.DestroyProjectile(true, area.visual)
+				area.DestroyProjectile()
 				createParryBullet()
 			if area is HurtboxComponent:
 				var attack = Attack.new()

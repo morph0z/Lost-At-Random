@@ -35,14 +35,16 @@ const BASIC_Arrow = preload("res://scenes/objects/inanimte/ammo/BasicArrow.tscn"
 @export var minimumChargeLevel:float = 10
 ##The max amount of charge so the power does not keep charging
 @export var maximumChargeLevel:float = 20
+##The amount of bullets that are being shot
+@export var bulletsBeingShot:int = 1
 
 ##The amount of ammo that the bow currently has
 var ammoAmount = ammoAmountOriginal
 ##The amount of charge the bow has
 var chargeLevel = 0
 
-
-
+@export var shoot_effects:Array[ShootEffect]
+@export var element_effect:ElementEffect
 #bools
 ##The ability of the bow to shoot
 var canShoot = true
@@ -62,7 +64,7 @@ func chargeShot():
 	attack_cooldown.start(shootCooldown)
 	
 ##Shoots an arrow
-func Shoot():
+func shoot(amountShot:int, spreadFactor:int):
 	#emits the change in ammo for use in the UI
 	ammoChange.emit(ammoAmount)
 	#reduces ammo amount
@@ -71,24 +73,37 @@ func Shoot():
 	sprite.play("shoot")
 	#creates particles
 	bow_shoot_prt.set_emitting(true)
-	#creates new arrow
-	var ArrowNew = BASIC_Arrow.instantiate()
-	#resizes scale (since it is normally to big)
-	ArrowNew.set_scale(Vector2(0.3, 0.3))
-	#sets the damage the arrow will deal
-	if playerRef is PlayerClass:
-		var attackMultiplierFromPlayer = playerRef.bowStrengthMultiplier*playerRef.attackStrengthMultiplier
-		ArrowNew.arrowDamage = (weaponDamage*(chargeLevel*0.5))*attackMultiplierFromPlayer
-	else:
-		ArrowNew.arrowDamage = (weaponDamage*(chargeLevel*0.5))
-	#DEBUGING PRINT: print(str(ArrowNew.arrowDamage)+" YO")
-	
-	#sets the rotation and position of the arrow to the shooting point of the bow
-	ArrowNew.global_position = shooting_point.global_position
-	ArrowNew.global_rotation = shooting_point.global_rotation
-	#adds the new arrow to the scene
-	get_tree().get_root().add_child(ArrowNew)
+	for i in range(amountShot):
+		#creates new arrow
+		var ArrowNew:arrow = BASIC_Arrow.instantiate()
+		ArrowNew.fromBow = self
+		#resizes scale (since it is normally to big)
+		ArrowNew.set_scale(Vector2(0.3, 0.3))
+		#sets the damage the arrow will deal
+		if playerRef is PlayerClass:
+			var attackMultiplierFromPlayer = playerRef.bowStrengthMultiplier*playerRef.attackStrengthMultiplier
+			ArrowNew.arrowDamage = (weaponDamage*(chargeLevel*0.5))*attackMultiplierFromPlayer
+		else:
+			ArrowNew.arrowDamage = (weaponDamage*(chargeLevel*0.5))
+		#DEBUGING PRINT: print(str(ArrowNew.arrowDamage)+" YO")
+				#sets the element effect of the bullet
+		ArrowNew.elementEffect = element_effect
+		#sets the rotation and position of the arrow to the shooting point of the bow
+		ArrowNew.global_position = shooting_point.global_position
+		if amountShot == 1:
+			ArrowNew.global_rotation = shooting_point.global_rotation
+		else:
+			var bulletSpread = clamp(spreadFactor*(i+1),-180,90)
+			if bulletSpread == 90:
+				bulletSpread -= clamp(-spreadFactor*(i+1), -360, -180)
+			ArrowNew.global_rotation = shooting_point.global_rotation+deg_to_rad(bulletSpread)
+		#adds the new arrow to the scene
+		get_tree().get_root().add_child(ArrowNew)
 	#DEBUGING PRINT: print(ammoAmount)
+
+	if shoot_effects:
+		for i in shoot_effects:
+			i.applyEffect(self)
 
 ##Shoots a blank
 func emptyShot():
@@ -119,7 +134,7 @@ func _input(event):
 				#if true it fires an empty shot and sets charge level to zero while playing the shooting animation
 			if canShoot == true:
 				if chargeLevel >= minimumChargeLevel:
-					Shoot()
+					shoot(bulletsBeingShot, 10)
 				if chargeLevel <= minimumChargeLevel:
 					emptyShot()
 					sprite.play("shoot")

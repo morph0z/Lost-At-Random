@@ -26,7 +26,7 @@ func dead():
 			Entity.state_machine.change_active_state(Entity.dead_state)
 			isDead = true
 			await get_tree().create_timer(3).timeout
-			SceneManager.change_scene(MAIN_MENU_UI.instantiate())
+			#SceneManager.change_scene(MAIN_MENU_UI.instantiate())
 			
 	elif Entity is not PlayerClass:
 		get_parent().get_parent().animation_player.play("Death")

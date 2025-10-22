@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://sv50te1bs358"]
+
+[ext_resource type="Texture2D" uid="uid://uk6k8vdp46tu" path="res://assets/sprites/particles/smoke.png" id="1_yqyfr"]
+[ext_resource type="Script" uid="uid://b0gpsaw3fuqym" path="res://scripts/attachParticleClass.gd" id="2_otr04"]
+[ext_resource type="Texture2D" uid="uid://ca4byytqckcy5" path="res://assets/sprites/particles/light.png" id="3_m1fhg"]
+
+[sub_resource type="Curve" id="Curve_yqyfr"]
+_limits = [-200.0, 400.0, 0.0, 1.0]
+_data = [Vector2(0, -11.2359), 0.0, 0.0, 0, 0, Vector2(1, 400), 1403.09, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wq1rs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.49213, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ut64y"]
+offsets = PackedFloat32Array(0, 0.142857, 0.316327, 0.459184, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.966667, 0, 0.8, 1, 0.566667, 0, 0.639216, 1, 0.16, 0.16, 0.533333, 1, 1, 1, 0)
+
+[node name="Fire_prt" type="CPUParticles2D"]
+scale = Vector2(2, 2)
+amount = 242
+texture = ExtResource("1_yqyfr")
+fixed_fps = 30
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 12.54
+direction = Vector2(0, -1)
+spread = 41.96
+gravity = Vector2(0, 0)
+initial_velocity_max = 131.15
+linear_accel_curve = SubResource("Curve_yqyfr")
+scale_amount_min = 0.3
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_wq1rs")
+color_ramp = SubResource("Gradient_ut64y")
+script = ExtResource("2_otr04")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.65, 0, 1)
+energy = 4.63
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("3_m1fhg")
+texture_scale = 0.2

@@ -5,5 +5,4 @@
 [node name="DroppedSwordBlaster" type="Node2D"]
 
 [node name="SwordBlaster" parent="." instance=ExtResource("1_hw83u")]
-weaponDamage = 3
 originalSwingTime = 0.6

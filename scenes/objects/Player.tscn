@@ -58,7 +58,6 @@ polygon = PackedVector2Array(0, -11.0892, -3.50536, -9.85707, -6.13438, -7.3928,
 radius = 13.0384
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2ig8"]
-radius = 9.0
 
 [sub_resource type="Animation" id="Animation_pf2nr"]
 resource_name = "Dead"

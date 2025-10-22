@@ -38,21 +38,24 @@ var joyStickSense = 0.5
 #-------------------------------------------------------------------------------
 
 #atrributes
-var walkSpeed = 100.0
-var sprintSpeed = 200.0
+@export_group("Attributes")
+@export var walkSpeed:float = 100.0
+@export var sprintSpeed:float = 200.0
+@export var Acceleration:float = 50.0
 var SPEED = walkSpeed
-var attackStrengthMultiplier:float = 1
-var swordStrengthMultiplier:float = 1
-var scytheStrengthMultiplier:float = 1
-var bowStrengthMultiplier:float = 1
-var gunStrengthMultiplier:float = 1
+@export var attackStrengthMultiplier:float = 1
+@export var swordStrengthMultiplier:float = 1
+@export var scytheStrengthMultiplier:float = 1
+@export var bowStrengthMultiplier:float = 1
+@export var gunStrengthMultiplier:float = 1
 #var EnemyStrenghtMultiplyer = 1
 var EntityHealth
 
 #-------------------------------------------------------------------------------
 
 #bools
-var slowmotimer = null	
+var slowmotimer = null
+var isOnIce = true
 var isHolding = 0
 
 #-------------------------------------------------------------------------------
@@ -96,19 +99,15 @@ func _input(event):
 	#ITEM DROPPING SYSTEM
 	if Input.is_action_pressed("Drop"):
 		#checks if the player has one item or not
-		if items.get_child(0) != null:
+		if items.get_children().size() >= 1:
 			items.get_child(0).animation_player.play("Drop")
-			if items.get_child(1) != null:
+			if items.get_children().size() > 1:
 				items.get_child(1).animation_player.play("heldF")
-			elif items.get_child(1) == null:
-				pass
 			await get_tree().create_timer(items.get_child(0).animation_player.current_animation_length).timeout
-			if items.get_child(0) != null:
+			if items.get_children().size() > 0:
 				items.get_child(0).queue_free()
 			isHolding = isHolding-1
 			sprite.play("HoldingOne")
-		elif items.get_child(0) == null:
-			pass
 
 #-------------------------------------------------------------------------------
 
@@ -143,14 +142,21 @@ func _physics_process(_delta):
 		#this is for movement 
 		var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
 		if direction != Vector2.ZERO:
-			velocity = direction*SPEED
+			if !isOnIce:
+				velocity = direction*SPEED
+			elif isOnIce:
+				velocity += (direction*SPEED)/Acceleration
 			if SPEED == walkSpeed:
 				state_machine.change_active_state(walking_state)
 			elif SPEED == sprintSpeed:
 				state_machine.change_active_state(sprinting_state)			
 		elif direction == Vector2.ZERO:
 			state_machine.change_active_state(idle_state)
-			velocity = Vector2.ZERO
+			if !isOnIce:
+				velocity = Vector2.ZERO
+			elif isOnIce:
+				velocity.x = move_toward(velocity.x , 0, _delta*Acceleration)
+				velocity.y = move_toward(velocity.y , 0, _delta*Acceleration)
 			
 		move_and_slide()	
 	

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://s8krkqr0qcyo"]
+
+[ext_resource type="Texture2D" uid="uid://uk6k8vdp46tu" path="res://assets/sprites/particles/smoke.png" id="1_e5os8"]
+[ext_resource type="Script" uid="uid://b0gpsaw3fuqym" path="res://scripts/attachParticleClass.gd" id="2_2ci1r"]
+
+[sub_resource type="Curve" id="Curve_1qpjq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.36199, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_i8gjj"]
+offsets = PackedFloat32Array(0.0153061, 0.326531, 1)
+colors = PackedColorArray(0.165063, 0.51603, 1, 1, 1, 1, 1, 1, 0.73, 0.8425, 1, 0)
+
+[node name="water_prt" type="CPUParticles2D"]
+emitting = false
+amount = 242
+texture = ExtResource("1_e5os8")
+one_shot = true
+explosiveness = 0.21
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 18.83
+direction = Vector2(0, -1)
+spread = 53.03
+initial_velocity_max = 234.82
+scale_amount_curve = SubResource("Curve_1qpjq")
+color_ramp = SubResource("Gradient_i8gjj")
+script = ExtResource("2_2ci1r")
+metadata/_custom_type_script = "uid://b0gpsaw3fuqym"

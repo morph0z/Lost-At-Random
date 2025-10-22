@@ -11,6 +11,7 @@ class_name scythe
 @export var originalSwingTime:float
 @export var weaponKnockback:float = 0
 
+@export var elementEffect:ElementEffect
 
 var swingTime = originalSwingTime
 var changeSwingTime = originalSwingTime
@@ -52,6 +53,8 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 		if Swung == true:
 			#checks if while the sword is swung if its in an enemy
 			if area is HurtboxComponent:
+				if elementEffect:
+					elementEffect.applyEffect(area, self)
 				var attack = Attack.new()
 				attack.knockback_force = weaponKnockback
 				attack.hit_cooldown = originalSwingTime

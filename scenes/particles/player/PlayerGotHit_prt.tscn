@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu72tq4p7psd7"]
+[gd_scene load_steps=3 format=3 uid="uid://cu72tq4p7psd7"]
+
+[ext_resource type="Script" uid="uid://d4hnminaqqf4o" path="res://scripts/particles/prtAtRoot.gd" id="1_8wr8f"]
 
 [sub_resource type="Gradient" id="Gradient_gil8f"]
 offsets = PackedFloat32Array(0, 0.339286, 0.6875, 1)
@@ -21,3 +23,4 @@ initial_velocity_max = 112.99
 scale_amount_min = 0.0
 scale_amount_max = 3.0
 color_ramp = SubResource("Gradient_gil8f")
+script = ExtResource("1_8wr8f")
