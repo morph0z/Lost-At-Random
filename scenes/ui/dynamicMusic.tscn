@@ -1,0 +1,12 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0ftgocputrhw"]
+
+[ext_resource type="Script" uid="uid://dmbyxktvbijex" path="res://scripts/ui/dynamic_music.gd" id="1_ivtqb"]
+[ext_resource type="AudioStream" uid="uid://b6xtmjcckelto" path="res://assets/music/forestTheme1/practice97base.mp3" id="2_svrao"]
+[ext_resource type="AudioStream" uid="uid://b1ykcycm5g6ve" path="res://assets/music/forestTheme1/practice97breakcoreLayer.mp3" id="3_jbii1"]
+[ext_resource type="AudioStream" uid="uid://dhyhdpwdmghuh" path="res://assets/music/forestTheme1/practice97lofiLayer.mp3" id="4_uxe0h"]
+[ext_resource type="AudioStream" uid="uid://ctgngxarx8w38" path="res://assets/music/forestTheme1/practice97trapLayer.mp3" id="5_ogoks"]
+
+[node name="DynamicMusic" type="AudioStreamPlayer"]
+script = ExtResource("1_ivtqb")
+baseTrack = ExtResource("2_svrao")
+tensenessLayers = Array[AudioStream]([ExtResource("4_uxe0h"), ExtResource("5_ogoks"), ExtResource("3_jbii1")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=35 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dy2v4nb7n1ibu" path="res://scenes/objects/Artifacts/staminaArtifact.tscn" id="19_si77m"]
 [ext_resource type="PackedScene" uid="uid://qarse0bpbvsn" path="res://scenes/objects/Artifacts/AttackIncs/baseAttackArtifact.tscn" id="20_bjv75"]
 [ext_resource type="PackedScene" uid="uid://dvft5mjdadfue" path="res://scenes/objects/Artifacts/AttackIncs/gunAttackArtifact.tscn" id="21_suy51"]
+[ext_resource type="PackedScene" uid="uid://djx7qcljkt6t2" path="res://scenes/objects/inanimte/dropped/DroppedApertureScienceBlackholeGun.tscn" id="22_suy51"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_op7yw"]
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
@@ -192,6 +193,9 @@ position = Vector2(-167, 182)
 
 [node name="DroppedSwordBlaster" parent="DroppedItems" instance=ExtResource("15_fs4ai")]
 position = Vector2(-253, -138)
+
+[node name="DroppedApertureScienceBlackholeGun" parent="DroppedItems" instance=ExtResource("22_suy51")]
+position = Vector2(-410, -178)
 
 [node name="Player" parent="." instance=ExtResource("2_8108k")]
 position = Vector2(57, 34)

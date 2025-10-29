@@ -3,7 +3,7 @@ class_name projectile
 
 ##This is a projectile it inherits the Area2D class 
 
-const Projectile_Gone = preload("res://scenes/particles/player/PlayerGotHit_prt.tscn")
+const Projectile_Gone = preload("res://scenes/particles/ProjectileGone_prt.tscn")
 @onready var projectile_trail: CPUParticles2D = $ProjectileTrail
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 ##The speed of the projectile
@@ -22,16 +22,17 @@ var distanceTraveled = 0
 const Player = preload("res://scripts/player/Player.gd")
 var PlayerIn = Player.new()
 
-
 ##When called this function will destroy the projectile
 func DestroyProjectile():
-	createParticles()
+	var particles:CPUParticles2D = createParticles()
+	particles.emitting = true
 	queue_free()
 
 ##Called every frame
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
 	self.position += direction * Speed * delta
+	#distanceTraveled += 1
 	if distanceTraveled > RANGE:
 		queue_free()
 
@@ -45,11 +46,10 @@ func _process(_delta: float) -> void:
 				elif goneThrough < peircingLevel:
 					if body_exited:
 						goneThrough = goneThrough+1
-						print("goneThroung " + str(goneThrough))
 
 ##Creates particles at the bullets position
-func createParticles() -> void:
+func createParticles() -> CPUParticles2D:
 	var projGonePrt = Projectile_Gone.instantiate()
 	projGonePrt.position = position
-	projGonePrt.emitting = true
 	get_tree().get_root().add_child(projGonePrt)
+	return projGonePrt

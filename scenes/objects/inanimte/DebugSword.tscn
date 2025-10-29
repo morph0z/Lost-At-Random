@@ -182,7 +182,7 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_b8geh")
-weaponDamage = 100
+weaponDamage = -50
 originalSwingTime = 2.0
 
 [node name="ColShape" type="CollisionShape2D" parent="." groups=["PickableItem", "Sword"]]
@@ -224,7 +224,6 @@ wait_time = 0.3
 one_shot = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
 occluder = SubResource("OccluderPolygon2D_mt5ga")
 
 [node name="ItemPick" type="Area2D" parent="."]

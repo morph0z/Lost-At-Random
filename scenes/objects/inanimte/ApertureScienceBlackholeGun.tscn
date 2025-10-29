@@ -1,0 +1,262 @@
+[gd_scene load_steps=20 format=3 uid="uid://b6u8dskfm4itr"]
+
+[ext_resource type="Script" uid="uid://b1g6e54j2mepl" path="res://scripts/weapons/ranged/BasicGun.gd" id="1_nvfqt"]
+[ext_resource type="PackedScene" uid="uid://dq5fgjrcuqecv" path="res://scenes/objects/inanimte/ammo/Blackhole.tscn" id="2_qlc0j"]
+[ext_resource type="PackedScene" uid="uid://bilfddfsraiwq" path="res://scenes/particles/GunShoot_prt.tscn" id="4_25evr"]
+[ext_resource type="Texture2D" uid="uid://bpkd3x820rlm7" path="res://assets/sprites/items/ApertureScienceBlackholeGun.png" id="5_nvfqt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
+size = Vector2(12, 26.5)
+
+[sub_resource type="Gradient" id="Gradient_87sev"]
+offsets = PackedFloat32Array(0.0255102, 0.489796, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.933891, 0.878967, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dnn3"]
+atlas = ExtResource("5_nvfqt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25evr"]
+atlas = ExtResource("5_nvfqt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_876mq"]
+atlas = ExtResource("5_nvfqt")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vbel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dnn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25evr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_876mq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mt5ga"]
+polygon = PackedVector2Array(-8, -2, 4, -2, 4, -4, 7, -4, 7, -3, 9, -3, 9, -4, 15, -4, 15, -6, 16, -6, 16, -7, 17, -7, 17, -6, 20, -6, 20, -5, 18, -5, 17, -5, 17, -4, 16, -4, 16, -3, 15, -3, 15, 1, 16, 1, 16, 2, 17, 2, 17, 3, 20, 3, 20, 4, 17, 4, 17, 5, 16, 5, 16, 4, 15, 4, 15, 2, 9, 2, 9, 1, 7, 1, 7, 2, 4, 2, 4, 0, -8, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xar4"]
+radius = 4.99999
+height = 26.9985
+
+[sub_resource type="Animation" id="Animation_vkebn"]
+resource_name = "Drop"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.249948, 0.496078),
+"transitions": PackedFloat32Array(0.5, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(29, -11), Vector2(59, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.248143, 0.492365),
+"transitions": PackedFloat32Array(1.41421, 1.41421, 1.41421),
+"update": 0,
+"values": [0.0, 4.36332, 7.33038]
+}
+
+[sub_resource type="Animation" id="Animation_6oe78"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wgwdb"]
+resource_name = "heldB"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-17, -1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.13904]
+}
+
+[sub_resource type="Animation" id="Animation_87s4h"]
+resource_name = "heldF"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1qo4w"]
+resource_name = "onGround"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [-1.5708, -0.0159494, 1.56247, 3.13726, 4.71239]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -3), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l67t7"]
+_data = {
+&"Drop": SubResource("Animation_vkebn"),
+&"RESET": SubResource("Animation_6oe78"),
+&"heldB": SubResource("Animation_wgwdb"),
+&"heldF": SubResource("Animation_87s4h"),
+&"onGround": SubResource("Animation_1qo4w")
+}
+
+[node name="ApertureScienceBlackholeGun" type="AnimatableBody2D" groups=["Gun", "PickableItem", "ProjShooter"]]
+z_index = 2
+position = Vector2(0, 1)
+disable_mode = 2
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_rvip8")
+constant_linear_velocity = Vector2(5, 0)
+sync_to_physics = false
+script = ExtResource("1_nvfqt")
+BULLET = ExtResource("2_qlc0j")
+bulletSize = Vector2(1, 1)
+
+[node name="ColShape" type="CollisionShape2D" parent="."]
+position = Vector2(6.80218, 0.0521181)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fo6jp")
+one_way_collision_margin = 0.0
+debug_color = Color(0.884428, 0, 0.355222, 0.42)
+
+[node name="GunShoot_prt" parent="." instance=ExtResource("4_25evr")]
+position = Vector2(15.0522, 0.052166)
+lifetime = 0.1
+spread = 0.0
+initial_velocity_max = 503.7
+color_ramp = SubResource("Gradient_87sev")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(8.05217, 0.052166)
+rotation = -0.00326566
+sprite_frames = SubResource("SpriteFrames_3vbel")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.413109
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0.052166, 1.05217)
+occluder = SubResource("OccluderPolygon2D_mt5ga")
+
+[node name="ItemPick" type="Area2D" parent="."]
+position = Vector2(4, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPick"]
+position = Vector2(3, 0)
+rotation = -1.57223
+shape = SubResource("CapsuleShape2D_2xar4")
+debug_color = Color(0.655886, 0.516826, 0, 0.42)
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(34, 0.052166)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l67t7")
+}
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

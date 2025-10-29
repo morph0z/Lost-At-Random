@@ -1,7 +1,7 @@
 extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var PlayButton: Button = $Play
-const GENERATED_WORLD = preload("res://scenes/worlds/generated_world.tscn")
+const GENERATED_WORLD = preload("res://scenes/worlds/test_generated_world.tscn")
 const TEST_WORLD = preload("res://scenes/worlds/test_world.tscn")
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 

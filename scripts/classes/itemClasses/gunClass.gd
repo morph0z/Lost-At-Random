@@ -29,6 +29,7 @@ signal ammoChange(ammoAmount)
 @export var ammoAmountOriginal:int = 1
 ##The amount of bullets that are being shot
 @export var bulletsBeingShot:int = 1
+@export var bulletSize:Vector2 = Vector2(0.5, 0.5)
 
 ##The amount of ammo that the bow currently has
 var ammoAmount = ammoAmountOriginal
@@ -60,7 +61,7 @@ func shoot(amountShot:int, spreadFactor:int):
 		#sets the element effect of the bullet
 		BulletNew.elementEffect = elementEffect
 		#rescales the projectile thats shot
-		BulletNew.set_scale(Vector2(0.5, 0.5))
+		BulletNew.set_scale(bulletSize)
 		#sets the damage, position and rotation of the projectile
 		BulletNew.global_position = shooting_point.global_position
 		if amountShot == 1:

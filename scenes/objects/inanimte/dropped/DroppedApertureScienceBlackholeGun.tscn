@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://djx7qcljkt6t2"]
+
+[ext_resource type="PackedScene" uid="uid://b6u8dskfm4itr" path="res://scenes/objects/inanimte/ApertureScienceBlackholeGun.tscn" id="1_8lejq"]
+
+[node name="DroppedApertureScienceBlackholeGun" type="Node2D"]
+
+[node name="ApertureScienceBlackholeGun" parent="." instance=ExtResource("1_8lejq")]

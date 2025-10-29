@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://dq5fgjrcuqecv"]
+
+[ext_resource type="Script" uid="uid://jj6oxui8bnqe" path="res://scripts/weapons/ammo/blackhole.gd" id="1_tuw3y"]
+[ext_resource type="Texture2D" uid="uid://cs7u064103p0b" path="res://assets/sprites/items/Blackhole.png" id="2_tuw3y"]
+
+[sub_resource type="Curve" id="Curve_5qjeb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.95946, 0), -5.16079, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_mldpo"]
+offsets = PackedFloat32Array(0, 0.244898, 0.627551, 1)
+colors = PackedColorArray(0.67451, 0.196078, 0.196078, 1, 0.87451, 0.443137, 0.14902, 1, 0.984314, 0.94902, 0.211765, 1, 0.98, 0.94178, 0.2156, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h6uv"]
+radius = 120.0
+height = 240.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ckxo"]
+atlas = ExtResource("2_tuw3y")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_171is"]
+atlas = ExtResource("2_tuw3y")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4ilb"]
+atlas = ExtResource("2_tuw3y")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7tsll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ckxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_171is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4ilb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_171is")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qjeb"]
+radius = 126.921
+
+[node name="Blackhole" type="Area2D" node_paths=PackedStringArray("visual")]
+script = ExtResource("1_tuw3y")
+Speed = 100
+RANGE = 50
+visual = NodePath("Polygon2D2")
+metadata/_custom_type_script = "uid://biuapet6qixgg"
+
+[node name="ProjectileTrail" type="CPUParticles2D" parent="."]
+position = Vector2(-25, 0)
+amount = 60
+lifetime = 0.35
+emission_shape = 2
+emission_sphere_radius = 9.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 681.41
+angular_velocity_min = -296.07
+angular_velocity_max = 255.7
+orbit_velocity_max = 10.0
+linear_accel_max = 21.31
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_5qjeb")
+color_ramp = SubResource("Gradient_mldpo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-25, -1.59162e-12)
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CapsuleShape2D_5h6uv")
+debug_color = Color(0.988235, 0, 0, 0.419608)
+
+[node name="Polygon2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-25, 0)
+sprite_frames = SubResource("SpriteFrames_7tsll")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.868284
+
+[node name="pullArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pullArea"]
+position = Vector2(-26, 0)
+shape = SubResource("CircleShape2D_5qjeb")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="pullArea" to="." method="_on_pull_area_body_entered"]

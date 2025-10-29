@@ -1,4 +1,5 @@
 extends Node2D
+class_name Room
 @onready var background: TileMapLayer = $Background
 @onready var midground: TileMapLayer = $Midground
 
@@ -12,12 +13,14 @@ extends Node2D
 			
 func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 	var FuncDirection
-	if area.get_parent().is_in_group("Player"):
+	if area.get_parent() is PlayerClass:
+		var playerRef:PlayerClass = area.get_parent()
+		var generatedWorldRef:generatingWorld = self.get_parent().get_parent()
 		self.get_parent().get_child(0).queue_free()
-		self.get_parent().get_parent().clearEnemys()
-		self.get_parent().get_parent().clearItems()
-		var newRoom = self.get_parent().get_parent().generateRoom()
-		self.get_parent().get_parent().spawnEnemys()
+		generatedWorldRef.clearEnemys()
+		generatedWorldRef.clearItems()
+		var newRoom = generatedWorldRef.generateRoom()
+		generatedWorldRef.spawnEnemys()
 		if Direction == "Up":
 			FuncDirection = "Area2D"
 		elif Direction == "Down":
@@ -26,7 +29,12 @@ func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 			FuncDirection = "Area2D3"
 		elif Direction == "Right":
 			FuncDirection = "Area2D4"
-		area.get_parent().position = Vector2(newRoom.get_node("Background/"+FuncDirection).position + playerPos)
+		playerRef.position = Vector2(newRoom.get_node("Background/"+FuncDirection).position + playerPos)
+	if area.get_parent().name == "SeeArea":
+		pass
+	elif area.get_parent().get_parent() is HurtboxComponent:
+		var enemyRef:enemyClass = area.get_parent().get_parent()
+		enemyRef.health_component.dead()
 #Up area
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	playerInNewRoom(area, Vector2(0,-40), "Down")

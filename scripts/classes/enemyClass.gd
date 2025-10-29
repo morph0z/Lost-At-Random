@@ -1,12 +1,12 @@
 class_name enemyClass extends CharacterBody2D
 
-@onready var playerSeen:PlayerClass
+@onready var Target:Node2D
 @onready var animation_player = $AnimationPlayer
 @onready var target_ray: RayCast2D = $SeeArea/targetRay
 @onready var forgeting_timer: Timer = $ForgetingTimer
 @onready var wander_timer: Timer = $WanderTimer
 
-@onready var health_component: HealthComponent = $Components/HealthComponent
+@export var health_component: HealthComponent
 var attacking = false
 
 var randBool:Array = [true,false]
@@ -24,6 +24,7 @@ var newRandomDir:Vector2
 #states
 @onready var wandering:bool = false
 @onready var chasing:bool = false
+@onready var pulled:bool = false
 
 func _ready():
 	animation_player.play("RESET")
@@ -33,21 +34,34 @@ func _physics_process(delta):
 	if wandering:
 		velocity = (newRandomDir)*SPEED*delta
 	if chasing:
-		velocity = position.direction_to(playerSeen.position) * SPEED
-		target_ray.target_position = (position.direction_to(playerSeen.position))*ViewingDistance
+		velocity = position.direction_to(Target.position) * SPEED
+		target_ray.target_position = (position.direction_to(Target.position))*ViewingDistance
 		if (target_ray.get_collider() is not PlayerClass) and (target_ray.is_colliding()):
 			wandering = true
 			chasing = false
-		
+	if pulled:
+		if Target:
+			velocity = position.direction_to(Target.position) * SPEED
+		if !Target:
+			velocity = lerp(velocity, Vector2.ZERO, delta)
+			modulate = Color(0,0,0)
+	
 	move_and_slide()
 
 func chase():
 	chasing = true
 	wandering = false
+	pulled = false
+
+func gettingPulled():
+	chasing = false
+	wandering = false
+	pulled = true
+
 
 func _on_see_area_area_entered(area: Area2D) -> void:
 	if area.get_parent().get_parent() is PlayerClass:
-		playerSeen = area.get_parent().get_parent()
+		Target = area.get_parent().get_parent()
 		chase()
 
 func _on_see_area_area_exited(area: Area2D) -> void:
@@ -69,4 +83,5 @@ func wander(speed:float):
 	wander_timer.start(1)
 	wandering = true
 	chasing = false
+	pulled = false
 	SPEED = speed

@@ -1,17 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://dokr0aggg5on5"]
+[gd_scene load_steps=20 format=3 uid="uid://dokr0aggg5on5"]
 
 [ext_resource type="Script" uid="uid://dvyjfoflyexaa" path="res://scripts/weapons/sword/BasicSword.gd" id="1_f5c1u"]
-[ext_resource type="Script" uid="uid://15dnpmatbim" path="res://scripts/customResources/Effects/ElementEffects/Effects/effectScripts/Metal.gd" id="2_86fhn"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_m4toy"]
 [ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_rliii"]
 [ext_resource type="Texture2D" uid="uid://d1g6v7oxh3lmc" path="res://assets/sprites/items/sword.png" id="4_a8jwy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
-
-[sub_resource type="Resource" id="Resource_r7yan"]
-script = ExtResource("2_86fhn")
-EffectStrength = 2.0
-metadata/_custom_type_script = "uid://15dnpmatbim"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
 size = Vector2(4, 16)
@@ -206,8 +200,7 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_f5c1u")
-elementEffect = SubResource("Resource_r7yan")
-weaponDamage = 1
+weaponDamage = 50
 originalSwingTime = 0.5
 
 [node name="ColShape" type="CollisionShape2D" parent="."]

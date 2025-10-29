@@ -1,4 +1,5 @@
 extends Node2D
+class_name generatingWorld
 
 @onready var enemys: Node2D = $Enemys
 @onready var rooms: Node2D = $Rooms
@@ -6,9 +7,9 @@ extends Node2D
 @onready var artifacts: Node2D = $Artifacts
 const PLAYERins = preload("res://scenes/objects/Player.tscn")
 var player = PLAYERins.instantiate()
-var ROOM_NORMAL_AREA = preload("res://scenes/worlds/Areas/room_normal_area.tscn")
+var ROOM_NORMAL_AREA = preload("res://scenes/worlds/Areas/baseAreas/room_normal_area.tscn")
 var roomPlaceHolderInsance = ROOM_NORMAL_AREA.instantiate()
-var ROOM_L_AREA = preload("res://scenes/worlds/Areas/room_L_area.tscn")
+var ROOM_L_AREA = preload("res://scenes/worlds/Areas/baseAreas/room_L_area.tscn")
 var enemyPlaceHolders = roomPlaceHolderInsance.get_node("PlaceHolders/Enemys")
 var enemylist:Array = []
 
@@ -71,6 +72,8 @@ func generateRoom():
 	amountOfRoomsMade += 1
 	if (amountOfRoomsMade%5 == 0) or (amountOfRoomsMade == 1):
 		randomItem.call_deferred("reparent", items)
+		randomItem.call_deferred("set_owner", items)
+		
 		randomItem.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
 	
 	if (amountOfRoomsMade%10 == 0) or (amountOfRoomsMade == 5):

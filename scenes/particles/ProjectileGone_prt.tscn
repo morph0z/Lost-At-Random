@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfjixk1svyecn"]
+
+[ext_resource type="Script" uid="uid://d4hnminaqqf4o" path="res://scripts/particles/prtAtRoot.gd" id="1_tpy34"]
+
+[sub_resource type="Gradient" id="Gradient_gil8f"]
+offsets = PackedFloat32Array(0, 0.339286, 0.6875, 1)
+colors = PackedColorArray(0.81, 0.6615, 0, 1, 0.989479, 0.94382, 0.94382, 1, 1, 1, 1, 0.701961, 1, 1, 1, 0)
+
+[node name="PlayerGotHitPrt" type="CPUParticles2D"]
+emitting = false
+amount = 360
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 6.8
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 72.45
+initial_velocity_max = 112.99
+scale_amount_min = 0.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_gil8f")
+script = ExtResource("1_tpy34")

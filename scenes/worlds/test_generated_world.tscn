@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://7dr6gi3cgt0p"]
+
+[ext_resource type="Script" uid="uid://b1m5siw5dw53i" path="res://scripts/generated_world.gd" id="1_fu8m5"]
+[ext_resource type="PackedScene" uid="uid://dkuvei78eppkf" path="res://scenes/objects/lootTables/basicWeaponLootTable.tscn" id="2_6nj36"]
+[ext_resource type="PackedScene" uid="uid://c51h4416b1un5" path="res://scenes/objects/lootTables/basicArtifactLootTable.tscn" id="3_8j3me"]
+[ext_resource type="PackedScene" uid="uid://d0ftgocputrhw" path="res://scenes/ui/dynamicMusic.tscn" id="4_ad07o"]
+
+[node name="TestGeneratedWorld" type="Node2D"]
+script = ExtResource("1_fu8m5")
+itemLootTable = ExtResource("2_6nj36")
+artifactLootTable = ExtResource("3_8j3me")
+metadata/_custom_type_script = "uid://b1m5siw5dw53i"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-1079, -1159, 1233, -1169, 1311, 1032, -1221, 977)
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Enemys" type="Node2D" parent="."]
+
+[node name="Artifacts" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="DynamicMusic" parent="." instance=ExtResource("4_ad07o")]
+autoplay = true

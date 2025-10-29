@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cehj21a7tvocw"]
+
+[ext_resource type="Script" uid="uid://b0gpsaw3fuqym" path="res://scripts/attachParticleClass.gd" id="2_18ftx"]
+
+[sub_resource type="Curve" id="Curve_wq1rs"]
+_data = [Vector2(0.00444444, 0.0561798), 0.0, 0.0, 0, 0, Vector2(0.337778, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.617978), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ut64y"]
+colors = PackedColorArray(0.53, 1, 0.960833, 1, 0.1708, 0.38308, 0.61, 0)
+
+[node name="Ice_prt" type="CPUParticles2D"]
+scale = Vector2(2, 2)
+amount = 242
+fixed_fps = 30
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 4.51
+gravity = Vector2(0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_wq1rs")
+color_ramp = SubResource("Gradient_ut64y")
+script = ExtResource("2_18ftx")
+metadata/_custom_type_script = "uid://b0gpsaw3fuqym"

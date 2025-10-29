@@ -49,13 +49,15 @@ var SPEED = walkSpeed
 @export var bowStrengthMultiplier:float = 1
 @export var gunStrengthMultiplier:float = 1
 #var EnemyStrenghtMultiplyer = 1
-var EntityHealth
+var EntityHealth:float
 
+
+var direction:Vector2
 #-------------------------------------------------------------------------------
 
 #bools
 var slowmotimer = null
-var isOnIce = true
+var isOnIce = false
 var isHolding = 0
 
 #-------------------------------------------------------------------------------
@@ -128,7 +130,10 @@ func dash(dashPower):
 	var canDash = (dash_timer.time_left == 0) and (stamina_componet.Stamina > 0) and (stamina_componet.canUseStamina)
 	if canDash:
 		stamina_componet.useStamina(dashPower*5)
-		SPEED = (SPEED+(dashPower*100))
+		if !isOnIce:
+			SPEED = (SPEED+(dashPower*100))
+		elif isOnIce:
+			velocity += (SPEED+(dashPower*10))*direction.normalized()
 		player_dash_prt.emitting = true
 		await get_tree().create_timer(0.1).timeout
 		player_dash_prt.emitting = false
@@ -140,7 +145,7 @@ func dash(dashPower):
 func _physics_process(_delta):
 	if !health_component.isDead:	
 		#this is for movement 
-		var direction = Input.get_vector("LeftA","RightD","UpW","DownS")
+		direction = Input.get_vector("LeftA","RightD","UpW","DownS")
 		if direction != Vector2.ZERO:
 			if !isOnIce:
 				velocity = direction*SPEED

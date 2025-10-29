@@ -10,7 +10,7 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_ut64y"]
 colors = PackedColorArray(0.816667, 1, 0, 1, 0.0110283, 0.610322, 5.77569e-07, 0)
 
-[node name="Smoke_prt" type="CPUParticles2D"]
+[node name="Poison_prt" type="CPUParticles2D"]
 scale = Vector2(2, 2)
 amount = 242
 texture = ExtResource("1_ae53r")
