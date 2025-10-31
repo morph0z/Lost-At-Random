@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://7dr6gi3cgt0p"]
+[gd_scene load_steps=16 format=3 uid="uid://7dr6gi3cgt0p"]
 
 [ext_resource type="Script" uid="uid://b1m5siw5dw53i" path="res://scripts/generated_world.gd" id="1_fu8m5"]
 [ext_resource type="Texture2D" uid="uid://dpqfke615sgyc" path="res://assets/sprites/tilesets/placeholder/normalMaps/worldTemplate_n.png" id="2_8j3me"]
 [ext_resource type="PackedScene" uid="uid://d0ftgocputrhw" path="res://scenes/ui/dynamicMusic.tscn" id="4_ad07o"]
+[ext_resource type="AudioStream" uid="uid://dhyhdpwdmghuh" path="res://assets/music/forestTheme1/practice97lofiLayer.mp3" id="4_k0nfl"]
+[ext_resource type="AudioStream" uid="uid://b1ykcycm5g6ve" path="res://assets/music/forestTheme1/practice97breakcoreLayer.mp3" id="5_finge"]
 [ext_resource type="PackedScene" uid="uid://cy1rkwiwtk5ny" path="res://scenes/objects/inanimte/dropped/DroppedBasicBow.tscn" id="5_x68b3"]
 [ext_resource type="Script" uid="uid://c4pwgkq3nsn4e" path="res://scripts/components/LoottableComponent.gd" id="6_8j3me"]
 [ext_resource type="PackedScene" uid="uid://cpia0yvq8cwfw" path="res://scenes/objects/inanimte/dropped/DroppedBasicGun.tscn" id="6_k44os"]
@@ -36,8 +38,8 @@ polygon = PackedVector2Array(-1079, -1159, 1233, -1169, 1311, 1032, -1221, 977)
 [node name="Items" type="Node2D" parent="."]
 
 [node name="DynamicMusic" parent="." instance=ExtResource("4_ad07o")]
-autoplay = true
 bus = &"Music"
+tensenessLayers = Array[AudioStream]([ExtResource("4_k0nfl"), ExtResource("5_finge")])
 
 [node name="LoottableItems" type="Node" parent="."]
 script = ExtResource("6_8j3me")
