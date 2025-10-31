@@ -20,14 +20,35 @@ var amountOfRoomsMade:int = 0
 ##Sets the number of rooms in the total of the dungeon before boss room.
 #NOTE make the difficulty of the mode change the range of the amount of rooms
 @export var numOfRooms:int = randi_range(10,20)
-@export var itemLootTable:PackedScene
-@export var artifactLootTable:PackedScene
-@onready var InsItemLootTable = itemLootTable.instantiate()
-@onready var InsArtifactLootTable = artifactLootTable.instantiate()
+#NOTE make player go to next area once numOfRooms is finished.
+@export var nextArea:PackedScene
+@export_group("Tile Set")
+@export_subgroup("Floor Tiles")
+@export var floorTiles:TileSetAtlasSource
+@export var floorTilesTexture:Texture2D
+@export_subgroup("Wall Tiles")
+@export var wallTiles:TileSetAtlasSource
+@export var wallTilesTexture:Texture2D
+@export_subgroup("Special Tiles")
+@export var specialTiles:TileSetAtlasSource
+@export var specialTilesTexture:Texture2D
+
+##Array of arrays that are the floor[0] tiles, wall[1] tiles, and object[2] tiles.
+@onready var tileSetUsed:Array[TileSetAtlasSource] = [floorTiles, wallTiles, specialTiles]
+
+@export_group("Loot Tables")
+@export var itemLootTable:LoottableComponent
+@export var artifactLootTable:LoottableComponent
 
 func _ready() -> void:
 	add_child(player)
 	generateRoom()
+	if floorTiles:
+		floorTiles.texture = floorTilesTexture
+	if wallTiles:
+		wallTiles.texture = wallTilesTexture
+	if specialTiles:
+		specialTiles.texture = specialTilesTexture
 	
 func spawnEnemys():
 	var BasicEnemy: PackedScene = preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
@@ -55,38 +76,56 @@ func clearEnemys():
 		enemylist.remove_at(listInc-1)
 
 func generateRoom():
+	
+#region RoomInstances
 	var normalRoom = ROOM_NORMAL_AREA.instantiate()
 	var lShapedRoom = ROOM_L_AREA.instantiate()
 	var roomList = [normalRoom, lShapedRoom]
 	var randomRoom = roomList.pick_random()
+#endregion
 	
-	var ItemLootTableDuplicate = InsItemLootTable.duplicate(8)
-	var ArtifactLootTableDuplicate = InsArtifactLootTable.duplicate(8)
-	
-	var randomItem:Node2D = ItemLootTableDuplicate.get_children().pick_random()
-	var randomArtifact:artifact = ArtifactLootTableDuplicate.get_children().pick_random()
+#region LootTables
+	var randItem = itemLootTable.pickRandom().instantiate()
+	var randArtifact = artifactLootTable.pickRandom().instantiate()
+#endregion
 	
 	var currentEnemyPlaceHolder1 = enemyPlaceHolders.get_child(randi_range(0,3))
-	var currentEnemyPlaceHolder2 = enemyPlaceHolders.get_child(randi_range(0,3))
+	var _currentEnemyPlaceHolder2 = enemyPlaceHolders.get_child(randi_range(0,3))
 	
 	amountOfRoomsMade += 1
+#region Item/Artifact Drops
 	if (amountOfRoomsMade%5 == 0) or (amountOfRoomsMade == 1):
-		randomItem.call_deferred("reparent", items)
-		randomItem.call_deferred("set_owner", items)
-		
-		randomItem.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
+		items.add_child(randItem)
+		randItem.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
 	
 	if (amountOfRoomsMade%10 == 0) or (amountOfRoomsMade == 5):
-		randomArtifact.call_deferred("reparent", artifacts)
-		randomArtifact.set_position(currentEnemyPlaceHolder2.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
+		artifacts.add_child(randArtifact)
+		randArtifact.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
+#endregion
 		
+#region RandomRoomOpenings
 	var roomOpenings = ["enterArea/areaEnterU","enterArea/areaEnterD","enterArea/areaEnterL","enterArea/areaEnterR"]
 	var OpenRoomOpenings = func():
 		randomAmountRoomOpenings = randi_range(1,4)
 		for i in range(randomAmountRoomOpenings):
 			randomRoomOpening = roomOpenings[randi_range(0,3)]
 			randomRoom.get_node(randomRoomOpening).visible = false
+#endregion
 			
 	rooms.call_deferred("add_child", randomRoom)
 	OpenRoomOpenings.call()
 	return randomRoom
+
+#var tileInt
+var createTileOnce:bool = false
+func replaceRelaceableTiles(tileAtlas:Vector2i, source:TileSetAtlasSource, layer:TileMapLayer):
+	
+	var newSource  = layer.tile_set.add_source(source)
+	if !createTileOnce:
+		source.create_tile(tileAtlas, Vector2(2,2))
+		createTileOnce = true
+	
+	print("yo")
+	for i in layer.get_used_cells():
+		if layer.get_cell_tile_data(i).get_custom_data("replace"):
+			layer.set_cell(i, newSource, Vector2.ZERO, 0)

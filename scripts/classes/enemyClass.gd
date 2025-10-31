@@ -80,7 +80,8 @@ func _on_wander_timer_timeout() -> void:
 			newRandomDir = Vector2.ZERO
 
 func wander(speed:float):
-	wander_timer.start(1)
+	if !is_queued_for_deletion():
+		wander_timer.start(1)
 	wandering = true
 	chasing = false
 	pulled = false

@@ -57,6 +57,8 @@ texture = ExtResource("1_3sjal")
 
 [sub_resource type="TileSet" id="TileSet_26hwy"]
 navigation_layer_0/layers = 1
+custom_data_layer_0/name = "replace"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_hmwnk")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltw4b"]

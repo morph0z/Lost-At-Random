@@ -2,7 +2,6 @@ extends Node2D
 class_name Room
 @onready var background: TileMapLayer = $Background
 @onready var midground: TileMapLayer = $Midground
-
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#for i in background.get_used_cells(): 
@@ -10,7 +9,14 @@ class_name Room
 			#print("yo "+str(i)+" is grass")
 			#background.get_cell_tile_data(i).set_modulate(Color(0,0,0,0))
 			#background.erase_cell(i)
+
+func _ready() -> void:
+	if get_parent().get_parent():
+		if get_parent().get_parent() is generatingWorld:
+			var generatedWorldRef:generatingWorld = self.get_parent().get_parent()
+			generatedWorldRef.replaceRelaceableTiles(Vector2i(0,0), generatedWorldRef.floorTiles, background)
 			
+
 func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 	var FuncDirection
 	if area.get_parent() is PlayerClass:
@@ -35,6 +41,7 @@ func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 	elif area.get_parent().get_parent() is HurtboxComponent:
 		var enemyRef:enemyClass = area.get_parent().get_parent()
 		enemyRef.health_component.dead()
+
 #Up area
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	playerInNewRoom(area, Vector2(0,-40), "Down")
