@@ -1,21 +1,9 @@
 extends Node2D
 class_name Room
-@onready var background: TileMapLayer = $Background
-@onready var midground: TileMapLayer = $Midground
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#for i in background.get_used_cells(): 
-		#if background.get_cell_tile_data(i) == background.get_cell_tile_data(Vector2i(-21,-22)) :
-			#print("yo "+str(i)+" is grass")
-			#background.get_cell_tile_data(i).set_modulate(Color(0,0,0,0))
-			#background.erase_cell(i)
+@export var background: TileMapLayer
+@export var midground: TileMapLayer
+@export var entrances: Array[TileMapLayer]
 
-func _ready() -> void:
-	if get_parent().get_parent():
-		if get_parent().get_parent() is generatingWorld:
-			var generatedWorldRef:generatingWorld = self.get_parent().get_parent()
-			generatedWorldRef.replaceRelaceableTiles(Vector2i(0,0), generatedWorldRef.floorTiles, background)
-			
 
 func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 	var FuncDirection

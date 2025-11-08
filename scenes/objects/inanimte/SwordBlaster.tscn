@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://jvhpue48a44f"]
+[gd_scene load_steps=41 format=3 uid="uid://jvhpue48a44f"]
 
 [ext_resource type="Script" uid="uid://b2m3ftvnpgleq" path="res://scripts/weapons/sword/SwordBlaster.gd" id="1_shppg"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_fkghg"]
@@ -16,9 +16,8 @@ size = Vector2(21, 4.5)
 [sub_resource type="Gradient" id="Gradient_pgp4d"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id="Gradient_vg28o"]
-offsets = PackedFloat32Array(0, 0.333333, 1)
-colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_shppg"]
+colors = PackedColorArray(0.243137, 0.298039, 0.105882, 1, 1, 1, 1, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkghg"]
 atlas = ExtResource("4_shppg")
@@ -335,13 +334,18 @@ _data = {
 &"onGround": SubResource("Animation_1qo4w")
 }
 
+[sub_resource type="Curve" id="Curve_fkghg"]
+_limits = [-500.0, 500.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.355856, 73.0338), -793.667, -793.667, 0, 0, Vector2(0.630631, 5.61798), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [sub_resource type="Curve" id="Curve_shppg"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.454955, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.648649, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.454955, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.648649, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -10.809, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_fkghg"]
 offsets = PackedFloat32Array(0, 0.994898)
-colors = PackedColorArray(1, 1, 1, 1, 0.141176, 0.623529, 0.870588, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.603922, 0.74902, 0.266667, 1)
 
 [node name="SwordBlaster" type="AnimatableBody2D" groups=["PickableItem", "Sword"]]
 position = Vector2(0, 1)
@@ -380,7 +384,7 @@ position = Vector2(6, 0)
 lifetime = 0.2
 explosiveness = 0.85
 randomness = 1.0
-color_ramp = SubResource("Gradient_vg28o")
+color_ramp = SubResource("Gradient_shppg")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(8, 0)
@@ -420,6 +424,7 @@ emission_sphere_radius = 1.0
 spread = 180.0
 gravity = Vector2(0, 0)
 orbit_velocity_max = 5.0
+orbit_velocity_curve = SubResource("Curve_fkghg")
 radial_accel_min = 100.0
 radial_accel_max = 100.0
 scale_amount_curve = SubResource("Curve_shppg")

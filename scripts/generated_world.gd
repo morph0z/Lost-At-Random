@@ -23,15 +23,16 @@ var amountOfRoomsMade:int = 0
 #NOTE make player go to next area once numOfRooms is finished.
 @export var nextArea:PackedScene
 @export_group("Tile Set")
+@export var tileSetTexture:Texture2D
 @export_subgroup("Floor Tiles")
 @export var floorTiles:TileSetAtlasSource
-@export var floorTilesTexture:Texture2D
+@export var floorTilesTexturePosition:Vector2
 @export_subgroup("Wall Tiles")
 @export var wallTiles:TileSetAtlasSource
-@export var wallTilesTexture:Texture2D
+@export var wallTilesTexturePosition:Vector2
 @export_subgroup("Special Tiles")
 @export var specialTiles:TileSetAtlasSource
-@export var specialTilesTexture:Texture2D
+@export var specialTilesTexturePosition:Vector2
 
 ##Array of arrays that are the floor[0] tiles, wall[1] tiles, and object[2] tiles.
 @onready var tileSetUsed:Array[TileSetAtlasSource] = [floorTiles, wallTiles, specialTiles]
@@ -42,13 +43,19 @@ var amountOfRoomsMade:int = 0
 
 func _ready() -> void:
 	add_child(player)
-	generateRoom()
 	if floorTiles:
-		floorTiles.texture = floorTilesTexture
+		floorTiles.texture = tileSetTexture
+		floorTiles.texture_region_size = Vector2(16,16)*2
+		floorTiles.create_tile(floorTilesTexturePosition)
 	if wallTiles:
-		wallTiles.texture = wallTilesTexture
+		wallTiles.texture = tileSetTexture
+		wallTiles.texture_region_size = Vector2(16,16)*2
+		wallTiles.create_tile(wallTilesTexturePosition)
 	if specialTiles:
-		specialTiles.texture = specialTilesTexture
+		specialTiles.texture = tileSetTexture
+		specialTiles.create_tile(wallTilesTexturePosition)
+	generateRoom()
+	
 	
 func spawnEnemys():
 	var BasicEnemy: PackedScene = preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
@@ -81,7 +88,7 @@ func generateRoom():
 	var normalRoom = ROOM_NORMAL_AREA.instantiate()
 	var lShapedRoom = ROOM_L_AREA.instantiate()
 	var roomList = [normalRoom, lShapedRoom]
-	var randomRoom = roomList.pick_random()
+	var randomRoom:Room = roomList.pick_random()
 #endregion
 	
 #region LootTables
@@ -95,11 +102,11 @@ func generateRoom():
 	amountOfRoomsMade += 1
 #region Item/Artifact Drops
 	if (amountOfRoomsMade%5 == 0) or (amountOfRoomsMade == 1):
-		items.add_child(randItem)
+		items.call_deferred("add_child", randItem)
 		randItem.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
 	
 	if (amountOfRoomsMade%10 == 0) or (amountOfRoomsMade == 5):
-		artifacts.add_child(randArtifact)
+		artifacts.call_deferred("add_child", randArtifact)
 		randArtifact.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
 #endregion
 		
@@ -113,19 +120,42 @@ func generateRoom():
 #endregion
 			
 	rooms.call_deferred("add_child", randomRoom)
+	replaceRelaceableTiles(floorTilesTexturePosition, floorTiles, randomRoom.background)
+	replaceRelaceableTiles(wallTilesTexturePosition, wallTiles, randomRoom.midground)
+	#for i in randomRoom.entrances:
+	#	replaceRelaceableTiles(wallTilesTexturePosition, wallTiles, i)
 	OpenRoomOpenings.call()
 	return randomRoom
 
-#var tileInt
-var createTileOnce:bool = false
-func replaceRelaceableTiles(tileAtlas:Vector2i, source:TileSetAtlasSource, layer:TileMapLayer):
-	
-	var newSource  = layer.tile_set.add_source(source)
-	if !createTileOnce:
-		source.create_tile(tileAtlas, Vector2(2,2))
-		createTileOnce = true
-	
-	print("yo")
-	for i in layer.get_used_cells():
-		if layer.get_cell_tile_data(i).get_custom_data("replace"):
-			layer.set_cell(i, newSource, Vector2.ZERO, 0)
+func replaceRelaceableTiles(tileAtlasPos:Vector2 ,source:TileSetAtlasSource, layer:TileMapLayer):
+	var addOnePhysicsLayer:bool = false
+	if layer:
+		var newSource = layer.tile_set.add_source(source)
+		layer.tile_set.add_physics_layer()
+		for i in layer.get_used_cells():
+			var tile_data = layer.get_cell_tile_data(i)
+			var Collideable = tile_data.get_custom_data("collide")
+			var Uncollideable = !tile_data.get_custom_data("collide")
+			#print(str(Collideable) + " " +str(i)+" "+str(layer))
+			if Collideable:
+				print("C"+" "+str(layer))
+				layer.set_cell(i, newSource, tileAtlasPos, 0)
+				if !addOnePhysicsLayer:
+					tile_data.add_collision_polygon(layer.tile_set.get_physics_layers_count()-1)
+					@warning_ignore("integer_division")
+					var tile_extents := Vector2(layer.tile_set.tile_size.x, layer.tile_set.tile_size.y)
+					tile_data.set_collision_polygon_points(
+						layer.tile_set.get_physics_layers_count()-1, 0, 
+						PackedVector2Array(
+							[
+								Vector2(-tile_extents.x, -tile_extents.y), 
+								Vector2(-tile_extents.x, tile_extents.y), 
+								Vector2(tile_extents.x, tile_extents.y),  
+								Vector2(tile_extents.x, -tile_extents.y)
+							]
+						)
+					)
+					addOnePhysicsLayer = true
+			if Uncollideable:
+				print("Uc"+" "+str(layer))
+				layer.set_cell(i, newSource, tileAtlasPos, 0)

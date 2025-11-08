@@ -1,11 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://c6lxwga1lujbj"]
+[gd_scene load_steps=30 format=3 uid="uid://c6lxwga1lujbj"]
 
 [ext_resource type="Script" uid="uid://vu6262yi6bmn" path="res://scripts/weapons/sword/parrylizer.gd" id="1_kdu4g"]
 [ext_resource type="PackedScene" uid="uid://bylwshaq4c4id" path="res://scenes/particles/player/HeroSlash_prt.tscn" id="2_3a48n"]
+[ext_resource type="Script" uid="uid://johao5i3fgdo" path="res://scripts/customResources/Effects/ElementEffects/Effects/effectScripts/BlueLightning.gd" id="2_55jx8"]
 [ext_resource type="PackedScene" uid="uid://d3welhhfyal7h" path="res://scenes/particles/SwordHit_prt.tscn" id="3_55jx8"]
 [ext_resource type="Texture2D" uid="uid://dfc4cm6lvpycv" path="res://assets/sprites/items/Parrylizer.png" id="4_kdu4g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
+
+[sub_resource type="Resource" id="Resource_c8sf6"]
+script = ExtResource("2_55jx8")
+EffectStrength = 0.0
+metadata/_custom_type_script = "uid://johao5i3fgdo"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
 size = Vector2(4, 22)
@@ -14,11 +20,12 @@ size = Vector2(4, 22)
 size = Vector2(18, 4)
 
 [sub_resource type="Gradient" id="Gradient_kdu4g"]
-colors = PackedColorArray(1, 0.966667, 0, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.428571, 1)
+colors = PackedColorArray(0.392157, 0.764706, 0.870588, 1, 0.3915, 0.766325, 0.87, 0.298039, 0.3984, 0.736487, 0.83, 0)
 
 [sub_resource type="Gradient" id="Gradient_3a48n"]
-offsets = PackedFloat32Array(0, 0.387755, 1)
-colors = PackedColorArray(1, 0.916667, 0, 1, 1, 1, 1, 0.572549, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.428571, 1)
+colors = PackedColorArray(0.392157, 0.764706, 0.870588, 1, 0.3915, 0.766325, 0.87, 0.298039, 0.3984, 0.736487, 0.83, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3a48n"]
 atlas = ExtResource("4_kdu4g")
@@ -256,6 +263,7 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_kdu4g")
+elementEffect = SubResource("Resource_c8sf6")
 weaponDamage = 5
 originalSwingTime = 0.5
 

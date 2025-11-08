@@ -14,7 +14,8 @@ config/name="L.A.R"
 config/tags=PackedStringArray("dont_delete", "my_game", "very_cool")
 run/main_scene="uid://ci5m425w8shmr"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://dgtxwa3yr5qxa"
+config/icon="uid://c6bcpnx15glxy"
 
 [audio]
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://7dr6gi3cgt0p"]
+[gd_scene load_steps=17 format=3 uid="uid://7dr6gi3cgt0p"]
 
 [ext_resource type="Script" uid="uid://b1m5siw5dw53i" path="res://scripts/generated_world.gd" id="1_fu8m5"]
-[ext_resource type="Texture2D" uid="uid://dpqfke615sgyc" path="res://assets/sprites/tilesets/placeholder/normalMaps/worldTemplate_n.png" id="2_8j3me"]
+[ext_resource type="Texture2D" uid="uid://dpqfke615sgyc" path="res://assets/sprites/tilesets/placeholder/normalMaps/worldTemplate_n.png" id="2_k0nfl"]
 [ext_resource type="PackedScene" uid="uid://d0ftgocputrhw" path="res://scenes/ui/dynamicMusic.tscn" id="4_ad07o"]
 [ext_resource type="AudioStream" uid="uid://dhyhdpwdmghuh" path="res://assets/music/forestTheme1/practice97lofiLayer.mp3" id="4_k0nfl"]
 [ext_resource type="AudioStream" uid="uid://b1ykcycm5g6ve" path="res://assets/music/forestTheme1/practice97breakcoreLayer.mp3" id="5_finge"]
@@ -15,12 +15,16 @@
 [ext_resource type="PackedScene" uid="uid://qarse0bpbvsn" path="res://scenes/objects/Artifacts/AttackIncs/baseAttackArtifact.tscn" id="11_jou2f"]
 [ext_resource type="PackedScene" uid="uid://5j4dox2mchr8" path="res://scenes/objects/Artifacts/AttackIncs/swordAttackArtifact.tscn" id="12_6yqa3"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fu8m5"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k44os"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0nfl"]
 
 [node name="TestGeneratedWorld" type="Node2D" node_paths=PackedStringArray("itemLootTable", "artifactLootTable")]
 script = ExtResource("1_fu8m5")
-floorTiles = SubResource("TileSetAtlasSource_fu8m5")
-floorTilesTexture = ExtResource("2_8j3me")
+tileSetTexture = ExtResource("2_k0nfl")
+floorTiles = SubResource("TileSetAtlasSource_k44os")
+wallTiles = SubResource("TileSetAtlasSource_k0nfl")
+wallTilesTexturePosition = Vector2(2, 0)
 itemLootTable = NodePath("LoottableItems")
 artifactLootTable = NodePath("LoottableArtifact")
 metadata/_custom_type_script = "uid://b1m5siw5dw53i"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dc5vgiggg0fg1"]
+[gd_scene load_steps=13 format=3 uid="uid://dc5vgiggg0fg1"]
 
 [ext_resource type="Script" uid="uid://dm86txyol8kph" path="res://scripts/weapons/ammo/ParrylizerBullet.gd" id="1_rnjsc"]
 [ext_resource type="Texture2D" uid="uid://dj4sirj3xde72" path="res://assets/sprites/items/ParrylizerBulletAni.png" id="2_rnjsc"]
@@ -58,14 +58,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_p3k84"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.326531, 0.627551, 1)
-colors = PackedColorArray(1, 0.883333, 0, 1, 1, 0.966667, 0, 0.435294, 1, 1, 1, 0)
-
 [sub_resource type="Gradient" id="Gradient_trsa0"]
 offsets = PackedFloat32Array(0, 0.428571, 1)
-colors = PackedColorArray(1, 1, 0, 1, 1, 0.924, 0.76, 0.592157, 1, 1, 0, 0)
+colors = PackedColorArray(0.392157, 0.764706, 0.870588, 1, 0.3915, 0.766325, 0.87, 0.298039, 0.3984, 0.736487, 0.83, 0)
 
 [node name="ParrylizerBullet" type="Area2D" node_paths=PackedStringArray("visual")]
 script = ExtResource("1_rnjsc")
@@ -81,7 +76,7 @@ debug_color = Color(0.988235, 0, 0, 0.419608)
 [node name="Polygon2D2" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7whxv")
 autoplay = "default"
-frame_progress = 0.0156299
+frame_progress = 0.878439
 
 [node name="ProjectileGone" parent="." instance=ExtResource("3_trsa0")]
 position = Vector2(-1.90735e-06, 1.81899e-12)
@@ -91,7 +86,7 @@ amount = 100
 emission_shape = 0
 initial_velocity_min = 6.43
 initial_velocity_max = 14.63
-color_ramp = SubResource("Gradient_p3k84")
+color_ramp = SubResource("Gradient_trsa0")
 
 [node name="ProjectileTrail" type="CPUParticles2D" parent="."]
 position = Vector2(-10, 0)

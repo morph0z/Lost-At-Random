@@ -8,7 +8,7 @@ const Player = preload("res://scripts/player/Player.gd")
 var PlayerIn = Player.new()
 
 ##The animation player for the item
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
 ##The item hitbox that activates when picking up an item
 @onready var item_pick = $ItemPick
 

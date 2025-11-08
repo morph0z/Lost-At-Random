@@ -1,6 +1,7 @@
 extends sword
 @onready var marker_2d: Marker2D = $ShootingPoint
 const PARRYLIZER_BULLET = preload("res://scenes/objects/inanimte/ammo/ParrylizerBullet.tscn")
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 var funProperties = {
 	"statType": "Electric",
@@ -16,7 +17,10 @@ func createParryBullet():
 	ParryBulletIns.global_rotation = marker_2d.global_rotation
 	ParryBulletIns.Speed = 500
 	ParryBulletIns.peircingLevel = 0
+	if elementEffect:
+		ParryBulletIns.elementEffect = elementEffect
 	get_tree().get_root().call_deferred("add_child",ParryBulletIns)
+	sprite.play("Swing")
 
 #Overwrites the _on_sharp_part_area_entered from the sword class
 func _on_sharp_part_area_entered(area: Area2D) -> void:

@@ -23,7 +23,7 @@ animations = [{
 colors = PackedColorArray(1, 1, 1, 1, 0.3738, 0.717933, 0.89, 0)
 
 [sub_resource type="Gradient" id="Gradient_eofaa"]
-colors = PackedColorArray(0.372549, 0.803922, 0.894118, 1, 0, 0.607197, 0.650122, 0)
+colors = PackedColorArray(0.65098, 0.768627, 0.74902, 1, 0, 0.607197, 0.650122, 0)
 
 [node name="SwordBlasterBullet" type="Area2D" node_paths=PackedStringArray("visual")]
 script = ExtResource("1_hl1qn")
