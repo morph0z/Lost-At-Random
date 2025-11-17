@@ -13,7 +13,7 @@ func _ready() -> void:
 var playOnce:bool = false
 var stopOnce:bool = false
 var musicLayer:AudioStreamPlayer 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if get_parent() is generatingWorld:
 		playerRef = get_parent().get_node("Player")
 		musicLayer = AudioStreamPlayer.new()

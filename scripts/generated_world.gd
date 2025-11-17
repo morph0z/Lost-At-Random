@@ -30,6 +30,9 @@ var amountOfRoomsMade:int = 0
 @export_subgroup("Wall Tiles")
 @export var wallTiles:TileSetAtlasSource
 @export var wallTilesTexturePosition:Vector2
+@export_subgroup("Entrance Tiles")
+@export var entranceTiles:TileSetAtlasSource
+@export var entranceTilesTexturePosition:Vector2
 @export_subgroup("Special Tiles")
 @export var specialTiles:TileSetAtlasSource
 @export var specialTilesTexturePosition:Vector2
@@ -51,6 +54,10 @@ func _ready() -> void:
 		wallTiles.texture = tileSetTexture
 		wallTiles.texture_region_size = Vector2(16,16)*2
 		wallTiles.create_tile(wallTilesTexturePosition)
+	if entranceTiles:
+		entranceTiles.texture = tileSetTexture
+		entranceTiles.texture_region_size = Vector2(16,16)*2
+		entranceTiles.create_tile(entranceTilesTexturePosition)
 	if specialTiles:
 		specialTiles.texture = tileSetTexture
 		specialTiles.create_tile(wallTilesTexturePosition)
@@ -116,46 +123,56 @@ func generateRoom():
 		randomAmountRoomOpenings = randi_range(1,4)
 		for i in range(randomAmountRoomOpenings):
 			randomRoomOpening = roomOpenings[randi_range(0,3)]
-			randomRoom.get_node(randomRoomOpening).visible = false
+			var open = randomRoom.get_node(randomRoomOpening)
+			var openTileLayer = randomRoom.get_node(randomRoomOpening).get_child(0)
+			open.set_visible(false)
+		#for j in roomOpenings:
+			#var entrance = randomRoom.get_node(j)
+			#var isClosed = entrance.visible
+			#if isClosed:
+				#var openTileLayer = entrance.get_child(0)
+				#replaceRelaceableTiles(entranceTilesTexturePosition, entranceTiles, openTileLayer)
 #endregion
 			
 	rooms.call_deferred("add_child", randomRoom)
-	replaceRelaceableTiles(floorTilesTexturePosition, floorTiles, randomRoom.background)
-	replaceRelaceableTiles(wallTilesTexturePosition, wallTiles, randomRoom.midground)
-	#for i in randomRoom.entrances:
-	#	replaceRelaceableTiles(wallTilesTexturePosition, wallTiles, i)
-	OpenRoomOpenings.call()
-	return randomRoom
 
+	replaceRelaceableTiles(wallTilesTexturePosition, wallTiles, randomRoom.midground)
+	replaceRelaceableTiles(floorTilesTexturePosition, floorTiles, randomRoom.background)
+	for i in randomRoom.entrances:
+		print("yo "+str(i))
+		replaceRelaceableTiles(entranceTilesTexturePosition, entranceTiles, i)
+	OpenRoomOpenings.call()
+		
+	return randomRoom
+	
+var addOneCol:bool = true
 func replaceRelaceableTiles(tileAtlasPos:Vector2 ,source:TileSetAtlasSource, layer:TileMapLayer):
-	var addOnePhysicsLayer:bool = false
 	if layer:
 		var newSource = layer.tile_set.add_source(source)
-		layer.tile_set.add_physics_layer()
+		
 		for i in layer.get_used_cells():
 			var tile_data = layer.get_cell_tile_data(i)
-			var Collideable = tile_data.get_custom_data("collide")
-			var Uncollideable = !tile_data.get_custom_data("collide")
-			#print(str(Collideable) + " " +str(i)+" "+str(layer))
-			if Collideable:
-				print("C"+" "+str(layer))
+			if tile_data.get_custom_data("replace"):
 				layer.set_cell(i, newSource, tileAtlasPos, 0)
-				if !addOnePhysicsLayer:
+				if tile_data.get_custom_data("collide"):
+					source.get_tile_data(tileAtlasPos, 0).set_custom_data("collide", true)
+					if layer.tile_set.get_physics_layers_count() > 0:
+						if tile_data.get_collision_polygons_count(layer.tile_set.get_physics_layers_count()-1):
+							addOneCol = true
+							
+		if addOneCol:
+			for j in layer.get_used_cells():
+				var tile_data = layer.get_cell_tile_data(j)
+				if tile_data.get_custom_data("collide"):
 					tile_data.add_collision_polygon(layer.tile_set.get_physics_layers_count()-1)
-					@warning_ignore("integer_division")
 					var tile_extents := Vector2(layer.tile_set.tile_size.x, layer.tile_set.tile_size.y)
 					tile_data.set_collision_polygon_points(
 						layer.tile_set.get_physics_layers_count()-1, 0, 
 						PackedVector2Array(
-							[
-								Vector2(-tile_extents.x, -tile_extents.y), 
-								Vector2(-tile_extents.x, tile_extents.y), 
-								Vector2(tile_extents.x, tile_extents.y),  
-								Vector2(tile_extents.x, -tile_extents.y)
-							]
-						)
-					)
-					addOnePhysicsLayer = true
-			if Uncollideable:
-				print("Uc"+" "+str(layer))
-				layer.set_cell(i, newSource, tileAtlasPos, 0)
+						[
+							Vector2(-tile_extents.x, -tile_extents.y), 
+							Vector2(-tile_extents.x, tile_extents.y), 
+							Vector2(tile_extents.x, tile_extents.y),  
+							Vector2(tile_extents.x, -tile_extents.y)
+						]))
+			addOneCol = false

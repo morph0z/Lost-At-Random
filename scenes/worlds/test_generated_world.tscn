@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://7dr6gi3cgt0p"]
+[gd_scene load_steps=18 format=3 uid="uid://7dr6gi3cgt0p"]
 
 [ext_resource type="Script" uid="uid://b1m5siw5dw53i" path="res://scripts/generated_world.gd" id="1_fu8m5"]
 [ext_resource type="Texture2D" uid="uid://dpqfke615sgyc" path="res://assets/sprites/tilesets/placeholder/normalMaps/worldTemplate_n.png" id="2_k0nfl"]
@@ -19,12 +19,16 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0nfl"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_finge"]
+
 [node name="TestGeneratedWorld" type="Node2D" node_paths=PackedStringArray("itemLootTable", "artifactLootTable")]
 script = ExtResource("1_fu8m5")
 tileSetTexture = ExtResource("2_k0nfl")
 floorTiles = SubResource("TileSetAtlasSource_k44os")
 wallTiles = SubResource("TileSetAtlasSource_k0nfl")
 wallTilesTexturePosition = Vector2(2, 0)
+entranceTiles = SubResource("TileSetAtlasSource_finge")
+entranceTilesTexturePosition = Vector2(2, 0)
 itemLootTable = NodePath("LoottableItems")
 artifactLootTable = NodePath("LoottableArtifact")
 metadata/_custom_type_script = "uid://b1m5siw5dw53i"

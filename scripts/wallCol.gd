@@ -1,5 +1,4 @@
 extends Area2D
-#@onready var ray_ca_u: RayCast2D = $".././RayCaU"
 
 func _process(_delta: float) -> void:
 	if visible == true:

@@ -6,8 +6,11 @@ var WEAPONSHOT:item
 
 signal callEffect()
 
+var connectOnce:bool = false
 func applyEffect(weaponShot:item) -> void:
-	callEffect.connect(doEffect.bind(EffectStrength))
+	if !connectOnce:
+		callEffect.connect(doEffect.bind(EffectStrength))
+		connectOnce = true
 	WEAPONSHOT = weaponShot
 	callEffect.emit()
 	

@@ -12,6 +12,6 @@ func _ready() -> void:
 
 func _on_play_pressed() -> void:
 	SceneManager.change_scene(GENERATED_WORLD)
-
+#
 func _on_play_test_pressed() -> void:
 	SceneManager.change_scene(TEST_WORLD)

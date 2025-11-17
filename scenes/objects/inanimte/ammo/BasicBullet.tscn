@@ -11,6 +11,8 @@ height = 300.0
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="BasicBullet" type="Area2D" node_paths=PackedStringArray("visual")]
+collision_layer = 0
+monitorable = false
 script = ExtResource("1_cpmwd")
 visual = NodePath("Polygon2D2")
 
