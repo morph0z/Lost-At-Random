@@ -11,6 +11,8 @@ extends item
 ##A signal that gives out the amount of ammo left on the gun
 signal ammoChange(ammoAmount)
 
+signal weaponShot
+
 #instances
 ##An instance of the bullet type the gun will shoot
 @export var BULLET:PackedScene
@@ -52,6 +54,7 @@ func _ready():
 func shoot(amountShot:int, spreadFactor:int):
 	#emits the change in ammo for use in the UI
 	ammoChange.emit(ammoAmount)
+	weaponShot.emit()
 	#creates particles for the shooting of the projectile
 	gun_shoot_prt.set_emitting(true)
 	for i in range(amountShot):

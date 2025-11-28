@@ -5,12 +5,20 @@ class_name generatingWorld
 @onready var rooms: Node2D = $Rooms
 @onready var items: Node2D = $Items
 @onready var artifacts: Node2D = $Artifacts
+
 const PLAYERins = preload("res://scenes/objects/Player.tscn")
 var player = PLAYERins.instantiate()
+
+@export var roomsSpawning:Array[PackedScene]
+
 var ROOM_NORMAL_AREA = preload("res://scenes/worlds/Areas/baseAreas/room_normal_area.tscn")
 var roomPlaceHolderInsance = ROOM_NORMAL_AREA.instantiate()
+
 var ROOM_L_AREA = preload("res://scenes/worlds/Areas/baseAreas/room_L_area.tscn")
 var enemyPlaceHolders = roomPlaceHolderInsance.get_node("PlaceHolders/Enemys")
+
+var LOOT_BOX = preload("res://scenes/objects/Lootbox.tscn")
+
 var enemylist:Array = []
 
 var randomAmountRoomOpenings:int
@@ -19,9 +27,11 @@ var amountOfRoomsMade:int = 0
 
 ##Sets the number of rooms in the total of the dungeon before boss room.
 #NOTE make the difficulty of the mode change the range of the amount of rooms
+@export_group("Settings")
 @export var numOfRooms:int = randi_range(10,20)
+@export var enableEnemySpawing:bool = true
 #NOTE make player go to next area once numOfRooms is finished.
-@export var nextArea:PackedScene
+@export var nextGeneratedWorld:PackedScene
 @export_group("Tile Set")
 @export var tileSetTexture:Texture2D
 @export_subgroup("Floor Tiles")
@@ -49,20 +59,23 @@ func _ready() -> void:
 	if floorTiles:
 		floorTiles.texture = tileSetTexture
 		floorTiles.texture_region_size = Vector2(16,16)*2
-		floorTiles.create_tile(floorTilesTexturePosition)
+		if !floorTiles.has_tile(floorTilesTexturePosition):
+			floorTiles.create_tile(floorTilesTexturePosition)
 	if wallTiles:
 		wallTiles.texture = tileSetTexture
 		wallTiles.texture_region_size = Vector2(16,16)*2
-		wallTiles.create_tile(wallTilesTexturePosition)
+		if !wallTiles.has_tile(wallTilesTexturePosition):
+			wallTiles.create_tile(wallTilesTexturePosition)
 	if entranceTiles:
 		entranceTiles.texture = tileSetTexture
 		entranceTiles.texture_region_size = Vector2(16,16)*2
-		entranceTiles.create_tile(entranceTilesTexturePosition)
+		if !entranceTiles.has_tile(entranceTilesTexturePosition):
+			entranceTiles.create_tile(entranceTilesTexturePosition)
 	if specialTiles:
 		specialTiles.texture = tileSetTexture
-		specialTiles.create_tile(wallTilesTexturePosition)
+		if !specialTiles.has_tile(wallTilesTexturePosition):
+			specialTiles.create_tile(wallTilesTexturePosition)
 	generateRoom()
-	
 	
 func spawnEnemys():
 	var BasicEnemy: PackedScene = preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
@@ -91,58 +104,48 @@ func clearEnemys():
 
 func generateRoom():
 	
-#region RoomInstances
-	var normalRoom = ROOM_NORMAL_AREA.instantiate()
-	var lShapedRoom = ROOM_L_AREA.instantiate()
-	var roomList = [normalRoom, lShapedRoom]
-	var randomRoom:Room = roomList.pick_random()
-#endregion
+	#region RoomInstances
+	var randomRoom:Room = roomsSpawning.pick_random().instantiate()
+	#endregion
 	
-#region LootTables
-	var randItem = itemLootTable.pickRandom().instantiate()
-	var randArtifact = artifactLootTable.pickRandom().instantiate()
-#endregion
+	#region LootTables
+	var newLootBox:lootbox = LOOT_BOX.instantiate()
+	#endregion
 	
 	var currentEnemyPlaceHolder1 = enemyPlaceHolders.get_child(randi_range(0,3))
 	var _currentEnemyPlaceHolder2 = enemyPlaceHolders.get_child(randi_range(0,3))
 	
 	amountOfRoomsMade += 1
-#region Item/Artifact Drops
-	if (amountOfRoomsMade%5 == 0) or (amountOfRoomsMade == 1):
-		items.call_deferred("add_child", randItem)
-		randItem.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
 	
-	if (amountOfRoomsMade%10 == 0) or (amountOfRoomsMade == 5):
-		artifacts.call_deferred("add_child", randArtifact)
-		randArtifact.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
-#endregion
+	#region Item/Artifact Drops
+	if (amountOfRoomsMade%5 == 0) or (amountOfRoomsMade == 1):
+		newLootBox.itemLootTable = itemLootTable
+		newLootBox.artifactLootTable = artifactLootTable
+		items.call_deferred("add_child", newLootBox)
+		newLootBox.set_position(currentEnemyPlaceHolder1.get_position()+Vector2(randi_range(0,10),randi_range(0,10)))
+	#endregion
 		
-#region RandomRoomOpenings
+	#region RandomRoomOpenings
 	var roomOpenings = ["enterArea/areaEnterU","enterArea/areaEnterD","enterArea/areaEnterL","enterArea/areaEnterR"]
 	var OpenRoomOpenings = func():
 		randomAmountRoomOpenings = randi_range(1,4)
 		for i in range(randomAmountRoomOpenings):
 			randomRoomOpening = roomOpenings[randi_range(0,3)]
 			var open = randomRoom.get_node(randomRoomOpening)
-			var openTileLayer = randomRoom.get_node(randomRoomOpening).get_child(0)
 			open.set_visible(false)
-		#for j in roomOpenings:
-			#var entrance = randomRoom.get_node(j)
-			#var isClosed = entrance.visible
-			#if isClosed:
-				#var openTileLayer = entrance.get_child(0)
-				#replaceRelaceableTiles(entranceTilesTexturePosition, entranceTiles, openTileLayer)
-#endregion
+	#endregion
 			
 	rooms.call_deferred("add_child", randomRoom)
 
+	#region ReplaceTiles
 	replaceRelaceableTiles(wallTilesTexturePosition, wallTiles, randomRoom.midground)
 	replaceRelaceableTiles(floorTilesTexturePosition, floorTiles, randomRoom.background)
 	for i in randomRoom.entrances:
-		print("yo "+str(i))
 		replaceRelaceableTiles(entranceTilesTexturePosition, entranceTiles, i)
+	#endregion
+
 	OpenRoomOpenings.call()
-		
+	
 	return randomRoom
 	
 var addOneCol:bool = true
@@ -176,3 +179,19 @@ func replaceRelaceableTiles(tileAtlasPos:Vector2 ,source:TileSetAtlasSource, lay
 							Vector2(tile_extents.x, -tile_extents.y)
 						]))
 			addOneCol = false
+
+#TODO: Make worlds spawn lootboxes for items rather than normal items
+func _rarityPick(array: Array, weights: Array):
+	assert(array.size() == weights.size(), "The arrays must be of the same size")
+	if array.is_empty():
+		push_error("Tried picking a weighted random value from an empty array")
+		return null
+	var sum := 0.0
+	for num in weights:
+		sum += num
+	var rand := randf_range(0, sum)
+	var cumulative := 0.0
+	for i in array.size():
+		cumulative += weights[i]
+		if rand <= cumulative:
+			return array[i]

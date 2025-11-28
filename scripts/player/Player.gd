@@ -14,7 +14,6 @@ class_name PlayerClass
 @onready var player_ui: Control = $CanvasLayer/PlayerUI
 
 #State Machine
-@export var state_machine : LimboHSM
 
 #States
 @onready var idle_state: LimboState = $LimboHSM/Idle
@@ -27,9 +26,11 @@ class_name PlayerClass
 signal itemPicked 
 
 #componets
+@export_group("Components")
+@export var state_machine : LimboHSM
 @export var health_component:HealthComponent
-@onready var stamina_componet: StaminaComponent = $Componets/StaminaComponet
-
+@export var stamina_componet: StaminaComponent
+@export var experience_component: ExperienceHandler
 #-------------------------------------------------------------------------------
 
 #settings
@@ -100,16 +101,20 @@ func _input(event):
 		
 	#ITEM DROPPING SYSTEM
 	if Input.is_action_pressed("Drop"):
-		#checks if the player has one item or not
-		if items.get_children().size() >= 1:
-			items.get_child(0).animation_player.play("Drop")
-			if items.get_children().size() > 1:
-				items.get_child(1).animation_player.play("heldF")
-			await get_tree().create_timer(items.get_child(0).animation_player.current_animation_length).timeout
-			if items.get_children().size() > 0:
-				items.get_child(0).queue_free()
-			isHolding = isHolding-1
-			sprite.play("HoldingOne")
+		dropItem()
+#-------------------------------------------------------------------------------
+
+func dropItem():
+	if items.get_children().size() >= 1:
+		items.get_child(0).animation_player.play("Drop")
+		if items.get_children().size() > 1:
+			items.get_child(1).animation_player.play("heldF")
+		await get_tree().create_timer(items.get_child(0).animation_player.current_animation_length).timeout
+		if items.get_children().size() > 0:
+			items.get_child(0).queue_free()
+		isHolding = isHolding-1
+		sprite.play("HoldingOne")
+
 
 #-------------------------------------------------------------------------------
 
@@ -117,7 +122,7 @@ func sprint(sprintToggle):
 	var canSprint = (sprintToggle) and (stamina_componet.Stamina > 0) and (stamina_componet.canUseStamina)
 	if canSprint:
 		SPEED = sprintSpeed
-		stamina_componet.startStaminaDrain(1, 0.05)
+		stamina_componet.startStaminaDrain(1, 2)
 		sprint_dust.get_child(0).set_emitting(sprintToggle)
 		state_machine.change_active_state(sprinting_state)
 	elif !canSprint:
@@ -176,7 +181,7 @@ func _on_pick_up_zone_area_entered(area):
 			#checks if it is acctually a pickable item
 			if area.get_parent().is_in_group("PickableItem"):
 				#procceds to reparent the item and sets the item to being held
-				var Pickitem = area.get_parent()
+				var Pickitem:item = area.get_parent()
 				itemPicked.emit(Pickitem)
 				Pickitem.isHeld = true
 				Pickitem.checkIfHeld()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://djtv33chlenid"]
+[gd_scene load_steps=35 format=4 uid="uid://djtv33chlenid"]
 
 [ext_resource type="Texture2D" uid="uid://dvbmnlp2xp68q" path="res://assets/sprites/tilesets/tileset.png" id="1_eet0d"]
 [ext_resource type="PackedScene" uid="uid://brqqrkpvnybn1" path="res://scenes/objects/Player.tscn" id="2_8108k"]
@@ -20,7 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://dy2v4nb7n1ibu" path="res://scenes/objects/Artifacts/staminaArtifact.tscn" id="19_si77m"]
 [ext_resource type="PackedScene" uid="uid://qarse0bpbvsn" path="res://scenes/objects/Artifacts/AttackIncs/baseAttackArtifact.tscn" id="20_bjv75"]
 [ext_resource type="PackedScene" uid="uid://dvft5mjdadfue" path="res://scenes/objects/Artifacts/AttackIncs/gunAttackArtifact.tscn" id="21_suy51"]
+[ext_resource type="PackedScene" uid="uid://dmhturn04aadx" path="res://scenes/objects/Lootbox.tscn" id="22_4ctnv"]
 [ext_resource type="PackedScene" uid="uid://djx7qcljkt6t2" path="res://scenes/objects/inanimte/dropped/DroppedApertureScienceBlackholeGun.tscn" id="22_suy51"]
+[ext_resource type="Script" uid="uid://c4pwgkq3nsn4e" path="res://scripts/components/LoottableComponent.gd" id="23_4ctnv"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_op7yw"]
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
@@ -150,6 +152,7 @@ navigation_enabled = false
 
 [node name="DummyEnemy" parent="Enemys" instance=ExtResource("4_umrhl")]
 position = Vector2(72, 144)
+KBstrengh = 0.0
 
 [node name="SimpleEnemy" parent="Enemys" instance=ExtResource("4_dneas")]
 position = Vector2(274, -74)
@@ -195,8 +198,6 @@ position = Vector2(-410, -178)
 [node name="Player" parent="." instance=ExtResource("2_8108k")]
 position = Vector2(57, 34)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-
 [node name="DebugBulletShooter" parent="." instance=ExtResource("15_0xgc2")]
 position = Vector2(-350, -348)
 scale = Vector2(0.642256, 1.03)
@@ -213,3 +214,18 @@ position = Vector2(-319, -53)
 
 [node name="gunAttackArtifact" parent="." instance=ExtResource("21_suy51")]
 position = Vector2(-310, -111)
+
+[node name="Lootbox" parent="." node_paths=PackedStringArray("itemLootTable", "artifactLootTable") instance=ExtResource("22_4ctnv")]
+position = Vector2(-89, 241)
+itemLootTable = NodePath("ItemLoottable")
+artifactLootTable = NodePath("artifactLoottable")
+
+[node name="ItemLoottable" type="Node" parent="Lootbox"]
+script = ExtResource("23_4ctnv")
+LootTable = Array[PackedScene]([ExtResource("22_suy51")])
+metadata/_custom_type_script = "uid://c4pwgkq3nsn4e"
+
+[node name="artifactLoottable" type="Node" parent="Lootbox"]
+script = ExtResource("23_4ctnv")
+LootTable = Array[PackedScene]([ExtResource("20_bjv75"), ExtResource("18_oesy6"), ExtResource("19_si77m")])
+metadata/_custom_type_script = "uid://c4pwgkq3nsn4e"

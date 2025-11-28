@@ -250,6 +250,7 @@ constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_kpkgl")
 elementEffect = SubResource("Resource_0f0ue")
+itemRarity = 7
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.71734e-06)

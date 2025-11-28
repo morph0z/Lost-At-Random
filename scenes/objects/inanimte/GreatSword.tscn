@@ -191,6 +191,7 @@ sync_to_physics = false
 script = ExtResource("1_yr7uc")
 weaponDamage = 3
 originalSwingTime = 0.5
+itemRarity = 19
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(7.5, 3.08752e-05)
@@ -242,7 +243,7 @@ debug_color = Color(0.655886, 0.516826, 0, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_l67t7")
+&"": SubResource("AnimationLibrary_l67t7")
 }
 
 [connection signal="area_entered" from="SharpPart" to="." method="_on_sharp_part_area_entered"]

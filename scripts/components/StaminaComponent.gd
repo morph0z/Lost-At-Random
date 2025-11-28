@@ -26,7 +26,7 @@ func startStaminaDrain(amount: int, speed: float):
 		drainingStamina = true
 		while drainingStamina:
 			Stamina -= amount
-			await get_tree().create_timer(speed).timeout
+			await get_tree().create_timer(1/speed).timeout
 
 func stopStaminaDrain():
 	drainingStamina = false

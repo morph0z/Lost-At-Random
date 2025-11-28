@@ -194,6 +194,7 @@ shootCooldown = 2.0
 reloadTimeMultiplyer = 1.0
 weaponDamage = 50
 ammoAmountOriginal = 3
+itemRarity = 4
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(0.500007, -1.50002)
@@ -238,5 +239,27 @@ position = Vector2(14, -1.5)
 libraries = {
 &"": SubResource("AnimationLibrary_l67t7")
 }
+
+[node name="ShatterPoints" type="Node2D" parent="."]
+
+[node name="ShatterPoint" type="Marker2D" parent="ShatterPoints"]
+position = Vector2(-7, -5)
+rotation = -2.70392
+
+[node name="ShatterPoint3" type="Marker2D" parent="ShatterPoints"]
+position = Vector2(0, 5)
+rotation = -4.2015
+
+[node name="ShatterPoint4" type="Marker2D" parent="ShatterPoints"]
+position = Vector2(10, 5)
+rotation = -5.70372
+
+[node name="ShatterPoint5" type="Marker2D" parent="ShatterPoints"]
+position = Vector2(3, -8)
+rotation = -8.00558
+
+[node name="ShatterPoint2" type="Marker2D" parent="ShatterPoints"]
+position = Vector2(9, -7)
+rotation = -0.533013
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

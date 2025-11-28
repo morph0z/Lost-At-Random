@@ -14,7 +14,8 @@ func playerInNewRoom(area:Area2D, playerPos: Vector2, Direction:String):
 		generatedWorldRef.clearEnemys()
 		generatedWorldRef.clearItems()
 		var newRoom = generatedWorldRef.generateRoom()
-		#generatedWorldRef.spawnEnemys()
+		if generatedWorldRef.enableEnemySpawing:
+			generatedWorldRef.spawnEnemys()
 		if Direction == "Up":
 			FuncDirection = "Area2D"
 		elif Direction == "Down":

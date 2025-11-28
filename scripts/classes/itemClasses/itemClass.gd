@@ -1,7 +1,7 @@
 class_name item
 extends AnimatableBody2D
 
-var playerRef
+var playerRef:PlayerClass
 
 #instances
 const Player = preload("res://scripts/player/Player.gd") 
@@ -12,8 +12,14 @@ var PlayerIn = Player.new()
 ##The item hitbox that activates when picking up an item
 @onready var item_pick = $ItemPick
 
+const rarityEnum = rarity.new().Rarities
+@export var itemRarity:rarityEnum = rarityEnum.COMMON
+
 ##This is only true when the item is held by the player
 var isHeld = false
+
+@warning_ignore("unused_signal")
+signal KilledThing(thingHealth:int)
 
 func _process(_delta: float) -> void:
 	if get_parent().get_parent() is PlayerClass:

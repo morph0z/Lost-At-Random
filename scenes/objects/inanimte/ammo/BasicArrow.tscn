@@ -12,8 +12,6 @@ height = 600.0
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="BasicArrow" type="Area2D" node_paths=PackedStringArray("visual")]
-collision_layer = 0
-monitorable = false
 script = ExtResource("1_t8fg7")
 visual = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://58b8q2vx725j"

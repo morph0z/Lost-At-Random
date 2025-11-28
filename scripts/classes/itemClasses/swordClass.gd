@@ -49,28 +49,40 @@ func _on_attack_cooldown_timeout():
 			swingTime = swingTime*-1
 			if swingTime == originalSwingTime:
 				swingTime = originalSwingTime
-				
+
+func dealDamage(area) -> Attack:
+	if elementEffect:
+		elementEffect.applyEffect(area, self)
+	
+	var attack = Attack.new()
+	attack.knockback_force = weaponKnockback
+	attack.hit_cooldown = originalSwingTime
+	attack.attack_position = global_position
+	
+	if playerRef is PlayerClass:
+		var attackMultiplierFromPlayer = playerRef.swordStrengthMultiplier*playerRef.attackStrengthMultiplier
+		attack.attack_damage = (weaponDamage)*attackMultiplierFromPlayer
+	else:
+		attack.attack_damage = (weaponDamage)
+		
+	return attack
+	
+func juiceEffects(area: Area2D):
+	var camera = get_parent().get_parent().get_node("Camera")
+	sword_hit_prt.set_emitting(true)
+	camera.randomStrength = 2
+	camera.apply_shake()
+	Global.frameFreeze(0.1, 1, area.get_parent().get_parent())
+
 func _on_sharp_part_area_entered(area: Area2D) -> void:
 	if isHeld == true:
 		if Swung == true:
 			#checks if while the sword is swung if its in an enemy
 			if area is HurtboxComponent:
-				if elementEffect:
-					elementEffect.applyEffect(area, self)
-				var attack = Attack.new()
-				attack.knockback_force = weaponKnockback
-				attack.hit_cooldown = originalSwingTime
-				attack.attack_position = global_position
 				
-				if playerRef is PlayerClass:
-					var attackMultiplierFromPlayer = playerRef.swordStrengthMultiplier*playerRef.attackStrengthMultiplier
-					attack.attack_damage = (weaponDamage)*attackMultiplierFromPlayer
-				else:
-					attack.attack_damage = (weaponDamage)
+				area.damage(dealDamage(area))
+				juiceEffects(area)
 				
-				var camera = get_parent().get_parent().get_node("Camera")
-				area.damage(attack)
-				sword_hit_prt.set_emitting(true)
-				camera.randomStrength = 2
-				camera.apply_shake()
-				Global.frameFreeze(0.1, 1, area.get_parent().get_parent())
+				if area.health_component.isDead:
+					KilledThing.emit(area.health_component.MaxHealthPoints)
+				

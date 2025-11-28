@@ -200,7 +200,7 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_f5c1u")
-weaponDamage = 50
+weaponDamage = 1
 originalSwingTime = 0.5
 
 [node name="ColShape" type="CollisionShape2D" parent="."]

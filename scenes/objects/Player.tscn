@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://brqqrkpvnybn1"]
+[gd_scene load_steps=31 format=3 uid="uid://brqqrkpvnybn1"]
 
 [ext_resource type="Script" uid="uid://ekhqkcb6o8y7" path="res://scripts/player/Player.gd" id="1_uvua7"]
 [ext_resource type="Shader" uid="uid://bgmem2bvyd36o" path="res://shaders/damageFlash.gdshader" id="1_vnarb"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cxgu4tqfwlwh3" path="res://scripts/player/states/idle.gd" id="8_5jm4c"]
 [ext_resource type="PackedScene" uid="uid://dqe40ukmew3og" path="res://scenes/componets/StaminaComponet.tscn" id="8_ulqmn"]
 [ext_resource type="Script" uid="uid://d2m2262s2t7g5" path="res://scripts/player/states/walking.gd" id="9_2i02n"]
+[ext_resource type="Script" uid="uid://cv5h6olt5nn2p" path="res://scripts/components/ExperienceComponent.gd" id="10_cu6h5"]
 [ext_resource type="PackedScene" uid="uid://bmh6hwcgqj3b6" path="res://scenes/ui/player_ui.tscn" id="12_ubpv3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ubpv3"]
@@ -445,13 +446,15 @@ _data = {
 &"idle": SubResource("Animation_5jm4c")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health_component") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health_component", "stamina_componet", "experience_component") groups=["Player"]]
 z_index = 1
 material = SubResource("ShaderMaterial_ubpv3")
 motion_mode = 1
 script = ExtResource("1_uvua7")
 state_machine = NodePath("LimboHSM")
 health_component = NodePath("Componets/HealthComponent")
+stamina_componet = NodePath("Componets/StaminaComponet")
+experience_component = NodePath("Componets/ExperienceHandler")
 
 [node name="PhysicsBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pbuog")
@@ -497,7 +500,7 @@ debug_color = Color(0.463259, 0.592475, 1.73271e-06, 0.42)
 [node name="Componets" type="Node2D" parent="."]
 
 [node name="HealthComponent" parent="Componets" node_paths=PackedStringArray("StateMachine", "Entity") instance=ExtResource("6_ltku5")]
-HealthPoints = 100
+HealthPoints = 100.0
 StateMachine = NodePath("../../LimboHSM")
 Entity = NodePath("../..")
 
@@ -509,6 +512,11 @@ shape = SubResource("CircleShape2D_e2ig8")
 debug_color = Color(0.955225, 0.213235, 0, 0.42)
 
 [node name="StaminaComponet" parent="Componets" instance=ExtResource("8_ulqmn")]
+
+[node name="ExperienceHandler" type="Node" parent="Componets" node_paths=PackedStringArray("playerRef")]
+script = ExtResource("10_cu6h5")
+playerRef = NodePath("../..")
+metadata/_custom_type_script = "uid://cv5h6olt5nn2p"
 
 [node name="Artifacts_Buffs" type="Node2D" parent="."]
 

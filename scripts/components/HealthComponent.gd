@@ -3,17 +3,18 @@ class_name HealthComponent extends Node
 const MAIN_MENU_UI = preload("res://scenes/ui/mainMenu_ui.tscn")
 @onready var damaged_timer: Timer = $damagedTimer
 
-@export var HealthPoints: int
+@export var HealthPoints: float
 @export var StateMachine: LimboHSM
 @export var Entity: CharacterBody2D
 var isDead = false
 
-#signal hitting
+@onready var MaxHealthPoints:float = HealthPoints
 
 func damage(attack: Attack):
 	HealthPoints -= attack.attack_damage
+	@warning_ignore("narrowing_conversion")
+	HealthPoints = clampi(HealthPoints, 0, MaxHealthPoints)
 	if HealthPoints <= 0:
-		HealthPoints = 0
 		dead()
 
 
@@ -29,4 +30,5 @@ func dead():
 			#SceneManager.change_scene(MAIN_MENU_UI.instantiate())
 			
 	elif Entity is not PlayerClass:
+		isDead = true
 		get_parent().get_parent().animation_player.play("Death")

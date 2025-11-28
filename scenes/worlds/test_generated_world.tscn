@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://7dr6gi3cgt0p"]
+[gd_scene load_steps=20 format=3 uid="uid://7dr6gi3cgt0p"]
 
 [ext_resource type="Script" uid="uid://b1m5siw5dw53i" path="res://scripts/generated_world.gd" id="1_fu8m5"]
+[ext_resource type="PackedScene" uid="uid://uptfo2tljehx" path="res://scenes/worlds/Areas/baseAreas/room_L_area.tscn" id="2_b10py"]
 [ext_resource type="Texture2D" uid="uid://dpqfke615sgyc" path="res://assets/sprites/tilesets/placeholder/normalMaps/worldTemplate_n.png" id="2_k0nfl"]
+[ext_resource type="PackedScene" uid="uid://bpqjvwe12xb8u" path="res://scenes/worlds/Areas/baseAreas/room_normal_area.tscn" id="3_srt61"]
 [ext_resource type="PackedScene" uid="uid://d0ftgocputrhw" path="res://scenes/ui/dynamicMusic.tscn" id="4_ad07o"]
 [ext_resource type="AudioStream" uid="uid://dhyhdpwdmghuh" path="res://assets/music/forestTheme1/practice97lofiLayer.mp3" id="4_k0nfl"]
 [ext_resource type="AudioStream" uid="uid://b1ykcycm5g6ve" path="res://assets/music/forestTheme1/practice97breakcoreLayer.mp3" id="5_finge"]
@@ -23,6 +25,7 @@
 
 [node name="TestGeneratedWorld" type="Node2D" node_paths=PackedStringArray("itemLootTable", "artifactLootTable")]
 script = ExtResource("1_fu8m5")
+roomsSpawning = Array[PackedScene]([ExtResource("2_b10py"), ExtResource("3_srt61")])
 tileSetTexture = ExtResource("2_k0nfl")
 floorTiles = SubResource("TileSetAtlasSource_k44os")
 wallTiles = SubResource("TileSetAtlasSource_k0nfl")

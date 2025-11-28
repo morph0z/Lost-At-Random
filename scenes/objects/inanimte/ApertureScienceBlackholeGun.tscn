@@ -211,6 +211,7 @@ sync_to_physics = false
 script = ExtResource("1_nvfqt")
 BULLET = ExtResource("2_qlc0j")
 bulletSize = Vector2(1, 1)
+itemRarity = 5
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(6.80218, 0.0521181)

@@ -216,7 +216,7 @@ libraries = {
 [node name="Components" type="Node2D" parent="."]
 
 [node name="HealthComponent" parent="Components" instance=ExtResource("3_80spk")]
-HealthPoints = 107317
+HealthPoints = 100000.0
 
 [node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("health_component") instance=ExtResource("4_pnib3")]
 health_component = NodePath("../HealthComponent")

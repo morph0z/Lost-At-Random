@@ -294,7 +294,7 @@ libraries = {
 [node name="Components" type="Node2D" parent="."]
 
 [node name="HealthComponent" parent="Components" node_paths=PackedStringArray("Entity") instance=ExtResource("3_11ysd")]
-HealthPoints = 2
+HealthPoints = 3.0
 Entity = NodePath("../..")
 
 [node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("health_component") instance=ExtResource("4_nx8p6")]

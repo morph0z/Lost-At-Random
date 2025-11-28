@@ -8,9 +8,9 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rvip8"]
 
-[sub_resource type="Resource" id="Resource_c8sf6"]
+[sub_resource type="Resource" id="Resource_3a48n"]
 script = ExtResource("2_55jx8")
-EffectStrength = 0.0
+EffectStrength = 1.0
 metadata/_custom_type_script = "uid://johao5i3fgdo"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo6jp"]
@@ -263,9 +263,10 @@ physics_material_override = SubResource("PhysicsMaterial_rvip8")
 constant_linear_velocity = Vector2(5, 0)
 sync_to_physics = false
 script = ExtResource("1_kdu4g")
-elementEffect = SubResource("Resource_c8sf6")
+elementEffect = SubResource("Resource_3a48n")
 weaponDamage = 5
 originalSwingTime = 0.5
+itemRarity = 7
 
 [node name="ColShape" type="CollisionShape2D" parent="."]
 position = Vector2(3, 1.45435e-05)

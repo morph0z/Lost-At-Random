@@ -29,17 +29,12 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 			#checks if while the sword is swung if its in an enemy
 			if area is bullet:
 				area.DestroyProjectile()
+				Global.frameFreeze(0.1, 1.5, area.get_parent().get_parent())
 				createParryBullet()
-			if area is HurtboxComponent:
-				var attack = Attack.new()
-				attack.attack_damage = weaponDamage
-				attack.knockback_force = weaponKnockback
-				attack.hit_cooldown = originalSwingTime
-				attack.attack_position = global_position
 				
-				var camera = get_parent().get_parent().get_node("Camera")
-				area.damage(attack)
-				sword_hit_prt.set_emitting(true)
-				camera.randomStrength = 2
-				camera.apply_shake()
-				Global.frameFreeze(0.1, 1, area.get_parent().get_parent())
+			if area is HurtboxComponent:
+				area.damage(dealDamage(area))
+				juiceEffects(area)
+				
+				if area.health_component.isDead:
+					KilledThing.emit(area.health_component.MaxHealthPoints)

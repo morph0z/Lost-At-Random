@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfium7e7b5yep"]
+[gd_scene load_steps=5 format=3 uid="uid://yejxfl8kf11n"]
 
-[ext_resource type="Script" uid="uid://hlf4om5wcswx" path="res://scripts/weapons/ammo/BasicBullet.gd" id="1_cpmwd"]
-[ext_resource type="Texture2D" uid="uid://dksc7sq55l754" path="res://assets/sprites/items/BasicBullet.png" id="2_xq32y"]
+[ext_resource type="Script" uid="uid://bagwpknuvxhgt" path="res://scripts/weapons/ammo/GlassShard.gd" id="1_3ib7w"]
+[ext_resource type="Texture2D" uid="uid://csmvdwlen7foh" path="res://assets/sprites/items/GlassShard.png" id="2_3ib7w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5h6uv"]
 radius = 69.9997
@@ -10,9 +10,8 @@ height = 300.0
 [sub_resource type="Gradient" id="Gradient_d3jb3"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="BasicBullet" type="Area2D" node_paths=PackedStringArray("visual")]
-script = ExtResource("1_cpmwd")
-visual = NodePath("Polygon2D2")
+[node name="GlassShard" type="Area2D"]
+script = ExtResource("1_3ib7w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-26, 1.59162e-12)
@@ -23,8 +22,8 @@ debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="Polygon2D2" type="Sprite2D" parent="."]
 position = Vector2(-22, 0)
-rotation = 1.57288
-texture = ExtResource("2_xq32y")
+rotation = -0.000997424
+texture = ExtResource("2_3ib7w")
 
 [node name="ProjectileTrail" type="CPUParticles2D" parent="."]
 position = Vector2(-38, 0)

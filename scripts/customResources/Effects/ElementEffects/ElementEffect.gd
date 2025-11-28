@@ -21,8 +21,9 @@ func doEffect(_Strength:int) -> void:
 	assert(false, "This method must be overridden in a subclass")
 
 func createParticles(entity:CharacterBody2D, particlePackedScene:PackedScene) -> CPUParticles2D:
-	var Prt = particlePackedScene.instantiate()
+	var Prt:attachParticleClass = particlePackedScene.instantiate()
 	Prt.scale = Vector2(0.5, 0.5)
 	Prt.entityAttached = entity
+	Prt.position = entity.position
 	entity.get_tree().get_root().add_child(Prt)
 	return Prt

@@ -184,6 +184,7 @@ sync_to_physics = false
 script = ExtResource("1_b8geh")
 weaponDamage = -50
 originalSwingTime = 2.0
+itemRarity = 2
 
 [node name="ColShape" type="CollisionShape2D" parent="." groups=["PickableItem", "Sword"]]
 position = Vector2(7, 2.90871e-05)
