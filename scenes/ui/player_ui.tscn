@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmh6hwcgqj3b6"]
+[gd_scene load_steps=9 format=3 uid="uid://bmh6hwcgqj3b6"]
 
 [ext_resource type="Script" uid="uid://c2l3vqbiti4lf" path="res://scripts/ui/player_ui.gd" id="1_l260u"]
+[ext_resource type="Theme" uid="uid://c71tfod88q3h4" path="res://BaseTheme.tres" id="2_fatqr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4ogp"]
 bg_color = Color(0.929074, 0.131237, 3.85046e-07, 1)
@@ -18,7 +19,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sf84"]
-bg_color = Color(0.82648, 0.575823, 5.77569e-07, 1)
+bg_color = Color(0.68, 0.612, 0, 1)
 corner_radius_top_left = 23
 corner_radius_top_right = 8
 corner_radius_bottom_right = 9
@@ -32,7 +33,23 @@ corner_radius_top_left = 20
 corner_radius_top_right = 5
 corner_radius_bottom_right = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1afs1"]
+bg_color = Color(0.6624, 0.94016, 0.96, 1)
+corner_radius_top_left = 23
+corner_radius_top_right = 8
+corner_radius_bottom_right = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fatqr"]
+bg_color = Color(0.59809, 0.869376, 1, 1)
+border_width_left = 9
+border_width_top = 8
+border_color = Color(1.34766e-06, 0.567331, 0.715465, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 5
+corner_radius_bottom_right = 6
+
 [node name="PlayerUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l260u")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="."]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 61.0
@@ -61,6 +78,19 @@ offset_bottom = 122.0
 scale = Vector2(1, -0.350682)
 theme_override_styles/background = SubResource("StyleBoxFlat_2sf84")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jg20v")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
+[node name="XpBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 20.0
+offset_right = 615.0
+offset_bottom = 47.0
+scale = Vector2(2.27401, -0.788023)
+theme_override_styles/background = SubResource("StyleBoxFlat_1afs1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fatqr")
 max_value = 50.0
 value = 50.0
 show_percentage = false
@@ -85,7 +115,7 @@ offset_right = 0.432007
 offset_bottom = -0.160002
 text = "Fps:"
 
-[node name="Label" type="Label" parent="."]
+[node name="HP" type="Label" parent="."]
 layout_mode = 0
 offset_left = 39.0
 offset_top = 49.0
@@ -93,3 +123,76 @@ offset_right = 79.0
 offset_bottom = 72.0
 text = "HP
 "
+
+[node name="PauseMenu" type="Panel" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -305.0
+offset_right = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonArrangement" type="Control" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTree" type="Button" parent="PauseMenu/ButtonArrangement"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -12.0
+offset_right = 70.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fatqr")
+text = "Skill Tree"
+
+[node name="Return" type="Button" parent="PauseMenu/ButtonArrangement"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = 75.0
+offset_right = 102.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fatqr")
+text = "Return To Menu"
+
+[node name="SkillTree" type="Panel" parent="PauseMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -271.0
+offset_right = -271.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="PauseMenu/ButtonArrangement/SkillTree" to="." method="_on_skill_tree_pressed"]
+[connection signal="pressed" from="PauseMenu/ButtonArrangement/Return" to="." method="_on_return_pressed"]

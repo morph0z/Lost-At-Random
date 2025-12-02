@@ -23,6 +23,9 @@ func _on_area_entered(area: Area2D) -> void:
 		#adds particles
 		Projectile_Gone.instantiate()
 		#destroys the bullet if the amount of things gone through is equal to the peircing level
+		if area.health_component.isDead:
+			fromGun.KilledThing.emit(area.health_component.MaxHealthPoints)
+		
 		if goneThrough == peircingLevel:
 			DestroyProjectile()
 

@@ -7,8 +7,11 @@ func _input(_event):
 	#Exit to main menu
 	if SceneManager._current_scene.name != MAIN_MENU_UI.instantiate().name:
 		if Input.is_action_pressed("Home"):
-			SceneManager.change_scene(MAIN_MENU_UI)
-	
+			returnToMenu()
+
+func returnToMenu() -> void:
+	SceneManager.change_scene(MAIN_MENU_UI)
+
 #NOTE fix the damage flash effect
 func frameFreeze(timeScale, duration, flash):
 	Engine.time_scale = timeScale*0.5

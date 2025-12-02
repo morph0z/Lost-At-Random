@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://brqqrkpvnybn1"]
+[gd_scene load_steps=32 format=3 uid="uid://brqqrkpvnybn1"]
 
 [ext_resource type="Script" uid="uid://ekhqkcb6o8y7" path="res://scripts/player/Player.gd" id="1_uvua7"]
 [ext_resource type="Shader" uid="uid://bgmem2bvyd36o" path="res://shaders/damageFlash.gdshader" id="1_vnarb"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dqe40ukmew3og" path="res://scenes/componets/StaminaComponet.tscn" id="8_ulqmn"]
 [ext_resource type="Script" uid="uid://d2m2262s2t7g5" path="res://scripts/player/states/walking.gd" id="9_2i02n"]
 [ext_resource type="Script" uid="uid://cv5h6olt5nn2p" path="res://scripts/components/ExperienceComponent.gd" id="10_cu6h5"]
+[ext_resource type="Script" uid="uid://d246ryx1dskbc" path="res://scripts/components/SkillpointComponent.gd" id="11_wriqu"]
 [ext_resource type="PackedScene" uid="uid://bmh6hwcgqj3b6" path="res://scenes/ui/player_ui.tscn" id="12_ubpv3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ubpv3"]
@@ -446,7 +447,7 @@ _data = {
 &"idle": SubResource("Animation_5jm4c")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health_component", "stamina_componet", "experience_component") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "health_component", "stamina_componet", "experience_component", "Gui_component") groups=["Player"]]
 z_index = 1
 material = SubResource("ShaderMaterial_ubpv3")
 motion_mode = 1
@@ -455,6 +456,7 @@ state_machine = NodePath("LimboHSM")
 health_component = NodePath("Componets/HealthComponent")
 stamina_componet = NodePath("Componets/StaminaComponet")
 experience_component = NodePath("Componets/ExperienceHandler")
+Gui_component = NodePath("CanvasLayer/PlayerUI")
 
 [node name="PhysicsBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pbuog")
@@ -513,10 +515,15 @@ debug_color = Color(0.955225, 0.213235, 0, 0.42)
 
 [node name="StaminaComponet" parent="Componets" instance=ExtResource("8_ulqmn")]
 
-[node name="ExperienceHandler" type="Node" parent="Componets" node_paths=PackedStringArray("playerRef")]
+[node name="ExperienceHandler" type="Node" parent="Componets" node_paths=PackedStringArray("playerRef", "skillPointComponent")]
 script = ExtResource("10_cu6h5")
 playerRef = NodePath("../..")
+skillPointComponent = NodePath("../SkillpointHandler")
 metadata/_custom_type_script = "uid://cv5h6olt5nn2p"
+
+[node name="SkillpointHandler" type="Node" parent="Componets"]
+script = ExtResource("11_wriqu")
+metadata/_custom_type_script = "uid://d246ryx1dskbc"
 
 [node name="Artifacts_Buffs" type="Node2D" parent="."]
 
@@ -556,7 +563,11 @@ animation = &"Walking"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlayerUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("12_ubpv3")]
+[node name="PlayerUI" parent="CanvasLayer" node_paths=PackedStringArray("player", "healthComp", "staminaComp", "experienceComp", "skillpointComp") instance=ExtResource("12_ubpv3")]
 player = NodePath("../..")
+healthComp = NodePath("../../Componets/HealthComponent")
+staminaComp = NodePath("../../Componets/StaminaComponet")
+experienceComp = NodePath("../../Componets/ExperienceHandler")
+skillpointComp = NodePath("../../Componets/SkillpointHandler")
 
 [connection signal="area_entered" from="PickUpZone" to="." method="_on_pick_up_zone_area_entered"]

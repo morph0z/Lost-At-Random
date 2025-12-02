@@ -24,6 +24,10 @@ func _on_area_entered(area: Area2D) -> void:
 		if goneThrough == peircingLevel:
 			DestroyProjectile()
 			
+		if area.health_component.isDead:
+			fromBow.KilledThing.emit(area.health_component.MaxHealthPoints)
+
+	
 ##Called when arrow enters another body			
 func _on_body_entered(_body: Node2D) -> void:
 	pass

@@ -31,6 +31,7 @@ signal itemPicked
 @export var health_component:HealthComponent
 @export var stamina_componet: StaminaComponent
 @export var experience_component: ExperienceHandler
+@export var Gui_component: PlayerGui
 #-------------------------------------------------------------------------------
 
 #settings
@@ -49,6 +50,7 @@ var SPEED = walkSpeed
 @export var scytheStrengthMultiplier:float = 1
 @export var bowStrengthMultiplier:float = 1
 @export var gunStrengthMultiplier:float = 1
+@export var experienceMultiplier:float = 1
 #var EnemyStrenghtMultiplyer = 1
 var EntityHealth:float
 
@@ -171,7 +173,7 @@ func _physics_process(_delta):
 		move_and_slide()	
 	
 #-------------------------------------------------------------------------------	
-
+var setupOnce:bool = false
 #for checking if an area2d node enetered the pickupzone
 func _on_pick_up_zone_area_entered(area):
 	#checks if it has the name of item pick
@@ -182,6 +184,9 @@ func _on_pick_up_zone_area_entered(area):
 			if area.get_parent().is_in_group("PickableItem"):
 				#procceds to reparent the item and sets the item to being held
 				var Pickitem:item = area.get_parent()
+				if setupOnce == false:
+					experience_component.start_up()
+					setupOnce = true
 				itemPicked.emit(Pickitem)
 				Pickitem.isHeld = true
 				Pickitem.checkIfHeld()

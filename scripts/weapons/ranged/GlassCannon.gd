@@ -39,8 +39,8 @@ func createGlassShard(shardPosition:Vector2, shardRotation:float):
 	get_tree().get_root().call_deferred("add_child", ShatterPieceIns)
 
 func _on_weapon_shot():
+	randomize()
 	var randNum = randi() % 5
-	print(randNum)
 	if randNum == 3:
 		for i:Node2D in shatter_points.get_children():
 			createGlassShard(i.global_position, i.global_rotation)

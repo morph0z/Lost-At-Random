@@ -72,3 +72,6 @@ func _on_sharp_part_area_entered(area: Area2D) -> void:
 				camera.randomStrength = weaponDamage
 				camera.apply_shake()
 				Global.frameFreeze(0.1, 1, area.get_parent().get_parent())
+				
+				if area.health_component.isDead:
+					KilledThing.emit(area.health_component.MaxHealthPoints)
