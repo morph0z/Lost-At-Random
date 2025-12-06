@@ -1,7 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmh6hwcgqj3b6"]
+[gd_scene load_steps=36 format=3 uid="uid://bmh6hwcgqj3b6"]
 
 [ext_resource type="Script" uid="uid://c2l3vqbiti4lf" path="res://scripts/ui/player_ui.gd" id="1_l260u"]
 [ext_resource type="Theme" uid="uid://c71tfod88q3h4" path="res://BaseTheme.tres" id="2_fatqr"]
+[ext_resource type="Script" uid="uid://bfw3ldkpbv6r1" path="res://addons/worldmap_builder/nodes/worldmap_view.gd" id="2_jg20v"]
+[ext_resource type="Script" uid="uid://dgvxfl64wub1n" path="res://addons/worldmap_builder/nodes/worldmap_graph.gd" id="3_fatqr"]
+[ext_resource type="Texture2D" uid="uid://dfwrk73ka6j8x" path="res://assets/sprites/ui/skilltree/skilltree_borders.png" id="4_0cbkn"]
+[ext_resource type="Script" uid="uid://df3uck0ooxxqy" path="res://addons/worldmap_builder/resource_types/wordmap_style.gd" id="4_rtpfr"]
+[ext_resource type="Script" uid="uid://cl2de3nbgv2qg" path="res://addons/worldmap_builder/resource_types/worldmap_node_data.gd" id="5_1afs1"]
+[ext_resource type="Texture2D" uid="uid://cyh4fuqlvtl8m" path="res://assets/sprites/ui/skilltree/SkillIcons.png" id="6_g7v3g"]
+[ext_resource type="Script" uid="uid://ygn1skebvdlf" path="res://scripts/ui/InputHandler.gd" id="8_y8ff4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4ogp"]
 bg_color = Color(0.929074, 0.131237, 3.85046e-07, 1)
@@ -48,6 +55,163 @@ corner_radius_top_left = 20
 corner_radius_top_right = 5
 corner_radius_bottom_right = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7v3g"]
+bg_color = Color(0.219397, 0.100314, 0.47592, 1)
+border_width_left = 10
+border_width_top = 10
+border_color = Color(0.134178, 0.0527, 0.31, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vql2y"]
+atlas = ExtResource("4_0cbkn")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w5rdv"]
+load_path = "res://.godot/imported/skilltree_borders.png-b022ab63f57155a8a0a421454feb26f1.ctex"
+
+[sub_resource type="Resource" id="Resource_wm4y2"]
+resource_name = "Active"
+script = ExtResource("4_rtpfr")
+icon_modulate = Color(1, 1, 1, 1)
+icon_border_modulate = Color(1, 1, 1, 1)
+connection_modulate = Color(1, 1, 1, 1)
+icon_borders = Array[Texture2D]([SubResource("AtlasTexture_vql2y")])
+straight_tex = SubResource("CompressedTexture2D_w5rdv")
+straight_tex_region = Rect2(0, 8, 128, 8)
+straight_tex_repeat = false
+priority = -5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr8m7"]
+atlas = ExtResource("4_0cbkn")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6ivhx"]
+load_path = "res://.godot/imported/skilltree_borders.png-b022ab63f57155a8a0a421454feb26f1.ctex"
+
+[sub_resource type="Resource" id="Resource_yrfg3"]
+resource_name = "Can Activate"
+script = ExtResource("4_rtpfr")
+icon_modulate = Color(1, 1, 1, 1)
+icon_border_modulate = Color(1, 1, 1, 1)
+connection_modulate = Color(1, 1, 1, 1)
+icon_borders = Array[Texture2D]([SubResource("AtlasTexture_pr8m7")])
+straight_tex = SubResource("CompressedTexture2D_6ivhx")
+straight_tex_region = Rect2(0, 16, 128, 8)
+straight_tex_repeat = false
+priority = -3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm6gh"]
+atlas = ExtResource("4_0cbkn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="Resource" id="Resource_ayl2b"]
+resource_name = "Inactive"
+script = ExtResource("4_rtpfr")
+icon_modulate = Color(0.275248, 0.324215, 0.424479, 1)
+icon_border_modulate = Color(1, 1, 1, 1)
+connection_modulate = Color(1, 1, 1, 1)
+icon_borders = Array[Texture2D]([SubResource("AtlasTexture_wm6gh")])
+straight_tex = ExtResource("4_0cbkn")
+straight_tex_region = Rect2(0, 0, 128, 8)
+straight_tex_repeat = false
+priority = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8ff4"]
+atlas = ExtResource("6_g7v3g")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_0cbkn"]
+script = ExtResource("5_1afs1")
+id = &""
+texture = SubResource("AtlasTexture_y8ff4")
+color = Color(1, 1, 1, 1)
+name = "Dash Ability"
+desc = "Small Dash"
+size_tier = 0
+cost = 1
+dependency_min_state = 1
+tags = Array[StringName]([])
+data = Array[Resource]([])
+metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm4y2"]
+atlas = ExtResource("6_g7v3g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_llniq"]
+script = ExtResource("5_1afs1")
+id = &""
+texture = SubResource("AtlasTexture_wm4y2")
+color = Color(1, 1, 1, 1)
+name = "Sword Damage"
+desc = "Small boost in sword damage."
+size_tier = 0
+cost = 1
+dependency_min_state = 1
+tags = Array[StringName]([])
+data = Array[Resource]([])
+metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayl2b"]
+atlas = ExtResource("6_g7v3g")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_yh683"]
+script = ExtResource("5_1afs1")
+id = &""
+texture = SubResource("AtlasTexture_ayl2b")
+color = Color(1, 1, 1, 1)
+name = "Bow Damage"
+desc = "Small boost in bow damage."
+size_tier = 0
+cost = 1
+dependency_min_state = 1
+tags = Array[StringName]([])
+data = Array[Resource]([])
+metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjiww"]
+atlas = ExtResource("6_g7v3g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_gbuk3"]
+script = ExtResource("5_1afs1")
+id = &""
+texture = SubResource("AtlasTexture_bjiww")
+color = Color(1, 1, 1, 1)
+name = "Gun Damage"
+desc = "Small boost in gun damage."
+size_tier = 0
+cost = 1
+dependency_min_state = 1
+tags = Array[StringName]([])
+data = Array[Resource]([])
+metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7mll"]
+atlas = ExtResource("6_g7v3g")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="Resource" id="Resource_snth3"]
+script = ExtResource("5_1afs1")
+id = &""
+texture = SubResource("AtlasTexture_l7mll")
+color = Color(1, 1, 1, 1)
+name = "Scythe Damage"
+desc = "Small boost in scythe damage."
+size_tier = 0
+cost = 1
+dependency_min_state = 1
+tags = Array[StringName]([])
+data = Array[Resource]([])
+metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
+
+[sub_resource type="LabelSettings" id="LabelSettings_y8ff4"]
+font_size = 8
+
 [node name="PlayerUI" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -56,6 +220,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_l260u")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
@@ -126,7 +291,6 @@ text = "HP
 
 [node name="PauseMenu" type="Panel" parent="."]
 process_mode = 2
-visible = false
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -136,6 +300,7 @@ offset_left = -305.0
 offset_right = 308.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_fatqr")
 
 [node name="ButtonArrangement" type="Control" parent="PauseMenu"]
 layout_mode = 1
@@ -159,9 +324,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -70.0
-offset_top = -12.0
+offset_top = 42.0
 offset_right = 70.0
-offset_bottom = 12.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_fatqr")
@@ -175,16 +340,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -102.0
-offset_top = 75.0
+offset_top = -15.0
 offset_right = 102.0
-offset_bottom = 99.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_fatqr")
 text = "Return To Menu"
 
 [node name="SkillTree" type="Panel" parent="PauseMenu"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,6 +357,67 @@ offset_left = -271.0
 offset_right = -271.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_fatqr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7v3g")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/SkillTree"]
+layout_mode = 0
+offset_right = 565.0
+offset_bottom = 646.0
+
+[node name="WorldmapView" type="Control" parent="PauseMenu/SkillTree/MarginContainer" node_paths=PackedStringArray("initial_item")]
+custom_minimum_size = Vector2(309, 287)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_jg20v")
+initial_item = NodePath("WorldmapGraph")
+style_active = SubResource("Resource_wm4y2")
+style_can_activate = SubResource("Resource_yrfg3")
+style_inactive = SubResource("Resource_ayl2b")
+metadata/_custom_type_script = "uid://bfw3ldkpbv6r1"
+
+[node name="WorldmapGraph" type="Node2D" parent="PauseMenu/SkillTree/MarginContainer/WorldmapView"]
+script = ExtResource("3_fatqr")
+node_grid_snap = 1
+node_count = 5
+node_0/data = SubResource("Resource_0cbkn")
+node_0/position = Vector2(137, 137)
+node_1/data = SubResource("Resource_llniq")
+node_1/position = Vector2(16, 50)
+node_2/data = SubResource("Resource_yh683")
+node_2/position = Vector2(293, 135)
+node_3/data = SubResource("Resource_gbuk3")
+node_3/position = Vector2(244, 16)
+node_4/data = SubResource("Resource_snth3")
+node_4/position = Vector2(32, 271)
+connection_count = 4
+connection_0/nodes = Vector2i(0, 1)
+connection_1/nodes = Vector2i(0, 2)
+connection_2/nodes = Vector2i(0, 3)
+connection_3/nodes = Vector2i(0, 4)
+metadata/_custom_type_script = "uid://dgvxfl64wub1n"
+
+[node name="InputHandler" type="Node" parent="PauseMenu/SkillTree" node_paths=PackedStringArray("skill_node_text", "skillTree")]
+script = ExtResource("8_y8ff4")
+skill_node_text = NodePath("../SkillNodeDescription")
+skillTree = NodePath("../MarginContainer/WorldmapView")
+
+[node name="SkillPoints" type="Label" parent="PauseMenu/SkillTree"]
+layout_mode = 0
+offset_left = 521.0
+offset_top = 32.0
+offset_right = 561.0
+offset_bottom = 50.0
+
+[node name="SkillNodeDescription" type="Label" parent="PauseMenu/SkillTree"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 18.0
+label_settings = SubResource("LabelSettings_y8ff4")
 
 [connection signal="pressed" from="PauseMenu/ButtonArrangement/SkillTree" to="." method="_on_skill_tree_pressed"]
 [connection signal="pressed" from="PauseMenu/ButtonArrangement/Return" to="." method="_on_return_pressed"]
+[connection signal="node_gui_input" from="PauseMenu/SkillTree/MarginContainer/WorldmapView" to="PauseMenu/SkillTree/InputHandler" method="_on_worldmap_view_node_gui_input"]
+[connection signal="node_mouse_entered" from="PauseMenu/SkillTree/MarginContainer/WorldmapView" to="PauseMenu/SkillTree/InputHandler" method="_on_worldmap_view_node_mouse_entered"]
+[connection signal="node_mouse_exited" from="PauseMenu/SkillTree/MarginContainer/WorldmapView" to="PauseMenu/SkillTree/InputHandler" method="_on_worldmap_view_node_mouse_exited"]

@@ -17,6 +17,8 @@ class_name PlayerGui
 @onready var xp_bar: ProgressBar = $XpBar
 
 @onready var pause_menu: Panel = $PauseMenu
+@onready var skill_tree: Panel = $PauseMenu/SkillTree
+@onready var skill_points: Label = $PauseMenu/SkillTree/SkillPoints
 
 @export_group("Settings")
 @export var debug:bool = false
@@ -38,12 +40,12 @@ func _process(delta):
 		smoothstepIncXp = 0
 
 	stamina_bar.value = staminaComp.Stamina
-
+	skill_points.text = "Skill Points: "+str(experienceComp.skillPointComponent.getSkillPoints())
 	#xp_bar.max_value = player.experience_component.xpNeededForNextLevel
 	if debug:
 		fps_counter.visible = debug
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("MenuEscape"):
 		if !isPauseMenuOpen():
 			openPauseMenu()
@@ -55,7 +57,7 @@ func _on_return_pressed() -> void:
 	Global.returnToMenu()
 
 func _on_skill_tree_pressed() -> void:
-	pass # Replace with function body.
+	skill_tree.visible = true
 
 func isPauseMenuOpen() -> bool:
 	return pause_menu.visible
@@ -66,4 +68,5 @@ func openPauseMenu() -> void:
 	
 func closePauseMenu() -> void:
 	pause_menu.visible = false
+	skill_tree.visible = false
 	get_tree().paused = false

@@ -1,4 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c71tfod88q3h4"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c71tfod88q3h4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wuiyi"]
+bg_color = Color(0.120735, 0.000153922, 0.330274, 1)
+border_width_left = 10
+border_width_top = 20
+border_color = Color(0.202365, 0.000393325, 0.505206, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 100
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wykvj"]
 
@@ -15,6 +24,7 @@ Label/font_sizes/font_size = 18
 LineEdit/constants/outline_size = 2
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_top = 10
+Panel/styles/panel = SubResource("StyleBoxFlat_wuiyi")
 TabBar/colors/font_hovered_color = Color(0.803922, 0.352941, 0.0901961, 1)
 TabBar/colors/font_selected_color = Color(0.184314, 0.537255, 0.611765, 1)
 TabBar/styles/button_highlight = SubResource("StyleBoxFlat_wykvj")

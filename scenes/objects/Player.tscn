@@ -516,13 +516,16 @@ debug_color = Color(0.955225, 0.213235, 0, 0.42)
 [node name="StaminaComponet" parent="Componets" instance=ExtResource("8_ulqmn")]
 
 [node name="ExperienceHandler" type="Node" parent="Componets" node_paths=PackedStringArray("playerRef", "skillPointComponent")]
+process_mode = 3
 script = ExtResource("10_cu6h5")
 playerRef = NodePath("../..")
 skillPointComponent = NodePath("../SkillpointHandler")
 metadata/_custom_type_script = "uid://cv5h6olt5nn2p"
 
 [node name="SkillpointHandler" type="Node" parent="Componets"]
+process_mode = 3
 script = ExtResource("11_wriqu")
+debug = true
 metadata/_custom_type_script = "uid://d246ryx1dskbc"
 
 [node name="Artifacts_Buffs" type="Node2D" parent="."]
