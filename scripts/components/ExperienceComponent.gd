@@ -11,6 +11,9 @@ var xpNeededForNextLevel:float = ((level*sqrt(level))/25)*100
 var thingHealth:int
 var connectOnce = false
 
+signal experienceChanged(newExp:float)
+signal levelChanged(newLevel:int)
+
 func start_up() -> void:
 	playerRef.itemPicked.connect(_on_item_picked)
 	connectOnce = false
@@ -26,11 +29,12 @@ func increaseLevel(amount:int, override:bool = false):
 		level += amount
 		xpNeededForNextLevel = ((level*sqrt(level))/25)*100
 		skillPointComponent.increaseSkillPoints(1)
+		levelChanged.emit(level)
 
 func _on_killed_thing(Health:int):
 	xp += (Health*2)*playerRef.experienceMultiplier
 	xp = clampf(xp, 0, xpNeededForNextLevel)
-	
+	experienceChanged.emit(xp)
 	if debug:
 		print(str(xp) + " xp")
 		print(str(level) + " level")

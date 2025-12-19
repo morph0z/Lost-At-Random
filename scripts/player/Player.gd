@@ -24,6 +24,11 @@ class_name PlayerClass
 #--------------------------------------------------------------------------------
 
 signal itemPicked 
+signal playerHealthChanged
+signal playerStaminaChanged
+signal playerExpChanged
+signal playerLevelChanged
+signal playerSkillPointChanged
 
 #componets
 @export_group("Components")
@@ -215,3 +220,23 @@ func setWalking():
 	state_machine.change_active_state(walking_state)
 	sprint_dust.get_child(0).set_emitting(false)
 	SPEED = walkSpeed
+
+
+func _on_health_component_health_changed(_newHealth: float) -> void:
+	playerHealthChanged.emit()
+
+
+func _on_stamina_componet_stamina_changed(_newStamina: float) -> void:
+	playerStaminaChanged.emit()
+
+
+func _on_experience_handler_experience_changed(_newExp: float) -> void:
+	playerExpChanged.emit()
+
+
+func _on_experience_handler_level_changed(_newLevel: int) -> void:
+	playerLevelChanged.emit()
+
+
+func _on_skillpoint_handler_skill_point_changed(_newSkillPoints: int) -> void:
+	playerSkillPointChanged.emit()

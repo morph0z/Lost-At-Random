@@ -10,10 +10,13 @@ var isDead = false
 
 @onready var MaxHealthPoints:float = HealthPoints
 
+signal healthChanged(newHealth:float)
+
 func damage(attack: Attack):
 	HealthPoints -= attack.attack_damage
 	@warning_ignore("narrowing_conversion")
 	HealthPoints = clampi(HealthPoints, 0, MaxHealthPoints)
+	healthChanged.emit(HealthPoints)
 	if HealthPoints <= 0:
 		dead()
 

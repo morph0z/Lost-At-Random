@@ -12,7 +12,7 @@ class_name PlayerGui
 
 @onready var fps_counter: Label = $"Fps Counter"
 
-@onready var progress_bar = $HealthBar
+@onready var health_bar = $HealthBar
 @onready var stamina_bar: ProgressBar = $StaminaBar
 @onready var xp_bar: ProgressBar = $XpBar
 
@@ -23,26 +23,15 @@ class_name PlayerGui
 @export_group("Settings")
 @export var debug:bool = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-var smoothstepIncHealth:int = 0
-var smoothstepIncXp:int = 0
-func _process(delta):
-	fps_counter.set_text("FPS: "+ str(Engine.get_frames_per_second()))
+func _ready() -> void:
+	xp_bar.value = 0
 	
-	smoothstepIncHealth += 1
-	progress_bar.value = move_toward(progress_bar.value, healthComp.HealthPoints, smoothstepIncHealth*delta)
-	if healthComp.HealthPoints == progress_bar.value:
-		smoothstepIncHealth = 0
-
-	smoothstepIncXp += 1
-	xp_bar.value = move_toward(xp_bar.value,  experienceComp.xp, smoothstepIncXp*delta) 
-	if experienceComp.xp == progress_bar.value:
-		smoothstepIncXp = 0
-
+func _process(_delta):
 	stamina_bar.value = staminaComp.Stamina
 	skill_points.text = "Skill Points: "+str(experienceComp.skillPointComponent.getSkillPoints())
-	#xp_bar.max_value = player.experience_component.xpNeededForNextLevel
+	
 	if debug:
+		fps_counter.set_text("FPS: "+ str(Engine.get_frames_per_second()))
 		fps_counter.visible = debug
 
 func _input(_event: InputEvent) -> void:
@@ -70,3 +59,19 @@ func closePauseMenu() -> void:
 	pause_menu.visible = false
 	skill_tree.visible = false
 	get_tree().paused = false
+
+
+func _on_player_player_health_changed() -> void:
+	var healthBarTween:Tween = get_tree().create_tween()
+	healthBarTween.tween_property(health_bar, "value", healthComp.HealthPoints, 1)
+	healthBarTween.set_ease(Tween.EASE_OUT)
+	healthBarTween.set_trans(Tween.TRANS_EXPO)
+
+func _on_player_player_exp_changed() -> void:
+	var expBarTween:Tween = get_tree().create_tween()
+	expBarTween.tween_property(xp_bar, "value", experienceComp.xp, 1)
+	expBarTween.set_ease(Tween.EASE_OUT)
+	expBarTween.set_trans(Tween.TRANS_EXPO)
+
+func _on_player_player_level_changed() -> void:
+	xp_bar.max_value = player.experience_component.xpNeededForNextLevel

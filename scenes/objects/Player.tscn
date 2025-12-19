@@ -573,4 +573,12 @@ staminaComp = NodePath("../../Componets/StaminaComponet")
 experienceComp = NodePath("../../Componets/ExperienceHandler")
 skillpointComp = NodePath("../../Componets/SkillpointHandler")
 
+[connection signal="playerExpChanged" from="." to="CanvasLayer/PlayerUI" method="_on_player_player_exp_changed"]
+[connection signal="playerHealthChanged" from="." to="CanvasLayer/PlayerUI" method="_on_player_player_health_changed"]
+[connection signal="playerLevelChanged" from="." to="CanvasLayer/PlayerUI" method="_on_player_player_level_changed"]
 [connection signal="area_entered" from="PickUpZone" to="." method="_on_pick_up_zone_area_entered"]
+[connection signal="healthChanged" from="Componets/HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="staminaChanged" from="Componets/StaminaComponet" to="." method="_on_stamina_componet_stamina_changed"]
+[connection signal="experienceChanged" from="Componets/ExperienceHandler" to="." method="_on_experience_handler_experience_changed"]
+[connection signal="levelChanged" from="Componets/ExperienceHandler" to="." method="_on_experience_handler_level_changed"]
+[connection signal="skillPointChanged" from="Componets/SkillpointHandler" to="." method="_on_skillpoint_handler_skill_point_changed"]

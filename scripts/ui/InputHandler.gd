@@ -10,6 +10,16 @@ var nodeCost:String
 
 signal skillPurchased(resource)
 
+func _ready() -> void:
+	var nodes:Array =  skillTree.get_all_nodes().keys()
+	var nodeStates:Array = skillTree.get_all_nodes().values()
+	print(nodes[1])
+	#print(skillTree.initial_item.get_node_data(nodes[1]))
+	for i in nodeStates.size():
+		if nodeStates[i] == 0:
+			#skillTree.set_node_style_override(skillTree.initial_item, nodes[i], skillTree.style_can_activate)
+			pass
+
 @warning_ignore("unused_parameter")
 func _on_worldmap_view_node_mouse_entered(path: NodePath, node_in_path: int, resource: WorldmapNodeData) -> void:
 	nodeName = resource.name
@@ -31,10 +41,8 @@ func _on_worldmap_view_node_gui_input(event: InputEvent, path: NodePath, node_in
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
+			print(str(path)+" "+str(node_in_path))
 			if player_ui.skillpointComp.getSkillPoints() >= resource.cost:
-				if skillTree.get_node_state(path, node_in_path) == 0:
-					print("unavil")
-					skillTree.set_node_style_override(path, node_in_path, skillTree.style_inactive)
 				if skillTree.get_node_state(path, node_in_path) == 1:
 					player_ui.skillpointComp.reduceSkillPoints(resource.cost)
 					skillPurchased.emit(resource)

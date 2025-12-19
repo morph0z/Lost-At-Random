@@ -19,6 +19,7 @@ var funProperties = {
 
 func createBullet():
 	var BulletIns = SWORD_BLASTER_BULLET.instantiate()
+	BulletIns.fromGun = self
 	BulletIns.set_scale(Vector2(0.6, 0.6))
 	#sets the damage, position and rotation of the projectile
 	BulletIns.bulletDamage = 1*(chargeLevel*0.1)

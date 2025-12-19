@@ -5,7 +5,7 @@ class_name bullet
 ##The ammount of damage done by the bullet (usally set by the weapon shooting it)
 var bulletDamage:float
 var elementEffect:ElementEffect
-var fromGun:gun
+var fromGun:item
 
 ##Called when bullet enters an area	
 func _on_area_entered(area: Area2D) -> void:

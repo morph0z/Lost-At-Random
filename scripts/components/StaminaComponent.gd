@@ -7,6 +7,8 @@ class_name StaminaComponent extends Node
 var Stamina = OriginalStamina
 var canUseStamina = true
 
+signal staminaChanged(newStamina:float)
+
 func _ready() -> void:
 	stamina_regen_cooldown.wait_time = RegenCooldown
 
@@ -27,6 +29,8 @@ func startStaminaDrain(amount: int, speed: float):
 		while drainingStamina:
 			Stamina -= amount
 			await get_tree().create_timer(1/speed).timeout
+		staminaChanged.emit(Stamina)
+
 
 func stopStaminaDrain():
 	drainingStamina = false
@@ -34,3 +38,4 @@ func stopStaminaDrain():
 func useStamina(amount):
 	if canUseStamina and (Stamina != 0) and (Stamina > OriginalStamina%(amount)):
 		Stamina -= amount
+		staminaChanged.emit(Stamina)

@@ -125,7 +125,7 @@ region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="Resource" id="Resource_0cbkn"]
 script = ExtResource("5_1afs1")
-id = &""
+id = &"0"
 texture = SubResource("AtlasTexture_y8ff4")
 color = Color(1, 1, 1, 1)
 name = "Dash Ability"
@@ -143,7 +143,7 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="Resource" id="Resource_llniq"]
 script = ExtResource("5_1afs1")
-id = &""
+id = &"1"
 texture = SubResource("AtlasTexture_wm4y2")
 color = Color(1, 1, 1, 1)
 name = "Sword Damage"
@@ -161,7 +161,7 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="Resource" id="Resource_yh683"]
 script = ExtResource("5_1afs1")
-id = &""
+id = &"2"
 texture = SubResource("AtlasTexture_ayl2b")
 color = Color(1, 1, 1, 1)
 name = "Bow Damage"
@@ -179,7 +179,7 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="Resource" id="Resource_gbuk3"]
 script = ExtResource("5_1afs1")
-id = &""
+id = &"3"
 texture = SubResource("AtlasTexture_bjiww")
 color = Color(1, 1, 1, 1)
 name = "Gun Damage"
@@ -197,7 +197,7 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="Resource" id="Resource_snth3"]
 script = ExtResource("5_1afs1")
-id = &""
+id = &"4"
 texture = SubResource("AtlasTexture_l7mll")
 color = Color(1, 1, 1, 1)
 name = "Scythe Damage"
