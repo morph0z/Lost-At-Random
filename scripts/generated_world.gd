@@ -56,27 +56,21 @@ var amountOfRoomsMade:int = 0
 
 func _ready() -> void:
 	add_child(player)
-	if floorTiles:
-		floorTiles.texture = tileSetTexture
-		floorTiles.texture_region_size = Vector2(16,16)*2
-		if !floorTiles.has_tile(floorTilesTexturePosition):
-			floorTiles.create_tile(floorTilesTexturePosition)
-	if wallTiles:
-		wallTiles.texture = tileSetTexture
-		wallTiles.texture_region_size = Vector2(16,16)*2
-		if !wallTiles.has_tile(wallTilesTexturePosition):
-			wallTiles.create_tile(wallTilesTexturePosition)
-	if entranceTiles:
-		entranceTiles.texture = tileSetTexture
-		entranceTiles.texture_region_size = Vector2(16,16)*2
-		if !entranceTiles.has_tile(entranceTilesTexturePosition):
-			entranceTiles.create_tile(entranceTilesTexturePosition)
+	if floorTiles: setTiles(floorTiles, floorTilesTexturePosition)
+	if wallTiles: setTiles(wallTiles, wallTilesTexturePosition)
+	if entranceTiles: setTiles(entranceTiles, entranceTilesTexturePosition)
 	if specialTiles:
 		specialTiles.texture = tileSetTexture
 		if !specialTiles.has_tile(wallTilesTexturePosition):
 			specialTiles.create_tile(wallTilesTexturePosition)
 	generateRoom()
-	
+
+func setTiles(atlas: TileSetAtlasSource, positon: Vector2):
+	atlas.texture = tileSetTexture
+	atlas.texture_region_size = Vector2(16,16)*2
+	if !atlas.has_tile(positon):
+		atlas.create_tile(positon)
+
 func spawnEnemys():
 	var BasicEnemy: PackedScene = preload("res://scenes/objects/enemy/SimpleEnemy.tscn")
 	#NOTE replace the 5 with the increasing amount of enemys due to higher levels

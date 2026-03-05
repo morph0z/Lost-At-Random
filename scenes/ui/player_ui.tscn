@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bmh6hwcgqj3b6"]
+[gd_scene format=3 uid="uid://bmh6hwcgqj3b6"]
 
 [ext_resource type="Script" uid="uid://c2l3vqbiti4lf" path="res://scripts/ui/player_ui.gd" id="1_l260u"]
 [ext_resource type="Theme" uid="uid://c71tfod88q3h4" path="res://BaseTheme.tres" id="2_fatqr"]
@@ -75,13 +75,9 @@ load_path = "res://.godot/imported/skilltree_borders.png-b022ab63f57155a8a0a4214
 [sub_resource type="Resource" id="Resource_wm4y2"]
 resource_name = "Active"
 script = ExtResource("4_rtpfr")
-icon_modulate = Color(1, 1, 1, 1)
-icon_border_modulate = Color(1, 1, 1, 1)
-connection_modulate = Color(1, 1, 1, 1)
 icon_borders = Array[Texture2D]([SubResource("AtlasTexture_vql2y")])
 straight_tex = SubResource("CompressedTexture2D_w5rdv")
 straight_tex_region = Rect2(0, 8, 128, 8)
-straight_tex_repeat = false
 priority = -5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pr8m7"]
@@ -94,13 +90,9 @@ load_path = "res://.godot/imported/skilltree_borders.png-b022ab63f57155a8a0a4214
 [sub_resource type="Resource" id="Resource_yrfg3"]
 resource_name = "Can Activate"
 script = ExtResource("4_rtpfr")
-icon_modulate = Color(1, 1, 1, 1)
-icon_border_modulate = Color(1, 1, 1, 1)
-connection_modulate = Color(1, 1, 1, 1)
 icon_borders = Array[Texture2D]([SubResource("AtlasTexture_pr8m7")])
 straight_tex = SubResource("CompressedTexture2D_6ivhx")
 straight_tex_region = Rect2(0, 16, 128, 8)
-straight_tex_repeat = false
 priority = -3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wm6gh"]
@@ -111,13 +103,9 @@ region = Rect2(0, 32, 32, 32)
 resource_name = "Inactive"
 script = ExtResource("4_rtpfr")
 icon_modulate = Color(0.275248, 0.324215, 0.424479, 1)
-icon_border_modulate = Color(1, 1, 1, 1)
-connection_modulate = Color(1, 1, 1, 1)
 icon_borders = Array[Texture2D]([SubResource("AtlasTexture_wm6gh")])
 straight_tex = ExtResource("4_0cbkn")
 straight_tex_region = Rect2(0, 0, 128, 8)
-straight_tex_repeat = false
-priority = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8ff4"]
 atlas = ExtResource("6_g7v3g")
@@ -127,14 +115,8 @@ region = Rect2(128, 0, 32, 32)
 script = ExtResource("5_1afs1")
 id = &"0"
 texture = SubResource("AtlasTexture_y8ff4")
-color = Color(1, 1, 1, 1)
 name = "Dash Ability"
 desc = "Small Dash"
-size_tier = 0
-cost = 1
-dependency_min_state = 1
-tags = Array[StringName]([])
-data = Array[Resource]([])
 metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wm4y2"]
@@ -145,14 +127,8 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("5_1afs1")
 id = &"1"
 texture = SubResource("AtlasTexture_wm4y2")
-color = Color(1, 1, 1, 1)
 name = "Sword Damage"
 desc = "Small boost in sword damage."
-size_tier = 0
-cost = 1
-dependency_min_state = 1
-tags = Array[StringName]([])
-data = Array[Resource]([])
 metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayl2b"]
@@ -163,14 +139,8 @@ region = Rect2(64, 0, 32, 32)
 script = ExtResource("5_1afs1")
 id = &"2"
 texture = SubResource("AtlasTexture_ayl2b")
-color = Color(1, 1, 1, 1)
 name = "Bow Damage"
 desc = "Small boost in bow damage."
-size_tier = 0
-cost = 1
-dependency_min_state = 1
-tags = Array[StringName]([])
-data = Array[Resource]([])
 metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjiww"]
@@ -181,14 +151,8 @@ region = Rect2(32, 0, 32, 32)
 script = ExtResource("5_1afs1")
 id = &"3"
 texture = SubResource("AtlasTexture_bjiww")
-color = Color(1, 1, 1, 1)
 name = "Gun Damage"
 desc = "Small boost in gun damage."
-size_tier = 0
-cost = 1
-dependency_min_state = 1
-tags = Array[StringName]([])
-data = Array[Resource]([])
 metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l7mll"]
@@ -199,20 +163,14 @@ region = Rect2(96, 0, 32, 32)
 script = ExtResource("5_1afs1")
 id = &"4"
 texture = SubResource("AtlasTexture_l7mll")
-color = Color(1, 1, 1, 1)
 name = "Scythe Damage"
 desc = "Small boost in scythe damage."
-size_tier = 0
-cost = 1
-dependency_min_state = 1
-tags = Array[StringName]([])
-data = Array[Resource]([])
 metadata/_custom_type_script = "uid://cl2de3nbgv2qg"
 
 [sub_resource type="LabelSettings" id="LabelSettings_y8ff4"]
 font_size = 8
 
-[node name="PlayerUI" type="Control"]
+[node name="PlayerUI" type="Control" unique_id=688215147]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -223,7 +181,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_l260u")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1507140831]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 61.0
@@ -234,7 +192,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_dq4ne")
 value = 100.0
 show_percentage = false
 
-[node name="StaminaBar" type="ProgressBar" parent="."]
+[node name="StaminaBar" type="ProgressBar" parent="." unique_id=1373976529]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 95.0
@@ -247,7 +205,7 @@ max_value = 50.0
 value = 50.0
 show_percentage = false
 
-[node name="XpBar" type="ProgressBar" parent="."]
+[node name="XpBar" type="ProgressBar" parent="." unique_id=1057498635]
 layout_mode = 0
 offset_left = 446.0
 offset_top = 20.0
@@ -260,15 +218,15 @@ max_value = 50.0
 value = 50.0
 show_percentage = false
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1351929990]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 65.0
 offset_right = 1117.0
 offset_bottom = 643.0
 scale = Vector2(0.0740016, 0.131422)
 
-[node name="Fps Counter" type="Label" parent="."]
+[node name="Fps Counter" type="Label" parent="." unique_id=583995457]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.885
@@ -280,7 +238,7 @@ offset_right = 0.432007
 offset_bottom = -0.160002
 text = "Fps:"
 
-[node name="HP" type="Label" parent="."]
+[node name="HP" type="Label" parent="." unique_id=400545679]
 layout_mode = 0
 offset_left = 39.0
 offset_top = 49.0
@@ -289,7 +247,7 @@ offset_bottom = 72.0
 text = "HP
 "
 
-[node name="PauseMenu" type="Panel" parent="."]
+[node name="PauseMenu" type="Panel" parent="." unique_id=1736035193]
 process_mode = 2
 layout_mode = 1
 anchors_preset = 13
@@ -302,7 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_fatqr")
 
-[node name="ButtonArrangement" type="Control" parent="PauseMenu"]
+[node name="ButtonArrangement" type="Control" parent="PauseMenu" unique_id=1162568603]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -316,7 +274,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkillTree" type="Button" parent="PauseMenu/ButtonArrangement"]
+[node name="SkillTree" type="Button" parent="PauseMenu/ButtonArrangement" unique_id=1934847797]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -332,7 +290,7 @@ grow_vertical = 2
 theme = ExtResource("2_fatqr")
 text = "Skill Tree"
 
-[node name="Return" type="Button" parent="PauseMenu/ButtonArrangement"]
+[node name="Return" type="Button" parent="PauseMenu/ButtonArrangement" unique_id=1479091148]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -348,7 +306,7 @@ grow_vertical = 2
 theme = ExtResource("2_fatqr")
 text = "Return To Menu"
 
-[node name="SkillTree" type="Panel" parent="PauseMenu"]
+[node name="SkillTree" type="Panel" parent="PauseMenu" unique_id=81371026]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -360,12 +318,12 @@ grow_vertical = 2
 theme = ExtResource("2_fatqr")
 theme_override_styles/panel = SubResource("StyleBoxFlat_g7v3g")
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/SkillTree"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/SkillTree" unique_id=752646434]
 layout_mode = 0
 offset_right = 565.0
 offset_bottom = 646.0
 
-[node name="WorldmapView" type="Control" parent="PauseMenu/SkillTree/MarginContainer" node_paths=PackedStringArray("initial_item")]
+[node name="WorldmapView" type="Control" parent="PauseMenu/SkillTree/MarginContainer" unique_id=561256750 node_paths=PackedStringArray("initial_item")]
 custom_minimum_size = Vector2(309, 287)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -377,7 +335,7 @@ style_can_activate = SubResource("Resource_yrfg3")
 style_inactive = SubResource("Resource_ayl2b")
 metadata/_custom_type_script = "uid://bfw3ldkpbv6r1"
 
-[node name="WorldmapGraph" type="Node2D" parent="PauseMenu/SkillTree/MarginContainer/WorldmapView"]
+[node name="WorldmapGraph" type="Node2D" parent="PauseMenu/SkillTree/MarginContainer/WorldmapView" unique_id=341168878]
 script = ExtResource("3_fatqr")
 node_grid_snap = 1
 node_count = 5
@@ -398,19 +356,19 @@ connection_2/nodes = Vector2i(0, 3)
 connection_3/nodes = Vector2i(0, 4)
 metadata/_custom_type_script = "uid://dgvxfl64wub1n"
 
-[node name="InputHandler" type="Node" parent="PauseMenu/SkillTree" node_paths=PackedStringArray("skill_node_text", "skillTree")]
+[node name="InputHandler" type="Node" parent="PauseMenu/SkillTree" unique_id=1327609814 node_paths=PackedStringArray("skill_node_text", "skillTree")]
 script = ExtResource("8_y8ff4")
 skill_node_text = NodePath("../SkillNodeDescription")
 skillTree = NodePath("../MarginContainer/WorldmapView")
 
-[node name="SkillPoints" type="Label" parent="PauseMenu/SkillTree"]
+[node name="SkillPoints" type="Label" parent="PauseMenu/SkillTree" unique_id=1853757894]
 layout_mode = 0
 offset_left = 521.0
 offset_top = 32.0
 offset_right = 561.0
 offset_bottom = 50.0
 
-[node name="SkillNodeDescription" type="Label" parent="PauseMenu/SkillTree"]
+[node name="SkillNodeDescription" type="Label" parent="PauseMenu/SkillTree" unique_id=1709382025]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 18.0
