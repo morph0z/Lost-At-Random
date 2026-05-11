@@ -2,7 +2,6 @@ class_name ExperienceHandler
 extends Node
 
 @export var playerRef:PlayerClass
-@export var skillPointComponent:SkillpointHandler
 @export var debug:bool = false
 var xp:float = 0
 var level:int = 0
@@ -28,7 +27,6 @@ func increaseLevel(amount:int, override:bool = false):
 		xp = 0
 		level += amount
 		xpNeededForNextLevel = ((level*sqrt(level))/25)*100
-		skillPointComponent.increaseSkillPoints(1)
 		levelChanged.emit(level)
 
 func _on_killed_thing(Health:int):

@@ -1,10 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://7dr6gi3cgt0p"]
+[gd_scene format=3 uid="uid://7dr6gi3cgt0p"]
 
 [ext_resource type="Script" uid="uid://b1m5siw5dw53i" path="res://scripts/generated_world.gd" id="1_fu8m5"]
 [ext_resource type="PackedScene" uid="uid://uptfo2tljehx" path="res://scenes/worlds/Areas/baseAreas/room_L_area.tscn" id="2_b10py"]
-[ext_resource type="Texture2D" uid="uid://dpqfke615sgyc" path="res://assets/sprites/tilesets/placeholder/normalMaps/worldTemplate_n.png" id="2_k0nfl"]
 [ext_resource type="PackedScene" uid="uid://bpqjvwe12xb8u" path="res://scenes/worlds/Areas/baseAreas/room_normal_area.tscn" id="3_srt61"]
 [ext_resource type="PackedScene" uid="uid://d0ftgocputrhw" path="res://scenes/ui/dynamicMusic.tscn" id="4_ad07o"]
+[ext_resource type="Texture2D" uid="uid://xg6vsb52uf8u" path="res://assets/sprites/tilesets/placeholder/worldTemplate.png" id="4_b10py"]
 [ext_resource type="AudioStream" uid="uid://dhyhdpwdmghuh" path="res://assets/music/forestTheme1/practice97lofiLayer.mp3" id="4_k0nfl"]
 [ext_resource type="AudioStream" uid="uid://b1ykcycm5g6ve" path="res://assets/music/forestTheme1/practice97breakcoreLayer.mp3" id="5_finge"]
 [ext_resource type="PackedScene" uid="uid://cy1rkwiwtk5ny" path="res://scenes/objects/inanimte/dropped/DroppedBasicBow.tscn" id="5_x68b3"]
@@ -23,41 +23,44 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_finge"]
 
-[node name="TestGeneratedWorld" type="Node2D" node_paths=PackedStringArray("itemLootTable", "artifactLootTable")]
+[node name="TestGeneratedWorld" type="Node2D" unique_id=810780084 node_paths=PackedStringArray("itemLootTable", "artifactLootTable")]
 script = ExtResource("1_fu8m5")
 roomsSpawning = Array[PackedScene]([ExtResource("2_b10py"), ExtResource("3_srt61")])
-tileSetTexture = ExtResource("2_k0nfl")
+Difficulty = 0
+tileSetTexture = ExtResource("4_b10py")
 floorTiles = SubResource("TileSetAtlasSource_k44os")
 wallTiles = SubResource("TileSetAtlasSource_k0nfl")
-wallTilesTexturePosition = Vector2(2, 0)
+wallTilesTexturePosition = Vector2(1, 0)
 entranceTiles = SubResource("TileSetAtlasSource_finge")
 entranceTilesTexturePosition = Vector2(2, 0)
 itemLootTable = NodePath("LoottableItems")
 artifactLootTable = NodePath("LoottableArtifact")
 metadata/_custom_type_script = "uid://b1m5siw5dw53i"
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1792575979]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-1079, -1159, 1233, -1169, 1311, 1032, -1221, 977)
 
-[node name="Rooms" type="Node2D" parent="."]
+[node name="Rooms" type="Node2D" parent="." unique_id=1110895127]
 
-[node name="Enemys" type="Node2D" parent="."]
+[node name="Enemys" type="Node2D" parent="." unique_id=837756848]
 
-[node name="Artifacts" type="Node2D" parent="."]
+[node name="Artifacts" type="Node2D" parent="." unique_id=1150822225]
 
-[node name="Items" type="Node2D" parent="."]
+[node name="Items" type="Node2D" parent="." unique_id=63211813]
 
-[node name="DynamicMusic" parent="." instance=ExtResource("4_ad07o")]
+[node name="DynamicMusic" parent="." unique_id=2109332198 instance=ExtResource("4_ad07o")]
 bus = &"Music"
 tensenessLayers = Array[AudioStream]([ExtResource("4_k0nfl"), ExtResource("5_finge")])
 
-[node name="LoottableItems" type="Node" parent="."]
+[node name="LoottableItems" type="Node" parent="." unique_id=2081131766]
 script = ExtResource("6_8j3me")
 LootTable = Array[PackedScene]([ExtResource("5_x68b3"), ExtResource("6_k44os"), ExtResource("7_k0nfl"), ExtResource("8_finge")])
 metadata/_custom_type_script = "uid://c4pwgkq3nsn4e"
 
-[node name="LoottableArtifact" type="Node" parent="."]
+[node name="LoottableArtifact" type="Node" parent="." unique_id=1325271347]
 script = ExtResource("6_8j3me")
 LootTable = Array[PackedScene]([ExtResource("9_b10py"), ExtResource("10_srt61"), ExtResource("11_jou2f"), ExtResource("12_6yqa3")])
 metadata/_custom_type_script = "uid://c4pwgkq3nsn4e"
+
+[connection signal="roomsFinished" from="." to="." method="_on_rooms_finished"]

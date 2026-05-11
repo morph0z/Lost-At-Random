@@ -1,10 +1,17 @@
-[gd_scene load_steps=27 format=3 uid="uid://cq1jf82muvco"]
+[gd_scene format=3 uid="uid://cq1jf82muvco"]
 
 [ext_resource type="Script" uid="uid://dh4ga17kcdake" path="res://scripts/weapons/ranged/BasicBow.gd" id="1_257ij"]
 [ext_resource type="PackedScene" uid="uid://bilfddfsraiwq" path="res://scenes/particles/GunShoot_prt.tscn" id="1_nc88v"]
+[ext_resource type="Script" uid="uid://ffp8tblwyyfk" path="res://scripts/customResources/Effects/ShootEffects/ShootEffect.gd" id="2_loj0s"]
 [ext_resource type="Texture2D" uid="uid://2j6sfj3a3iua" path="res://assets/sprites/items/BasicBow.png" id="2_u0i6m"]
+[ext_resource type="Script" uid="uid://bcbrg8mx8j428" path="res://scripts/customResources/Effects/ShootEffects/Effects/IncreaseProjectilesShot.gd" id="3_1lyg6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fqiqo"]
+
+[sub_resource type="Resource" id="Resource_vssuf"]
+script = ExtResource("3_1lyg6")
+EffectStrength = 5.0
+metadata/_custom_type_script = "uid://bcbrg8mx8j428"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xji5"]
 size = Vector2(16, 8.99998)
@@ -263,7 +270,7 @@ _data = {
 &"onGround": SubResource("Animation_1qo4w")
 }
 
-[node name="BasicBow" type="AnimatableBody2D" groups=["Bow", "PickableItem", "ProjShooter"]]
+[node name="BasicBow" type="AnimatableBody2D" unique_id=1503410154 groups=["Bow", "PickableItem", "ProjShooter"]]
 position = Vector2(0, 1)
 disable_mode = 2
 collision_layer = 2
@@ -275,46 +282,45 @@ script = ExtResource("1_257ij")
 ammoAmountOriginal = 10
 minimumChargeLevel = 3.0
 maximumChargeLevel = 6.0
+shoot_effects = Array[ExtResource("2_loj0s")]([SubResource("Resource_vssuf")])
 
-[node name="ColShape" type="CollisionShape2D" parent="."]
+[node name="ColShape" type="CollisionShape2D" parent="." unique_id=1138946089]
 position = Vector2(-2.5, -2)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_0xji5")
 one_way_collision_margin = 0.0
 debug_color = Color(0.884428, 0, 0.355222, 0.42)
 
-[node name="BowShoot_prt" parent="." instance=ExtResource("1_nc88v")]
+[node name="BowShoot_prt" parent="." unique_id=1609420179 instance=ExtResource("1_nc88v")]
 position = Vector2(1, -2)
 lifetime = 0.1
 spread = 123.8
 initial_velocity_max = 503.7
 color_ramp = SubResource("Gradient_6i0va")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1655456441]
 position = Vector2(3, -2)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_mpxbq")
 animation = &"shoot"
 autoplay = "idle"
 
-[node name="AttackCooldown" type="Timer" parent="."]
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1475437271]
 wait_time = 0.3
 one_shot = true
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1233828349]
 occluder = SubResource("OccluderPolygon2D_6tjwi")
 
-[node name="ItemPick" type="Area2D" parent="."]
+[node name="ItemPick" type="Area2D" parent="." unique_id=794901252]
 position = Vector2(-3, -2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPick"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPick" unique_id=632829144]
 shape = SubResource("CapsuleShape2D_cl6dr")
 debug_color = Color(0.655886, 0.516826, 0, 0.42)
 
-[node name="ShootingPoint" type="Marker2D" parent="."]
+[node name="ShootingPoint" type="Marker2D" parent="." unique_id=1572017610]
 position = Vector2(8, -2)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_l67t7")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=271849087]
+libraries/ = SubResource("AnimationLibrary_l67t7")

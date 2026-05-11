@@ -25,10 +25,14 @@ var randomAmountRoomOpenings:int
 var randomRoomOpening
 var amountOfRoomsMade:int = 0
 
+signal roomsFinished
+
 ##Sets the number of rooms in the total of the dungeon before boss room.
 #NOTE make the difficulty of the mode change the range of the amount of rooms
 @export_group("Settings")
-@export var numOfRooms:int = randi_range(10,20)
+@export_enum("Easy", "Normal", "Hard") var Difficulty:int = 2
+var numOfRooms:int = randi_range(10, 10 * (Difficulty + 1))
+
 @export var enableEnemySpawing:bool = true
 #NOTE make player go to next area once numOfRooms is finished.
 @export var nextGeneratedWorld:PackedScene
@@ -137,6 +141,10 @@ func generateRoom():
 	for i in randomRoom.entrances:
 		replaceRelaceableTiles(entranceTilesTexturePosition, entranceTiles, i)
 	#endregion
+	
+	#region HandleRoomsFinished
+	if (amountOfRoomsMade >= numOfRooms): roomsFinished.emit()
+	#endregion
 
 	OpenRoomOpenings.call()
 	
@@ -189,3 +197,5 @@ func _rarityPick(array: Array, weights: Array):
 		cumulative += weights[i]
 		if rand <= cumulative:
 			return array[i]
+
+func _on_rooms_finished() -> void: SceneManager.change_scene(nextGeneratedWorld)

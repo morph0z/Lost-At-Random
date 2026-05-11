@@ -28,7 +28,6 @@ signal playerHealthChanged
 signal playerStaminaChanged
 signal playerExpChanged
 signal playerLevelChanged
-signal playerSkillPointChanged
 
 #componets
 @export_group("Components")
@@ -236,7 +235,3 @@ func _on_experience_handler_experience_changed(_newExp: float) -> void:
 
 func _on_experience_handler_level_changed(_newLevel: int) -> void:
 	playerLevelChanged.emit()
-
-
-func _on_skillpoint_handler_skill_point_changed(_newSkillPoints: int) -> void:
-	playerSkillPointChanged.emit()

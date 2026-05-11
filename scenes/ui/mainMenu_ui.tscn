@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ci5m425w8shmr"]
+[gd_scene format=3 uid="uid://ci5m425w8shmr"]
 
 [ext_resource type="Script" uid="uid://b6m36wo67lte7" path="res://scripts/ui/main_menu_ui.gd" id="1_8kjlb"]
 [ext_resource type="Texture2D" uid="uid://dgtxwa3yr5qxa" path="res://assets/sprites/other/LostAtRandom.png" id="2_3vnl4"]
@@ -93,7 +93,7 @@ shadow_size = 35
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 4)
 
-[node name="MainMenuUi" type="Control"]
+[node name="MainMenuUi" type="Control" unique_id=1749973927]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -103,12 +103,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8kjlb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3vnl4")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=842360692]
+libraries/ = SubResource("AnimationLibrary_3vnl4")
 
-[node name="imageBgPolys" type="Control" parent="."]
+[node name="imageBgPolys" type="Control" parent="." unique_id=954616924]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,34 +117,34 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="imageBgPolys"]
+[node name="Polygon2D" type="Polygon2D" parent="imageBgPolys" unique_id=2091302260]
 color = Color(0.113725, 0.156863, 0.227451, 1)
 polygon = PackedVector2Array(0, 1, 293, -9, 291, 660, -11, 656)
 
-[node name="Polygon2D2" type="Polygon2D" parent="imageBgPolys"]
+[node name="Polygon2D2" type="Polygon2D" parent="imageBgPolys" unique_id=386193198]
 color = Color(0.25098, 0.364706, 0.207843, 1)
 polygon = PackedVector2Array(-39, 532, 291, 532, 291, 660, -29, 673)
 
-[node name="Polygon2D3" type="Polygon2D" parent="imageBgPolys"]
+[node name="Polygon2D3" type="Polygon2D" parent="imageBgPolys" unique_id=1639465603]
 color = Color(0.427451, 0.588235, 0.356863, 1)
 polygon = PackedVector2Array(255, 420, 292, 385, 303, 391, 293, 429, 276, 424)
 
-[node name="Polygon2D5" type="Polygon2D" parent="imageBgPolys"]
+[node name="Polygon2D5" type="Polygon2D" parent="imageBgPolys" unique_id=525902688]
 position = Vector2(-1, 50)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(264, 474, 294, 382, 302, 380, 299, 429, 297, 459)
 
-[node name="Polygon2D6" type="Polygon2D" parent="imageBgPolys"]
+[node name="Polygon2D6" type="Polygon2D" parent="imageBgPolys" unique_id=428412099]
 position = Vector2(5, -78)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(264, 460, 282, 442, 296, 432, 315, 447, 305, 462)
 
-[node name="Polygon2D4" type="Polygon2D" parent="imageBgPolys"]
+[node name="Polygon2D4" type="Polygon2D" parent="imageBgPolys" unique_id=566722648]
 position = Vector2(11, 117)
 color = Color(0.427451, 0.588235, 0.356863, 1)
 polygon = PackedVector2Array(255, 420, 296, 383, 318, 401, 294, 414, 277, 415)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2032461038]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -160,7 +158,7 @@ pivot_offset = Vector2(900, 675)
 texture = ExtResource("2_3vnl4")
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayTest" type="Button" parent="."]
+[node name="PlayTest" type="Button" parent="." unique_id=419188396]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.529
@@ -174,33 +172,33 @@ theme = SubResource("Theme_4g317")
 theme_type_variation = &"FlatButton"
 text = "||  Play test  ||"
 
-[node name="Play" type="Button" parent="."]
+[node name="Play" type="Button" parent="." unique_id=356424072]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.529
 anchor_bottom = 0.529
 offset_left = 13.0
-offset_top = -12.792
+offset_top = -12.791992
 offset_right = 225.0
-offset_bottom = 13.208
+offset_bottom = 13.208008
 theme = SubResource("Theme_4g317")
 theme_type_variation = &"FlatButton"
 text = "||  Play  ||"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=196576596]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.484
 anchor_bottom = 0.484
 offset_left = 19.0
-offset_top = -57.632
+offset_top = -57.63199
 offset_right = 770.0
-offset_bottom = 57.368
+offset_bottom = 57.36801
 text = "Lost At Random"
 label_settings = SubResource("LabelSettings_ey4sl")
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=813543652]
 stream = ExtResource("3_4g317")
 volume_db = -40.0
 autoplay = true
