@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="L.A.R"
 config/tags=PackedStringArray("dont_delete", "my_game", "very_cool")
 run/main_scene="uid://ci5m425w8shmr"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/image="uid://dgtxwa3yr5qxa"
 config/icon="uid://c6bcpnx15glxy"
 
@@ -41,7 +41,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg", "res://addons/worldmap_builder/plugin.cfg")
+enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [file_customization]
 
